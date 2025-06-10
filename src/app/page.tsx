@@ -359,7 +359,7 @@ export default function Home() {
           
           {/* Email */}
           <a 
-            href="mailto:contact@abdellah.com" 
+            href="mailto:contact@aa3.site" 
             className="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-all duration-300 group"
             aria-label="Email"
           >
@@ -384,7 +384,7 @@ export default function Home() {
             <div>
               <h3 className="text-xl font-bold mb-4 font-[family-name:var(--font-inter)]">Contact</h3>
               <ul className="space-y-2">
-                <li>Email: contact@abdellah.com</li>
+                <li>Email: contact@aa3.site</li>
               </ul>
             </div>
 
@@ -392,10 +392,10 @@ export default function Home() {
             <div>
               <h3 className="text-xl font-bold mb-4 font-[family-name:var(--font-inter)]">Quick Links</h3>
               <ul className="space-y-2">
-                <li><a href="#" className="hover:text-blue-400 transition-colors">My Projects</a></li>
-                <li><a href="#" className="hover:text-blue-400 transition-colors">Services</a></li>
-                <li><a href="#" className="hover:text-blue-400 transition-colors">About</a></li>
-                <li><a href="#" className="hover:text-blue-400 transition-colors">Contact</a></li>
+                <li><a href="#projects" className="hover:text-blue-400 transition-colors">My Projects</a></li>
+                <li><a href="#skills" className="hover:text-blue-400 transition-colors">Skills & Tools</a></li>
+                <li><a href="#about" className="hover:text-blue-400 transition-colors">About</a></li>
+                <li><a href="#contact" className="hover:text-blue-400 transition-colors">Get in Touch</a></li>
               </ul>
             </div>
 
