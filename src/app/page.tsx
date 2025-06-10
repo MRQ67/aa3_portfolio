@@ -24,7 +24,7 @@ export default function Home() {
         {/* Left content - Bigger text */}
         <div className="flex flex-col gap-5 md:gap-10 z-10 mt-24">
           <h1 className="text-6xl md:text-8xl font-bold font-[family-name:var(--font-inter)]">
-            I'm Abdellah
+            I&apos;m Abdellah
           </h1>
           <div className="flex flex-col">
             <span className="text-4xl md:text-6xl font-[family-name:var(--font-ubuntu-mono)]">
@@ -55,7 +55,7 @@ export default function Home() {
             <div className="absolute inset-0 w-full h-full rounded-full overflow-hidden border-4 border-black z-10 flex items-center justify-center">
               <Image
                 src="/images/abdellah's_image.jpg"
-                alt="Abdellah's portrait"
+                alt="Abdellah&apos;s portrait"
                 fill
                 className="object-cover"
                 priority
@@ -92,7 +92,7 @@ export default function Home() {
         <div className="flex flex-col justify-start">
           <h2 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-inter)]">About Me</h2>
           <div className="mt-6 space-y-4 text-foreground/80">
-            <p>I'm a passionate developer with a knack building innovative solutions that make a difference. With a strong foundation in Nextjs, Go, Python, and Kotlin, I thrive on tackling complex challenges and turning ideas into reality. My curiosity drives me to stay updated with the latest tech trends, while my collaborative spirit ensures I work seamlessly with teams to deliver user-focused projects. When I'm not coding, you can find me playing an awesome Video Games or Dratfing a design for my latest project and, always seeking inspiration to fuel my creativity.</p>
+            <p>I&apos;m a passionate developer with a knack building innovative solutions that make a difference. With a strong foundation in Nextjs, Go, Python, and Kotlin, I thrive on tackling complex challenges and turning ideas into reality. My curiosity drives me to stay updated with the latest tech trends, while my collaborative spirit ensures I work seamlessly with teams to deliver user-focused projects. When I&apos;m not coding, you can find me playing an awesome Video Games or Dratfing a design for my latest project and, always seeking inspiration to fuel my creativity.</p>
           </div>
         </div>
         
@@ -232,65 +232,65 @@ export default function Home() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {/* Frontend */}
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2">
-            <img src="/icons/nextjs.svg" alt="Next.js" width={48} height={48} />
+            <Image src="/icons/nextjs.svg" alt="Next.js" width={48} height={48} />
             <span className="text-sm font-medium">Next.js</span>
           </div>
           
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2">
-            <img src="/icons/tailwindcss.svg" alt="Tailwind CSS" width={48} height={48} />
+            <Image src="/icons/tailwindcss.svg" alt="Tailwind CSS" width={48} height={48} />
             <span className="text-sm font-medium">Tailwind CSS</span>
           </div>
           
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2">
-            <img src="/icons/javascript.svg" alt="JavaScript" width={48} height={48} />
+            <Image src="/icons/javascript.svg" alt="JavaScript" width={48} height={48} />
             <span className="text-sm font-medium">JavaScript</span>
           </div>
           
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2">
-            <img src="/icons/typescript.svg" alt="TypeScript" width={48} height={48} />
+            <Image src="/icons/typescript.svg" alt="TypeScript" width={48} height={48} />
             <span className="text-sm font-medium">TypeScript</span>
           </div>
           
           {/* Backend */}
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2">
-            <img src="/icons/nodejs.svg" alt="Node.js" width={48} height={48} />
+            <Image src="/icons/nodejs.svg" alt="Node.js" width={48} height={48} />
             <span className="text-sm font-medium">Node.js</span>
           </div>
           
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2">
-            <img src="/icons/go.svg" alt="Go" width={48} height={48} />
+            <Image src="/icons/go.svg" alt="Go" width={48} height={48} />
             <span className="text-sm font-medium">Go</span>
           </div>
           
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2">
-            <img src="/icons/mongodb.svg" alt="MongoDB" width={48} height={48} />
+            <Image src="/icons/mongodb.svg" alt="MongoDB" width={48} height={48} />
             <span className="text-sm font-medium">MongoDB</span>
           </div>
           
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2">
-            <img src="/icons/postgresql.svg" alt="PostgreSQL" width={48} height={48} />
+            <Image src="/icons/postgresql.svg" alt="PostgreSQL" width={48} height={48} />
             <span className="text-sm font-medium">PostgreSQL</span>
           </div>
           
           {/* Mobile */}
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2">
-            <img src="/icons/react-native.svg" alt="React Native" width={48} height={48} />
+            <Image src="/icons/react-native.svg" alt="React Native" width={48} height={48} />
             <span className="text-sm font-medium">React Native</span>
           </div>
           
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2">
-            <img src="/icons/kotlin.svg" alt="Kotlin" width={48} height={48} />
+            <Image src="/icons/kotlin.svg" alt="Kotlin" width={48} height={48} />
             <span className="text-sm font-medium">Kotlin</span>
           </div>
           
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2">
-            <img src="/icons/flutter.svg" alt="Flutter" width={48} height={48} />
+            <Image src="/icons/flutter.svg" alt="Flutter" width={48} height={48} />
             <span className="text-sm font-medium">Flutter</span>
           </div>
           
           {/* Design & Tools */}
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2">
-            <img src="/icons/figma.svg" alt="Figma" width={48} height={48} />
+            <Image src="/icons/figma.svg" alt="Figma" width={48} height={48} />
             <span className="text-sm font-medium">Figma</span>
           </div>
         </div>
