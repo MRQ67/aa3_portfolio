@@ -40,7 +40,7 @@ export default function Home() {
 
         {/* Right content - Image with spinning text */}
         <div className="w-full h-full flex items-center justify-center relative">
-          <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto mt-8 md:mt-0">
+          <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto mt-20 md:mt-0">
             {/* Spinning Text Component around the image */}
             <div className="absolute inset-0 w-full h-full scale-90 md:scale-100">
               <SpinningText 
