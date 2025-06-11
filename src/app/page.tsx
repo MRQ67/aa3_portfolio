@@ -94,7 +94,7 @@ export default function Home() {
         <div className="flex flex-col justify-start">
           <h2 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-inter)]">About Me</h2>
           <div className="mt-6 space-y-4 text-foreground/80">
-            <p>I&apos;m a passionate developer with a knack building innovative solutions that make a difference. With a strong foundation in Nextjs, Go, Python, and Kotlin, I thrive on tackling complex challenges and turning ideas into reality. My curiosity drives me to stay updated with the latest tech trends, while my collaborative spirit ensures I work seamlessly with teams to deliver user-focused projects. When I&apos;m not coding, you can find me playing an awesome Video Games or Dratfing a design for my latest project and, always seeking inspiration to fuel my creativity.</p>
+            <p>I&apos;m a passionate developer with a knack for building innovative solutions that make a difference. With a strong foundation in Nextjs, Go, Python, and Kotlin, I thrive on tackling complex challenges and turning ideas into reality. My curiosity drives me to stay updated with the latest tech trends, while my collaborative spirit ensures I work seamlessly with teams to deliver user-focused projects. When I&apos;m not coding, you can find me playing an awesome Video Games or Dratfing a design for my latest project and, always seeking inspiration to fuel my creativity.</p>
           </div>
         </div>
         
