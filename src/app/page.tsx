@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { VelocityScroll } from "@/components/magicui/scroll-based-velocity";
 import { SpinningText } from "@/components/magicui/spinning-text";
+import { ModeToggle } from "@/components/dark-mode-toggle";
 
 export default function Home() {
   return (
@@ -10,8 +11,8 @@ export default function Home() {
       {/* Hero Section */}
       <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] items-center min-h-screen p-8 relative">
         {/* Logo at the top */}
-        <div className="absolute top-8 left-8 z-20">
-          <div className="w-24 h-24 relative">
+        <div className="absolute top-8 left-8 z-20 flex items-center gap-4">
+          <div className="w-16 h-16 relative">
             <Image
               src="/logo.svg"
               alt="Logo"
@@ -19,6 +20,7 @@ export default function Home() {
               className="object-contain"
             />
           </div>
+          <ModeToggle />
         </div>
         
         {/* Left content - Bigger text */}
