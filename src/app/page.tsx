@@ -60,7 +60,7 @@ export default function Home() {
                   duration={0.6}
                   delayMultiple={0.1}
                 >
-                  I'm Abdellah
+                  I&apos;m Abdellah
                 </FlipText>
               </div>
             </motion.h1>
