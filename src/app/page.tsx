@@ -50,12 +50,12 @@ export default function Home() {
           >
             <div className="relative w-48 h-48 md:w-80 md:h-80 mx-auto mt-32 md:mt-0">
               {/* Spinning Text Component around the image */}
-              <div className="absolute inset-0 w-full h-full scale-75 md:scale-100">
+              <div className="absolute inset-0 w-full h-full scale-50 md:scale-100">
                 <SpinningText
                   className="w-full h-full text-foreground/70"
                   duration={15}
-                  radius={21}
-                  fontSize={25}
+                  radius={22}
+                  fontSize={20}
                 >
                   Eat · Code · Pray · Sleep · Repeat ·
                 </SpinningText>
@@ -94,7 +94,7 @@ export default function Home() {
             >
               <div className="flex justify-start">
                 <FlipText
-                  className="text-4xl md:text-8xl font-bold font-[family-name:var(--font-inter)]"
+                  className="text-5xl md:text-8xl font-bold font-[family-name:var(--font-inter)]"
                   duration={0.6}
                   delayMultiple={0.1}
                 >
@@ -108,15 +108,15 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="flex flex-col"
             >
-              <span className="text-2xl md:text-6xl font-[family-name:var(--font-ubuntu-mono)]">
+              <span className="text-3xl md:text-6xl font-[family-name:var(--font-ubuntu-mono)]">
                 Software Engineer &
               </span>
               <SparklesText
-                className="text-3xl md:text-7xl text-blue-400 font-[family-name:var(--font-sarina)]"
+                className="text-4xl md:text-7xl text-blue-400 font-[family-name:var(--font-sarina)]"
                 colors={{ first: "#F472B6", second: "#EC4899" }}
                 sparklesCount={8}
               >
-                UI Designer
+                Ui Designer
               </SparklesText>
             </motion.div>
           </motion.div>
@@ -128,7 +128,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1.5 }}
-            className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
+            className="absolute bottom-20 md:bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
           >
             <div className="animate-bounce">
               <svg
