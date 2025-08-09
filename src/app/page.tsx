@@ -149,7 +149,7 @@ export default function Home() {
         </div>
 
         {/* About Me Section */}
-        <div className="py-20 grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-10">
+        <div className="py-20 grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-10">
           {/* Left side - About Me Text */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -172,7 +172,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               viewport={{ once: true }}
-              className="mt-6 space-y-4 text-foreground/80"
+              className="mt-6 space-y-4 text-foreground/80 text-lg md:text-xl leading-relaxed"
             >
               <p>I&apos;m a passionate developer with a knack for building innovative solutions that make a difference. With a strong foundation in <span className="text-blue-400 font-semibold">Next.js</span>, <span className="text-blue-400 font-semibold">Go</span>, <span className="text-blue-400 font-semibold">Python</span>, and <span className="text-blue-400 font-semibold">Kotlin</span>, I thrive on tackling complex challenges and turning ideas into reality. My curiosity drives me to stay updated with the latest tech trends, while my collaborative spirit ensures I work seamlessly with teams to deliver user-focused projects. When I&apos;m not coding, you can find me playing an awesome Video Game or Draft a design for my latest projects and, I&apos;m always seeking inspiration to fuel my creativity.</p>
             </motion.div>
