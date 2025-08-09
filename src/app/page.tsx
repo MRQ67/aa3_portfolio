@@ -716,14 +716,16 @@ export default function Home() {
             </div>
 
             {/* Scroll-based velocity component at the bottom */}
-            <div className="mt-16 overflow-hidden">
-              <VelocityScroll
-                defaultVelocity={3}
-                numRows={2}
-                className="text-6xl md:text-8xl font-bold text-white opacity-20"
-              >
-                AA³
-              </VelocityScroll>
+            <div className="mt-16 overflow-hidden w-full">
+              <div className="overflow-hidden">
+                <VelocityScroll
+                  defaultVelocity={3}
+                  numRows={2}
+                  className="text-6xl md:text-8xl font-bold text-white opacity-20"
+                >
+                  AA³
+                </VelocityScroll>
+              </div>
             </div>
 
             {/* Copyright */}
