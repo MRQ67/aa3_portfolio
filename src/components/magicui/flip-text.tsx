@@ -42,7 +42,7 @@ export function FlipText({
   const characters = React.Children.toArray(children).join("").split("");
 
   return (
-    <div className="flex justify-center space-x-2">
+    <div className="flex justify-center">
       <AnimatePresence mode="wait">
         {characters.map((char, i) => (
           <MotionComponent
@@ -52,10 +52,10 @@ export function FlipText({
             exit="hidden"
             variants={variants || defaultVariants}
             transition={{ duration, delay: i * delayMultiple }}
-            className={cn("origin-center drop-shadow-sm", className)}
+            className={cn("origin-center drop-shadow-sm", className, char === ' ' ? 'w-4' : '')}
             {...props}
           >
-            {char}
+            {char === ' ' ? '\u00A0' : char}
           </MotionComponent>
         ))}
       </AnimatePresence>

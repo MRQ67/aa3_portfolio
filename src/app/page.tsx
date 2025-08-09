@@ -52,11 +52,11 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-6xl md:text-8xl font-bold font-[family-name:var(--font-inter)]"
+              className="text-4xl md:text-8xl font-bold font-[family-name:var(--font-inter)]"
             >
               <div className="flex justify-start">
                 <FlipText
-                  className="text-6xl md:text-8xl font-bold font-[family-name:var(--font-inter)]"
+                  className="text-4xl md:text-8xl font-bold font-[family-name:var(--font-inter)]"
                   duration={0.6}
                   delayMultiple={0.1}
                 >
@@ -70,11 +70,11 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="flex flex-col"
             >
-              <span className="text-4xl md:text-6xl font-[family-name:var(--font-ubuntu-mono)]">
+              <span className="text-2xl md:text-6xl font-[family-name:var(--font-ubuntu-mono)]">
                 Software Engineer &
               </span>
               <SparklesText
-                className="text-5xl md:text-7xl text-blue-400 font-[family-name:var(--font-sarina)]"
+                className="text-3xl md:text-7xl text-blue-400 font-[family-name:var(--font-sarina)]"
                 colors={{ first: "#F472B6", second: "#EC4899" }}
                 sparklesCount={8}
               >
