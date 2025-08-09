@@ -22,7 +22,7 @@ export default function Home() {
       />
       <div className="min-h-screen text-foreground flex flex-col max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Hero Section */}
-        <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] items-center min-h-screen p-8 relative">
+        <div className="flex flex-col md:grid md:grid-cols-[2fr_1fr] items-center min-h-screen p-8 relative">
           {/* Logo at the top */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -41,12 +41,50 @@ export default function Home() {
             <AnimatedThemeToggler className="w-8 h-8 p-1.5 rounded-lg bg-white/10 backdrop-blur-sm border border-foreground/20 hover:bg-white/20 transition-all duration-300 flex items-center justify-center" />
           </motion.div>
 
-          {/* Left content - Bigger text */}
+          {/* Image section - First on mobile */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="w-full h-full flex items-center justify-center relative order-1 md:order-2"
+          >
+            <div className="relative w-48 h-48 md:w-80 md:h-80 mx-auto mt-32 md:mt-0">
+              {/* Spinning Text Component around the image */}
+              <div className="absolute inset-0 w-full h-full scale-75 md:scale-100">
+                <SpinningText
+                  className="w-full h-full text-foreground/70"
+                  duration={15}
+                  radius={21}
+                  fontSize={25}
+                >
+                  Eat · Code · Pray · Sleep · Repeat ·
+                </SpinningText>
+              </div>
+
+              {/* Profile Image */}
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 0.6, delay: 1.2, type: "spring", stiffness: 200 }}
+                className="absolute inset-0 w-full h-full rounded-full overflow-hidden border-4 border-black z-10 flex items-center justify-center"
+              >
+                <Image
+                  src="/images/abdellah's_image.jpg"
+                  alt="Abdellah&apos;s portrait"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </motion.div>
+            </div>
+          </motion.div>
+
+          {/* Text content - Second on mobile */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex flex-col gap-5 md:gap-10 z-10 mt-24"
+            className="flex flex-col gap-5 md:gap-10 z-10 mt-24 md:mt-24 order-2 md:order-1"
           >
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
@@ -83,43 +121,7 @@ export default function Home() {
             </motion.div>
           </motion.div>
 
-          {/* Right content - Image with spinning text */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="w-full h-full flex items-center justify-center relative"
-          >
-            <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto mt-20 md:mt-0">
-              {/* Spinning Text Component around the image */}
-              <div className="absolute inset-0 w-full h-full scale-90 md:scale-100">
-                <SpinningText
-                  className="w-full h-full text-foreground/70"
-                  duration={15}
-                  radius={21}
-                  fontSize={25}
-                >
-                  Eat · Code · Pray · Sleep · Repeat ·
-                </SpinningText>
-              </div>
 
-              {/* Profile Image */}
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.6, delay: 1.2, type: "spring", stiffness: 200 }}
-                className="absolute inset-0 w-full h-full rounded-full overflow-hidden border-4 border-black z-10 flex items-center justify-center"
-              >
-                <Image
-                  src="/images/abdellah's_image.jpg"
-                  alt="Abdellah&apos;s portrait"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </motion.div>
-            </div>
-          </motion.div>
 
           {/* Logo and down arrow at bottom */}
           <motion.div
