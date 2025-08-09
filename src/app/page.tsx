@@ -20,7 +20,7 @@ export default function Home() {
         size={0.6}
         staticity={30}
       />
-      <div className="min-h-screen bg-background text-foreground flex flex-col max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="min-h-screen text-foreground flex flex-col max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Hero Section */}
         <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] items-center min-h-screen p-8 relative">
           {/* Logo at the top */}
