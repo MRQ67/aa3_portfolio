@@ -326,7 +326,7 @@ export default function Home() {
         </div>
 
         {/* Skills & Technologies Section */}
-        <div className="py-20 grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-10">
+        <div className="py-20 flex flex-col-reverse lg:grid lg:grid-cols-[2fr_1fr] gap-10">
           {/* Left side - Skills Grid */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
