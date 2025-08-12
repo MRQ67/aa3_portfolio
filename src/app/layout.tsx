@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";
+import { ProjectProvider } from "@/contexts/ProjectContext";
+import { DesignProvider } from "@/contexts/DesignContext";
 import { Inter, Ubuntu_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import { Analytics } from '@vercel/analytics/next';
@@ -46,7 +48,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <ProjectProvider>
+            <DesignProvider>
+              {children}
+            </DesignProvider>
+          </ProjectProvider>
         </ThemeProvider>
         <Analytics />
       </body>

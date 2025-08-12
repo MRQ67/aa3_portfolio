@@ -8,8 +8,22 @@ import { AnimatedThemeToggler } from "@/components/magicui/animated-theme-toggle
 import { SparklesText } from "@/components/magicui/sparkles-text";
 import { FlipText } from "@/components/magicui/flip-text";
 import { Particles } from "@/components/magicui/particles";
+import { getTopProjects } from "@/data/projects";
+import { getFeaturedDesigns } from "@/data/designs";
+import Link from "next/link";
+import { ProjectCard } from "@/components/ProjectCard";
+import { ProjectModal } from "@/components/ProjectModal";
+import { DesignCard } from "@/components/DesignCard";
+import { DesignModal } from "@/components/DesignModal";
+import { useProject } from "@/contexts/ProjectContext";
+import { useDesign } from "@/contexts/DesignContext";
 
 export default function Home() {
+  const topProjects = getTopProjects(4);
+  const featuredDesigns = getFeaturedDesigns(3);
+  const { isModalOpen, selectedProject, openModal, closeModal } = useProject();
+  const { isModalOpen: isDesignModalOpen, selectedDesign, closeModal: closeDesignModal } = useDesign();
+
   return (
     <>
       <Particles
@@ -234,134 +248,14 @@ export default function Home() {
             viewport={{ once: true }}
             className="grid grid-cols-1 md:grid-cols-2 gap-6"
           >
-            {/* Project Card 1 */}
-            <motion.a
-              href="https://github.com/MRQ67/MarkPlainer"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -5 }}
-            >
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl overflow-hidden border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md cursor-pointer">
-                <div className="h-48 relative">
-                  <Image
-                    src="/images/mark.png"
-                    alt="Project 1"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2">MarkPlainer</h3>
-                  <p className="text-foreground/70 mb-4">An android app that convert markdown text to plain text written in kotlin.</p>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="px-2 py-1 bg-blue-500/10 text-purple-500 rounded-full text-xs">Kotlin</span>
-                  </div>
-                </div>
-              </div>
-            </motion.a>
-
-            {/* Project Card 2 */}
-            <motion.a
-              href="https://github.com/MRQ67/zync-chat"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -5 }}
-            >
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl overflow-hidden border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md cursor-pointer">
-                <div className="h-68 relative">
-                  <Image
-                    src="/images/zync.png"
-                    alt="Project 2"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2">Zync Chat</h3>
-                  <p className="text-foreground/70 mb-4">a real-time chat web app in written golang.</p>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="px-2 py-1 bg-yellow-500/10 text-yellow-500 rounded-full text-xs">JavaScript</span>
-                    <span className="px-2 py-1 bg-blue-500/10 text-blue-500 rounded-full text-xs">Go</span>
-                  </div>
-                </div>
-              </div>
-            </motion.a>
-
-            {/* Project Card 3 */}
-            <motion.a
-              href="https://github.com/MRQ67/unique-e-learning"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -5 }}
-            >
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl overflow-hidden border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md cursor-pointer">
-                <div className="h-60 relative">
-                  <Image
-                    src="/images/unique.png"
-                    alt="Project 3"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2">Unique E-Learning Platform</h3>
-                  <p className="text-foreground/70 mb-4">A secure, AI-powered e-learning platform with advanced proctoring for online exams and courses.</p>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="px-2 py-1 bg-black/10 text-foreground rounded-full text-xs">Next.js</span>
-                    <span className="px-2 py-1 bg-blue-300/10 text-blue-300 rounded-full text-xs">Tailwind CSS</span>
-                    <span className="px-2 py-1 bg-orange-500/10 text-orange-500 rounded-full text-xs">Framer Motion</span>
-                  </div>
-                </div>
-              </div>
-            </motion.a>
-
-            {/* Project Card 4 */}
-            <motion.a
-              href="https://unique-validation.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -5 }}
-            >
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl overflow-hidden border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md cursor-pointer">
-                <div className="h-60 relative">
-                  <Image
-                    src="/images/vaild.png"
-                    alt="Project 4"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2">Unique Validation</h3>
-                  <p className="text-foreground/70 mb-4">A modern web application for creating, managing, and validating e-learning certificates with QR code verification. Perfect for hackathons, demos, and educational platforms.</p>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="px-2 py-1 bg-black/10 text-foreground rounded-full text-xs">Next.js</span>
-                    <span className="px-2 py-1 bg-blue-300/10 text-blue-300 rounded-full text-xs">Tailwind CSS</span>
-                    <span className="px-2 py-1 bg-purple-400/10 text-purple-400 rounded-full text-xs">Vercel KV</span>
-                  </div>
-                </div>
-              </div>
-            </motion.a>
+            {topProjects.map((project, index) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                index={index}
+                enableModal={true}
+              />
+            ))}
           </motion.div>
 
           {/* Right side - Section Title */}
@@ -373,6 +267,71 @@ export default function Home() {
             className="flex flex-col justify-start"
           >
             <h2 className="text-4xl md:text-5xl font-bold sticky top-20 font-[family-name:var(--font-inter)]">My Projects</h2>
+            <Link
+              href="/projects"
+              className="mt-4 text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-2 sticky top-36"
+            >
+              View All Projects
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </Link>
+          </motion.div>
+        </div>
+
+        {/* Design Gallery Section */}
+        <div className="py-20">
+          {/* Section Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-6xl font-bold font-[family-name:var(--font-inter)] mb-6">
+              Design Gallery
+            </h2>
+            <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
+              A showcase of my graphic design work, from logos to digital illustrations
+            </p>
+          </motion.div>
+
+          {/* Design Grid */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
+          >
+            {featuredDesigns.map((design, index) => (
+              <DesignCard
+                key={design.id}
+                design={design}
+                index={index}
+                enableModal={true}
+              />
+            ))}
+          </motion.div>
+
+          {/* View All Designs Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mt-12"
+          >
+            <Link
+              href="/designs"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 font-medium shadow-lg hover:shadow-xl"
+            >
+              View All Designs
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </Link>
           </motion.div>
         </div>
 
@@ -735,6 +694,20 @@ export default function Home() {
           </div>
         </footer>
       </div>
+
+      {/* Project Modal */}
+      <ProjectModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        selectedProject={selectedProject}
+      />
+
+      {/* Design Modal */}
+      <DesignModal
+        isOpen={isDesignModalOpen}
+        onClose={closeDesignModal}
+        selectedDesign={selectedDesign}
+      />
     </>
   );
 }
