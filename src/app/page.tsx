@@ -21,7 +21,7 @@ import { useDesign } from "@/contexts/DesignContext";
 export default function Home() {
   const topProjects = getTopProjects(4);
   const featuredDesigns = getFeaturedDesigns(3);
-  const { isModalOpen, selectedProject, openModal, closeModal } = useProject();
+  const { isModalOpen, selectedProject, closeModal } = useProject();
   const { isModalOpen: isDesignModalOpen, selectedDesign, closeModal: closeDesignModal } = useDesign();
 
   return (
@@ -266,44 +266,53 @@ export default function Home() {
             viewport={{ once: true }}
             className="flex flex-col justify-start"
           >
-            <h2 className="text-4xl md:text-5xl font-bold sticky top-20 font-[family-name:var(--font-inter)]">My Projects</h2>
-            <Link
-              href="/projects"
-              className="mt-4 text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-2 sticky top-36"
-            >
-              View All Projects
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </Link>
+            <div className="sticky top-20 space-y-4">
+              <h2 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-inter)]">My Projects</h2>
+              <Link
+                href="/projects"
+                className="text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-2"
+              >
+                View All Projects
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </Link>
+            </div>
           </motion.div>
         </div>
 
         {/* Design Gallery Section */}
-        <div className="py-20">
-          {/* Section Header */}
+        <div className="py-20 grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-10">
+          {/* Left side - Section Title */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="flex flex-col justify-start"
           >
-            <h2 className="text-4xl md:text-6xl font-bold font-[family-name:var(--font-inter)] mb-6">
-              Design Gallery
-            </h2>
-            <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
-              A showcase of my graphic design work, from logos to digital illustrations
-            </p>
+            <div className="sticky top-20 space-y-4">
+              <h2 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-inter)]">Design Gallery</h2>
+              <p className="text-foreground/70 pr-4">A showcase of my graphic design work, from logos to digital illustrations.</p>
+              <Link
+                href="/designs"
+                className="text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-2"
+              >
+                View All Designs
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </Link>
+            </div>
           </motion.div>
 
-          {/* Design Grid */}
+          {/* Right side - Design Cards Grid */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
+            className="grid grid-cols-1 md:grid-cols-3 gap-6"
           >
             {featuredDesigns.map((design, index) => (
               <DesignCard
@@ -314,42 +323,11 @@ export default function Home() {
               />
             ))}
           </motion.div>
-
-          {/* View All Designs Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mt-12"
-          >
-            <Link
-              href="/designs"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 font-medium shadow-lg hover:shadow-xl"
-            >
-              View All Designs
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </Link>
-          </motion.div>
         </div>
 
         {/* Skills & Technologies Section */}
-        <div className="py-20 grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-10">
-          {/* Left side - Section Title */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="flex flex-col justify-start"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold sticky top-20 font-[family-name:var(--font-inter)]">Skills & Tech</h2>
-            <p className="text-foreground/70 mt-4 pr-4 sticky top-32 md:top-36">Technologies and tools I work with.</p>
-          </motion.div>
-
-          {/* Right side - Skills Grid */}
+        <div className="py-20 grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-10">
+          {/* Left side - Skills Grid */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -504,6 +482,20 @@ export default function Home() {
               <Image src="/icons/figma.svg" alt="Figma" width={48} height={48} />
               <span className="text-sm font-medium">Figma</span>
             </motion.div>
+          </motion.div>
+
+          {/* Right side - Section Title */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="flex flex-col justify-start"
+          >
+            <div className="sticky top-20 space-y-4">
+              <h2 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-inter)]">Skills & Tech</h2>
+              <p className="text-foreground/70 pl-4">Technologies and tools I work with.</p>
+            </div>
           </motion.div>
         </div>
 
