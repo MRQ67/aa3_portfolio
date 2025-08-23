@@ -5,9 +5,9 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { designs } from "@/data/designs";
-import { DesignCard } from "@/components/DesignCard";
 import { DesignModal } from "@/components/DesignModal";
 import { useDesign } from "@/contexts/DesignContext";
+import { DesignCard } from "@/components/DesignCard";
 
 export default function DesignsPage() {
   const { isModalOpen, selectedDesign, closeModal } = useDesign();
@@ -77,12 +77,12 @@ export default function DesignsPage() {
         ))}
       </motion.div>
 
-      {/* Designs Grid */}
+      {/* Design Grid */}
       <motion.div
-        initial={{ opacity: 0, y: 50 }}
+        initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.6 }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-20"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pb-20 px-4"
       >
         {designs.map((design, index) => (
           <DesignCard

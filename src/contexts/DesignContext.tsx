@@ -7,6 +7,8 @@ interface DesignContextType {
   selectedDesign: number | null;
   openModal: (designId?: number) => void;
   closeModal: () => void;
+  setSelectedDesign: (id: number | null) => void;
+  setIsModalOpen: (isOpen: boolean) => void;
 }
 
 const DesignContext = createContext<DesignContextType | undefined>(undefined);
@@ -31,7 +33,9 @@ export function DesignProvider({ children }: { children: ReactNode }) {
       isModalOpen,
       selectedDesign,
       openModal,
-      closeModal
+      closeModal,
+      setSelectedDesign,
+      setIsModalOpen
     }}>
       {children}
     </DesignContext.Provider>

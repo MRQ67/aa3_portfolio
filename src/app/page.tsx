@@ -312,15 +312,16 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+            className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full"
           >
-            {featuredDesigns.map((design, index) => (
-              <DesignCard
-                key={design.id}
-                design={design}
-                index={index}
-                enableModal={true}
-              />
+            {featuredDesigns.slice(0, 3).map((design, index) => (
+              <div key={design.id} className={index === 2 ? 'md:col-span-2 max-w-2xl mx-auto' : ''}>
+                <DesignCard
+                  design={design}
+                  index={index}
+                  enableModal={true}
+                />
+              </div>
             ))}
           </motion.div>
         </div>

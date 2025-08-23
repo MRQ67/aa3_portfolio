@@ -1,9 +1,10 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { useEffect } from "react";
+import { motion, AnimatePresence, useAnimation } from "framer-motion";
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { designs } from "@/data/designs";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface DesignModalProps {
   isOpen: boolean;
@@ -12,159 +13,272 @@ interface DesignModalProps {
 }
 
 export function DesignModal({ isOpen, onClose, selectedDesign }: DesignModalProps) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const controls = useAnimation();
+  const modalRef = useRef<HTMLDivElement>(null);
   const design = selectedDesign ? designs.find(d => d.id === selectedDesign) : null;
 
-  // Close modal on escape key
+  // Handle click outside
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+    function handleClickOutside(event: MouseEvent) {
+      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+        onClose();
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen, onClose]);
+  
+  // Reset current index when design changes
+  useEffect(() => {
+    setCurrentIndex(0);
+  }, [selectedDesign]);
+
+  // Handle keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      } else if (e.key === "ArrowLeft") {
+        goToPrevious();
+      } else if (e.key === "ArrowRight") {
+        goToNext();
+      }
     };
 
     if (isOpen) {
-      document.addEventListener("keydown", handleEscape);
+      window.addEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
     }
 
     return () => {
-      document.removeEventListener("keydown", handleEscape);
+      window.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "unset";
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, currentIndex, design?.gallery?.length]);
 
-  if (!design) return null;
+  const goToNext = () => {
+    if (!design?.gallery) return;
+    const newIndex = (currentIndex + 1) % design.gallery.length;
+    setCurrentIndex(newIndex);
+  };
+
+  const goToPrevious = () => {
+    if (!design?.gallery) return;
+    const newIndex = (currentIndex - 1 + design.gallery.length) % design.gallery.length;
+    setCurrentIndex(newIndex);
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index);
+  };
+
+  if (!isOpen || !design) return null;
+
+  // Handle click outside
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    // Only close if clicking directly on the backdrop, not on any children
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
 
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <>
+    <AnimatePresence mode="wait">
+      {isOpen && design && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8">
           {/* Backdrop */}
           <motion.div
-            initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            animate={{ opacity: 1, backdropFilter: "blur(4px)" }}
-            exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm"
             onClick={onClose}
-            className="fixed inset-0 bg-black/60 z-40"
           />
-
-          {/* Modal */}
+          
+          {/* Modal Content */}
           <motion.div
-            layoutId={`design-card-${selectedDesign}`}
-            className="fixed inset-4 md:inset-8 bg-background border-2 border-foreground/20 rounded-2xl z-50 overflow-hidden"
-            transition={{ 
-              duration: 0.6, 
-              ease: [0.32, 0.72, 0, 1],
-              layout: { duration: 0.6, ease: [0.32, 0.72, 0, 1] }
+            ref={modalRef}
+            layoutId={`design-card-${design.id}`}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ 
+              opacity: 1, 
+              scale: 1,
+              transition: {
+                type: "spring",
+                bounce: 0.2,
+                duration: 0.5
+              }
+            }}
+            exit={{ 
+              opacity: 0, 
+              scale: 0.9,
+              transition: { duration: 0.2 }
+            }}
+            className="relative w-full max-w-6xl max-h-[90vh] bg-background rounded-2xl overflow-hidden shadow-2xl"
+            style={{
+              borderRadius: '1rem',
+              overflow: 'hidden',
+              cursor: 'default'
             }}
           >
             {/* Close Button */}
-            <button
+            <button 
               onClick={onClose}
-              className="absolute top-6 right-6 z-10 w-10 h-10 bg-foreground/10 hover:bg-foreground/20 rounded-full flex items-center justify-center transition-colors"
+              className="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/50 text-white hover:bg-white/20 transition-colors"
+              aria-label="Close modal"
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+              <X size={24} />
             </button>
+            
+            {/* Main Content */}
+            <div className="w-full max-w-6xl bg-background rounded-2xl overflow-hidden shadow-2xl flex flex-col md:flex-row h-full max-h-[90vh]">
+              {/* Left Side - Image */}
+              <div className="relative w-full md:w-1/2 h-64 md:h-auto bg-black">
+                {design.gallery && design.gallery.length > 1 && (
+                  <>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        goToPrevious();
+                      }}
+                      className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/50 text-white hover:bg-white/20 transition-colors"
+                      aria-label="Previous image"
+                      disabled={currentIndex === 0}
+                    >
+                      <ChevronLeft size={24} />
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        goToNext();
+                      }}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/50 text-white hover:bg-white/20 transition-colors"
+                      aria-label="Next image"
+                      disabled={currentIndex === (design.gallery?.length || 1) - 1}
+                    >
+                      <ChevronRight size={24} />
+                    </button>
+                  </>
+                )}
 
-            {/* Modal Content */}
-            <motion.div 
-              className="h-full overflow-y-auto"
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
-            >
-              {/* Hero Section */}
-              <div className="relative">
-                {/* Design Image */}
-                <div className="h-64 md:h-96 relative bg-foreground/5">
+                <motion.div
+                  key={currentIndex}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="w-full h-full flex items-center justify-center p-8"
+                >
                   <Image
-                    src={design.image}
-                    alt={design.title}
-                    fill
-                    className="object-cover"
+                    src={design.gallery?.[currentIndex] || design.image}
+                    alt={`${design.title} - ${currentIndex + 1} of ${design.gallery?.length || 1}`}
+                    width={800}
+                    height={600}
+                    className="object-contain max-h-full w-auto"
                     priority
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-                </div>
+                </motion.div>
 
-                {/* Design Info Overlay */}
-                <div className="absolute bottom-0 left-0 right-0 p-8">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="px-3 py-1 rounded-full text-sm font-medium backdrop-blur-sm bg-blue-500/20 text-blue-400 border border-blue-500/30 capitalize">
-                      {design.category}
-                    </span>
-                    <span className="px-3 py-1 rounded-full text-sm font-medium backdrop-blur-sm bg-foreground/10 text-foreground/80 border border-foreground/20">
-                      {design.year}
-                    </span>
+                {design.gallery && design.gallery.length > 1 && (
+                  <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-10">
+                    {design.gallery.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          goToSlide(index);
+                        }}
+                        className={`w-2 h-2 rounded-full transition-all ${
+                          index === currentIndex ? 'bg-white w-6' : 'bg-white/50 hover:bg-white/75'
+                        }`}
+                        aria-label={`Go to slide ${index + 1}`}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+              
+              {/* Right Side - Content */}
+              <div className="w-full md:w-1/2 p-6 md:p-8 overflow-y-auto">
+                <div className="flex flex-col h-full">
+                  <div className="mb-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <h2 className="text-2xl md:text-3xl font-bold text-foreground">
+                        {design.title}
+                      </h2>
+                      <span className="text-sm text-foreground/60">{design.year}</span>
+                    </div>
+                    
+                    <div className="flex items-center gap-3 mb-6">
+                      <span className="px-3 py-1 text-sm font-medium bg-foreground/5 text-foreground/80 rounded-full border border-foreground/10">
+                        {design.category.charAt(0).toUpperCase() + design.category.slice(1)}
+                      </span>
+                      {design.gallery && design.gallery.length > 1 && (
+                        <span className="text-sm text-foreground/60">
+                          {currentIndex + 1} / {design.gallery.length}
+                        </span>
+                      )}
+                    </div>
+                    
+                    <p className="text-foreground/90 mb-6">{design.description}</p>
+                    
+                    <div className="space-y-3">
+                      <h3 className="text-sm font-medium text-foreground/70">Tools Used</h3>
+                      <div className="flex flex-wrap gap-2">
+                        {design.tools.map((tool, index) => (
+                          <span
+                            key={index}
+                            className="px-3 py-1 text-xs bg-foreground/5 text-foreground/80 rounded-full border border-foreground/10"
+                          >
+                            {tool}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                   
-                  <motion.h1
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4, duration: 0.5, ease: "easeOut" }}
-                    className="text-3xl md:text-5xl font-bold font-[family-name:var(--font-inter)] mb-4"
-                  >
-                    {design.title}
-                  </motion.h1>
+                  {design.gallery && design.gallery.length > 1 && (
+                    <div className="mt-auto pt-6 border-t border-foreground/10">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={goToPrevious}
+                            disabled={currentIndex === 0}
+                            className="p-2 rounded-full hover:bg-foreground/5 disabled:opacity-30 disabled:cursor-not-allowed"
+                            aria-label="Previous image"
+                          >
+                            <ChevronLeft size={20} />
+                          </button>
+                          <button
+                            onClick={goToNext}
+                            disabled={currentIndex === design.gallery.length - 1}
+                            className="p-2 rounded-full hover:bg-foreground/5 disabled:opacity-30 disabled:cursor-not-allowed"
+                            aria-label="Next image"
+                          >
+                            <ChevronRight size={20} />
+                          </button>
+                        </div>
+                        <span className="text-sm text-foreground/60">
+                          Swipe to view more
+                        </span>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
-
-              {/* Content */}
-              <div className="p-8">
-                {/* Description */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5, duration: 0.5, ease: "easeOut" }}
-                  className="mb-8"
-                >
-                  <p className="text-lg text-foreground/80 leading-relaxed mb-6">
-                    {design.description}
-                  </p>
-
-                  {/* Tools Used */}
-                  <div className="mb-8">
-                    <h3 className="text-xl font-bold mb-4 font-[family-name:var(--font-inter)]">Tools Used</h3>
-                    <div className="flex flex-wrap gap-3">
-                      {design.tools.map((tool, index) => (
-                        <span
-                          key={index}
-                          className="px-4 py-2 bg-blue-500/10 text-blue-400 rounded-lg text-sm font-medium border border-blue-500/20"
-                        >
-                          {tool}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-
-                {/* Additional Info */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6, duration: 0.5, ease: "easeOut" }}
-                  className="grid grid-cols-1 md:grid-cols-2 gap-8"
-                >
-                  {/* Category Info */}
-                  <div>
-                    <h3 className="text-xl font-bold mb-4 font-[family-name:var(--font-inter)]">Category</h3>
-                    <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-foreground/10">
-                      <span className="text-foreground/80 capitalize font-medium">{design.category} Design</span>
-                    </div>
-                  </div>
-
-                  {/* Year */}
-                  <div>
-                    <h3 className="text-xl font-bold mb-4 font-[family-name:var(--font-inter)]">Year</h3>
-                    <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-foreground/10">
-                      <span className="text-foreground/80 font-medium">{design.year}</span>
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-            </motion.div>
+            </div>
           </motion.div>
-        </>
+        </div>
       )}
     </AnimatePresence>
   );

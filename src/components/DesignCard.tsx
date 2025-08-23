@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { Design } from "@/data/designs";
+import Image from "next/image";
 import { useDesign } from "@/contexts/DesignContext";
+import { cn } from "@/lib/utils";
 
 interface DesignCardProps {
   design: Design;
@@ -22,63 +23,80 @@ export function DesignCard({ design, index, enableModal = false, useAnimate = fa
     }
   };
 
-  const CardContent = (
+  // Generate a subtle gradient based on the design title
+  const gradientId = `gradient-${design.id}`;
+  const gradientColors = [
+    ['#6366f1', '#8b5cf6'], // indigo to purple
+    ['#ec4899', '#f43f5e'], // pink to rose
+    ['#10b981', '#3b82f6'], // emerald to blue
+    ['#f59e0b', '#ef4444'], // amber to red
+  ][index % 4];
+
+  return (
     <motion.div
-      layoutId={enableModal ? `design-card-${design.id}` : undefined}
+      layoutId={`design-card-${design.id}`}
       initial={{ opacity: 0, y: 20 }}
       animate={useAnimate ? { opacity: 1, y: 0 } : undefined}
       whileInView={!useAnimate ? { opacity: 1, y: 0 } : undefined}
       transition={{ 
         duration: 0.6, 
-        delay: useAnimate ? 0.1 * (index + 1) : 0.1 * (index + 1),
-        layout: { duration: 0.6, ease: [0.32, 0.72, 0, 1] }
+        delay: 0.1 * (index + 1),
+        layout: { 
+          type: "spring",
+          bounce: 0.2,
+          duration: 0.5
+        } 
       }}
       viewport={!useAnimate ? { once: true } : undefined}
-      whileHover={{ y: -5, scale: 1.02 }}
-      className="group cursor-pointer"
+      className="group relative max-w-sm w-full mx-auto"
       onClick={handleClick}
+      style={{
+        borderRadius: '1rem',
+        overflow: 'hidden',
+        cursor: 'pointer'
+      }}
     >
-      <div className="bg-white/10 backdrop-blur-sm rounded-xl overflow-hidden border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md">
-        {/* Design Image */}
-        <div className="aspect-square relative overflow-hidden bg-foreground/5">
-          <Image
-            src={design.image}
-            alt={design.title}
-            fill
-            className="object-cover group-hover:scale-110 transition-transform duration-500"
-            priority={index < 3}
-          />
-          {/* Category Badge */}
-          <div className="absolute top-3 right-3">
-            <span className="px-2 py-1 bg-black/50 backdrop-blur-sm text-white text-xs rounded-full capitalize">
+      <div
+        className={cn(
+          "w-full cursor-pointer overflow-hidden relative card h-96 rounded-xl shadow-xl flex flex-col justify-end p-6 border border-transparent dark:border-neutral-800",
+          "bg-cover bg-center",
+          "before:absolute before:inset-0 before:bg-gradient-to-t before:from-black/80 before:to-transparent before:opacity-80 before:z-10",
+          "transition-all duration-500 hover:shadow-2xl hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-background"
+        )}
+        style={{
+          backgroundImage: `url(${design.image})`,
+        }}
+        aria-label={`View ${design.title} design details`}
+      >
+        {/* Content */}
+        <div className="relative z-20 text-white">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="px-3 py-1 text-xs font-medium bg-black/50 backdrop-blur-sm rounded-full">
               {design.category}
             </span>
+            <span className="text-xs opacity-80">{design.year}</span>
           </div>
-        </div>
-        
-        {/* Design Info */}
-        <div className="p-6">
-          <div className="flex items-center justify-between mb-2">
-            <h3 className="text-lg font-bold">{design.title}</h3>
-            <span className="text-sm text-foreground/60">{design.year}</span>
-          </div>
-          <p className="text-foreground/70 text-sm mb-4 line-clamp-2">
+          
+          <h3 className="text-2xl font-bold mb-2 group-hover:text-primary-300 transition-colors">
+            {design.title}
+          </h3>
+          
+          <p className="text-sm text-gray-200 opacity-90 mb-4 line-clamp-2">
             {design.description}
           </p>
           
-          {/* Tools */}
-          <div className="flex flex-wrap gap-1">
-            {design.tools.slice(0, 2).map((tool, toolIndex) => (
-              <span
-                key={toolIndex}
-                className="px-2 py-1 bg-blue-500/10 text-blue-400 rounded-full text-xs"
+          <div className="flex flex-wrap gap-2">
+            {design.tools.slice(0, 3).map((tool, i) => (
+              <span 
+                key={i}
+                className="px-2.5 py-1 text-xs bg-black/40 backdrop-blur-sm rounded-full border border-white/10"
               >
                 {tool}
               </span>
             ))}
-            {design.tools.length > 2 && (
-              <span className="px-2 py-1 bg-foreground/10 text-foreground/60 rounded-full text-xs">
-                +{design.tools.length - 2}
+            {design.tools.length > 3 && (
+              <span className="px-2.5 py-1 text-xs bg-black/40 backdrop-blur-sm rounded-full">
+                +{design.tools.length - 3}
               </span>
             )}
           </div>
@@ -86,6 +104,4 @@ export function DesignCard({ design, index, enableModal = false, useAnimate = fa
       </div>
     </motion.div>
   );
-
-  return CardContent;
 }
