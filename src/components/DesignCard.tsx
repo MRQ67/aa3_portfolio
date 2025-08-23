@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { Design } from "@/data/designs";
-import Image from "next/image";
 import { useDesign } from "@/contexts/DesignContext";
 import { cn } from "@/lib/utils";
 
@@ -23,14 +22,7 @@ export function DesignCard({ design, index, enableModal = false, useAnimate = fa
     }
   };
 
-  // Generate a subtle gradient based on the design title
-  const gradientId = `gradient-${design.id}`;
-  const gradientColors = [
-    ['#6366f1', '#8b5cf6'], // indigo to purple
-    ['#ec4899', '#f43f5e'], // pink to rose
-    ['#10b981', '#3b82f6'], // emerald to blue
-    ['#f59e0b', '#ef4444'], // amber to red
-  ][index % 4];
+  // Gradient colors are defined but not used - keeping for future use
 
   return (
     <motion.div

@@ -144,7 +144,7 @@ export const designs: Design[] = [
 ];
 
 // Get featured designs for homepage
-export const getFeaturedDesigns = (p0: number): Design[] => {
+export const getFeaturedDesigns = (): Design[] => {
   // Return exactly 3 designs for the homepage gallery
   return [
     designs[0],  // First logo design

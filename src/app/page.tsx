@@ -20,7 +20,7 @@ import { useDesign } from "@/contexts/DesignContext";
 
 export default function Home() {
   const topProjects = getTopProjects(4);
-  const featuredDesigns = getFeaturedDesigns(3);
+  const featuredDesigns = getFeaturedDesigns();
   const { isModalOpen, selectedProject, closeModal } = useProject();
   const { isModalOpen: isDesignModalOpen, selectedDesign, closeModal: closeDesignModal } = useDesign();
 

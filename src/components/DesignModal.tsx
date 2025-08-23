@@ -14,6 +14,8 @@ interface DesignModalProps {
 
 export function DesignModal({ isOpen, onClose, selectedDesign }: DesignModalProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+  const [isClosing, setIsClosing] = useState(false);
   const controls = useAnimation();
   const modalRef = useRef<HTMLDivElement>(null);
   const design = selectedDesign ? designs.find(d => d.id === selectedDesign) : null;
@@ -83,13 +85,23 @@ export function DesignModal({ isOpen, onClose, selectedDesign }: DesignModalProp
 
   if (!isOpen || !design) return null;
 
-  // Handle click outside
-  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    // Only close if clicking directly on the backdrop, not on any children
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-  };
+  // Handle keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      } else if (e.key === 'ArrowRight') {
+        goToNext();
+      } else if (e.key === 'ArrowLeft') {
+        goToPrevious();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [goToNext, goToPrevious, onClose]);
 
   return (
     <AnimatePresence mode="wait">

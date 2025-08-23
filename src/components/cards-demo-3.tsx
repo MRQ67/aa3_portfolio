@@ -1,6 +1,6 @@
 "use client";
 import { animate, motion } from "motion/react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useCallback } from "react";
 import { cn } from "@/lib/utils";
 import { GoCopilot } from "react-icons/go";
 
@@ -65,13 +65,17 @@ const Skeleton = () => {
     ],
   ];
 
-  useEffect(() => {
+  const animateSequence = useCallback(() => {
     animate(sequence, {
-      // @ts-ignore
+      // @ts-expect-error - sequence type mismatch
       repeat: Infinity,
       repeatDelay: 1,
     });
-  }, []);
+  }, [sequence]);
+
+  useEffect(() => {
+    animateSequence();
+  }, [animateSequence]);
   return (
     <div className="p-8 overflow-hidden h-full relative flex items-center justify-center">
       <div className="flex flex-row shrink-0 justify-center items-center gap-2">
