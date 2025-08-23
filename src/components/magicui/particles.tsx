@@ -3,7 +3,6 @@
 import { cn } from "@/lib/utils";
 import React, {
   ComponentPropsWithoutRef,
-  useCallback,
   useEffect,
   useRef,
   useState,
@@ -100,137 +99,12 @@ export const Particles: React.FC<ParticlesProps> = ({
   const rafID = useRef<number | null>(null);
   const resizeTimeout = useRef<NodeJS.Timeout | null>(null);
 
-  // Renamed to avoid redeclaration
-  const renderParticles = useCallback(() => {
-    if (!context.current) return;
-    
-    circles.current.forEach((circle) => {
-      // Draw particle
-      context.current!.beginPath();
-      context.current!.arc(
-        circle.x,
-        circle.y,
-        circle.size,
-        0,
-        2 * Math.PI
-      );
-      context.current!.fillStyle = `rgba(${hexToRgb(color).join(",")}, ${circle.alpha})`;
-      context.current!.fill();
-      
-      // Update particle position
-      circle.translateX += (circle.dx * (vx || 1));
-      circle.translateY += (circle.dy * (vy || 1));
-      
-      // Apply magnetism
-      const distance = Math.hypot(
-        mouse.current.x - circle.x,
-        mouse.current.y - circle.y
-      );
-      
-      if (distance < 100) {
-        const angle = Math.atan2(
-          mouse.current.y - circle.y,
-          mouse.current.x - circle.x
-        );
-        circle.translateX += Math.cos(angle) * circle.magnetism;
-        circle.translateY += Math.sin(angle) * circle.magnetism;
-      }
-      
-      // Apply easing
-      circle.x = circle.x + (circle.translateX - circle.x) * (ease / 1000);
-      circle.y = circle.y + (circle.translateY - circle.y) * (ease / 1000);
-      
-      // Reset particle if it goes off screen
-      if (
-        circle.x < -circle.size ||
-        circle.x > canvasSize.current.w + circle.size ||
-        circle.y < -circle.size ||
-        circle.y > canvasSize.current.h + circle.size
-      ) {
-        // Reset to random position on the opposite side
-        if (Math.random() > 0.5) {
-          circle.x = Math.random() > 0.5 ? -circle.size : canvasSize.current.w + circle.size;
-          circle.y = Math.random() * canvasSize.current.h;
-        } else {
-          circle.x = Math.random() * canvasSize.current.w;
-          circle.y = Math.random() > 0.5 ? -circle.size : canvasSize.current.h + circle.size;
-        }
-        circle.translateX = circle.x;
-        circle.translateY = circle.y;
-      }
-    });
-  }, [color, ease, vx, vy]);
-
-  const initCanvas = useCallback(() => {
-    if (!canvasContainerRef.current || !canvasRef.current) return;
-    
-    // Set canvas size
-    canvasSize.current.w = canvasContainerRef.current.offsetWidth;
-    canvasSize.current.h = canvasContainerRef.current.offsetHeight;
-    
-    // Set canvas display size
-    canvasRef.current.width = canvasSize.current.w * dpr;
-    canvasRef.current.height = canvasSize.current.h * dpr;
-    canvasRef.current.style.width = `${canvasSize.current.w}px`;
-    canvasRef.current.style.height = `${canvasSize.current.h}px`;
-    
-    // Scale context for high DPI displays
-    if (context.current) {
-      context.current.scale(dpr, dpr);
-    }
-    
-    // Initialize particles
-    circles.current = [];
-    const baseSize = size; // Store the prop in a local constant to avoid shadowing
-    for (let i = 0; i < quantity; i++) {
-      const particleSize = (Math.random() * 2 + baseSize) * dpr;
-      circles.current.push({
-        x: Math.random() * canvasSize.current.w,
-        y: Math.random() * canvasSize.current.h,
-        translateX: 0,
-        translateY: 0,
-        size: particleSize,
-        alpha: Math.random() * 0.5 + 0.1,
-        targetAlpha: 0,
-        dx: (Math.random() - 0.5) * 0.2,
-        dy: (Math.random() - 0.5) * 0.2,
-        magnetism: Math.random() * 2 + 0.5
-      });
-    }
-    
-    renderParticles();
-  }, [quantity, size, dpr, renderParticles]);
-
-  const onMouseMove = useCallback(() => {
-    if (canvasRef.current) {
-      const rect = canvasRef.current.getBoundingClientRect();
-      const { w, h } = canvasSize.current;
-      const x = mousePosition.x - rect.left - w / 2;
-      const y = mousePosition.y - rect.top - h / 2;
-      const inside = x < w / 2 && x > -w / 2 && y < h / 2 && y > -h / 2;
-      if (inside) {
-        mouse.current.x = x;
-        mouse.current.y = y;
-      }
-    }
-  }, [mousePosition.x, mousePosition.y]);
-
-  const animateParticles = useCallback(() => {
-    if (!context.current || !canvasRef.current) return;
-    
-    if (context.current) {
-      context.current.clearRect(0, 0, canvasSize.current.w, canvasSize.current.h);
-      renderParticles();
-    }
-    rafID.current = requestAnimationFrame(animateParticles);
-  }, [renderParticles]);
-
   useEffect(() => {
     if (canvasRef.current) {
       context.current = canvasRef.current.getContext("2d");
     }
     initCanvas();
-    animateParticles();
+    animate();
 
     const handleResize = () => {
       if (resizeTimeout.current) {
@@ -252,15 +126,34 @@ export const Particles: React.FC<ParticlesProps> = ({
       }
       window.removeEventListener("resize", handleResize);
     };
-  }, [color, initCanvas, animateParticles]);
+  }, [color]);
 
   useEffect(() => {
     onMouseMove();
-  }, [onMouseMove]);
+  }, [mousePosition.x, mousePosition.y]);
 
   useEffect(() => {
     initCanvas();
-  }, [refresh, initCanvas]);
+  }, [refresh]);
+
+  const initCanvas = () => {
+    resizeCanvas();
+    drawParticles();
+  };
+
+  const onMouseMove = () => {
+    if (canvasRef.current) {
+      const rect = canvasRef.current.getBoundingClientRect();
+      const { w, h } = canvasSize.current;
+      const x = mousePosition.x - rect.left - w / 2;
+      const y = mousePosition.y - rect.top - h / 2;
+      const inside = x < w / 2 && x > -w / 2 && y < h / 2 && y > -h / 2;
+      if (inside) {
+        mouse.current.x = x;
+        mouse.current.y = y;
+      }
+    }
+  };
 
   const resizeCanvas = () => {
     if (canvasContainerRef.current && canvasRef.current && context.current) {

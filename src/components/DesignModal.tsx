@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence, useAnimation } from "framer-motion";
-import { useEffect, useState, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Image from "next/image";
 import { designs } from "@/data/designs";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
@@ -14,10 +14,8 @@ interface DesignModalProps {
 
 export function DesignModal({ isOpen, onClose, selectedDesign }: DesignModalProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState(0);
-  const [isClosing, setIsClosing] = useState(false);
-  const controls = useAnimation();
   const modalRef = useRef<HTMLDivElement>(null);
+  const controls = useAnimation();
   const design = selectedDesign ? designs.find(d => d.id === selectedDesign) : null;
 
   // Handle click outside
@@ -36,57 +34,28 @@ export function DesignModal({ isOpen, onClose, selectedDesign }: DesignModalProp
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isOpen, onClose]);
-  
-  // Reset current index when design changes
-  useEffect(() => {
-    setCurrentIndex(0);
-  }, [selectedDesign]);
 
-  // Handle keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        onClose();
-      } else if (e.key === "ArrowLeft") {
-        goToPrevious();
-      } else if (e.key === "ArrowRight") {
-        goToNext();
-      }
-    };
+  const goToNext = useCallback(() => {
+    if (!designs || !design) return;
+    const currentIdx = designs.findIndex((d) => d.id === design.id);
+    const nextIndex = (currentIdx + 1) % designs.length;
+    setCurrentIndex(nextIndex);
+  }, [design, designs]);
 
-    if (isOpen) {
-      window.addEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "unset";
-    };
-  }, [isOpen, currentIndex, design?.gallery?.length]);
-
-  const goToNext = () => {
-    if (!design?.gallery) return;
-    const newIndex = (currentIndex + 1) % design.gallery.length;
-    setCurrentIndex(newIndex);
-  };
-
-  const goToPrevious = () => {
-    if (!design?.gallery) return;
-    const newIndex = (currentIndex - 1 + design.gallery.length) % design.gallery.length;
-    setCurrentIndex(newIndex);
-  };
+  const goToPrevious = useCallback(() => {
+    if (!designs || !design) return;
+    const currentIdx = designs.findIndex((d) => d.id === design.id);
+    const prevIndex = (currentIdx - 1 + designs.length) % designs.length;
+    setCurrentIndex(prevIndex);
+  }, [design, designs]);
 
   const goToSlide = (index: number) => {
     setCurrentIndex(index);
   };
 
-  if (!isOpen || !design) return null;
-
-  // Handle keyboard navigation
   useEffect(() => {
+    if (!isOpen) return;
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onClose();
@@ -98,10 +67,10 @@ export function DesignModal({ isOpen, onClose, selectedDesign }: DesignModalProp
     };
 
     window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [goToNext, goToPrevious, onClose]);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose, goToNext, goToPrevious]);
+
+  if (!isOpen || !design) return null;
 
   return (
     <AnimatePresence mode="wait">

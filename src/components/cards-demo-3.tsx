@@ -66,12 +66,32 @@ const Skeleton = () => {
   ];
 
   const animateSequence = useCallback(() => {
-    animate(sequence, {
-      // @ts-expect-error - sequence type mismatch
-      repeat: Infinity,
-      repeatDelay: 1,
+    const sequence: [number, number, number][] = [
+      [0, 0, 0],
+      [0, 0, 0],
+      [0, 0, 0],
+      [0, 1, 0],
+      [0, 0, 0],
+    ];
+    
+    // Use the correct type for animation options
+    const options: KeyframeAnimationOptions = {
+      duration: 1000,
+      iterations: Infinity,
+      delay: 1000,
+      easing: 'ease-in-out'
+    };
+    
+    // Ensure we have a valid element to animate
+    const elements = document.querySelectorAll('.circle-1, .circle-2, .circle-3, .circle-4, .circle-5');
+    elements.forEach((element, i) => {
+      element.animate([
+        { transform: 'scale(1)', opacity: 0 },
+        { transform: 'scale(1.2)', opacity: 1 },
+        { transform: 'scale(1)', opacity: 0 }
+      ], options);
     });
-  }, [sequence]);
+  }, []);
 
   useEffect(() => {
     animateSequence();
