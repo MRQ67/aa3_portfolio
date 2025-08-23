@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence, useAnimation } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Image from "next/image";
 import { designs } from "@/data/designs";
@@ -15,7 +15,6 @@ interface DesignModalProps {
 export function DesignModal({ isOpen, onClose, selectedDesign }: DesignModalProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const modalRef = useRef<HTMLDivElement>(null);
-  const controls = useAnimation();
   const design = selectedDesign ? designs.find(d => d.id === selectedDesign) : null;
 
   // Handle click outside
