@@ -5,6 +5,7 @@ import { DesignProvider } from "@/contexts/DesignContext";
 import { Inter, Ubuntu_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import { Analytics } from '@vercel/analytics/next';
+import AppShell from "@/components/AppShell";
 import "./globals.css";
 
 const inter = Inter({
@@ -50,7 +51,9 @@ export default function RootLayout({
         >
           <ProjectProvider>
             <DesignProvider>
-              {children}
+              <AppShell>
+                {children}
+              </AppShell>
             </DesignProvider>
           </ProjectProvider>
         </ThemeProvider>

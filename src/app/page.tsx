@@ -44,7 +44,7 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="absolute top-8 left-8 z-20 flex items-center gap-4"
           >
-            <div className="w-16 h-16 relative">
+            <div id="hero-logo" className="w-16 h-16 relative">
               <Image
                 src="/logo.svg"
                 alt="Logo"
