@@ -34,8 +34,10 @@ export default function LoadingOverlay({
     autoplay: true,
     onStateChange: (event) => {
       // Listen for animation completion events
-      if (event.data.includes('end') || event.data.includes('complete')) {
-        setAnimationEnded(true);
+      if (event.data && typeof event.data === 'string') {
+        if (event.data.includes('end') || event.data.includes('complete')) {
+          setAnimationEnded(true);
+        }
       }
     },
   });

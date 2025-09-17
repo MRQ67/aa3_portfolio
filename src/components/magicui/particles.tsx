@@ -126,15 +126,15 @@ export const Particles: React.FC<ParticlesProps> = ({
       }
       window.removeEventListener("resize", handleResize);
     };
-  }, [color]);
+  }, [color]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     onMouseMove();
-  }, [mousePosition.x, mousePosition.y]);
+  }, [mousePosition.x, mousePosition.y]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     initCanvas();
-  }, [refresh]);
+  }, [refresh]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const initCanvas = () => {
     resizeCanvas();

@@ -35,18 +35,18 @@ export function DesignModal({ isOpen, onClose, selectedDesign }: DesignModalProp
   }, [isOpen, onClose]);
 
   const goToNext = useCallback(() => {
-    if (!designs || !design) return;
+    if (!design) return;
     const currentIdx = designs.findIndex((d) => d.id === design.id);
     const nextIndex = (currentIdx + 1) % designs.length;
     setCurrentIndex(nextIndex);
-  }, [design, designs]);
+  }, [design]);
 
   const goToPrevious = useCallback(() => {
-    if (!designs || !design) return;
+    if (!design) return;
     const currentIdx = designs.findIndex((d) => d.id === design.id);
     const prevIndex = (currentIdx - 1 + designs.length) % designs.length;
     setCurrentIndex(prevIndex);
-  }, [design, designs]);
+  }, [design]);
 
   const goToSlide = (index: number) => {
     setCurrentIndex(index);
