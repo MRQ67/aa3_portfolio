@@ -21,6 +21,76 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: 1,
+    slug: "stackmatch-suite",
+    title: "Stackmatch Suite",
+    description: "A comprehensive tech stack management platform with CLI tools and web dashboard for developers.",
+    fullDescription: "Stackmatch Suite is a complete solution for tech stack management featuring a powerful CLI tool and an intuitive web dashboard. Built with Next.js and TypeScript, it provides developers with streamlined tools to manage, analyze, and optimize their technology stacks. The platform includes authentication, real-time updates, and comprehensive analytics.",
+    image: "/images/stackmatch.png",
+    images: ["/images/stackmatch.png", "/images/stackmatch-2.png", "/images/stackmatch-3.png"],
+    tags: ["Next.js", "TypeScript", "Supabase"],
+    tagColors: ["bg-black/10 text-foreground", "bg-blue-500/10 text-blue-500", "bg-green-500/10 text-green-500"],
+    links: {
+      github: "https://github.com/MRQ67/stackmatch-dashboard"
+    },
+    features: [
+      "Command-line interface for stack management",
+      "Web-based dashboard with real-time analytics",
+      "Authentication and user management",
+      "Tech stack analysis and recommendations",
+      "Integration with popular development tools"
+    ],
+    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase", "shadcn/ui"],
+    status: "completed"
+  },
+  {
+    id: 2,
+    slug: "bugpin",
+    title: "Bugpin",
+    description: "Pin Your Pain - An intuitive bug tracking and issue management platform for development teams.",
+    fullDescription: "Bugpin is a modern bug tracking and issue management platform designed to help development teams efficiently track, manage, and resolve bugs. With its clean interface and powerful features, Bugpin makes it easy to 'pin your pain' and collaborate on solutions. Built with TypeScript and modern web technologies.",
+    image: "/images/bugpin.png",
+    images: ["/images/bugpin.png", "/images/bugpin-2.png", "/images/bugpin-3.png"],
+    tags: ["TypeScript", "React", "Issue Tracking"],
+    tagColors: ["bg-blue-500/10 text-blue-500", "bg-blue-400/10 text-blue-400", "bg-red-500/10 text-red-500"],
+    links: {
+      github: "https://github.com/MRQ67/bugpin"
+    },
+    features: [
+      "Intuitive bug tracking interface",
+      "Team collaboration tools",
+      "Priority and status management",
+      "Real-time notifications",
+      "Comprehensive reporting and analytics"
+    ],
+    techStack: ["TypeScript", "React", "Node.js", "Database Integration"],
+    status: "completed"
+  },
+  {
+    id: 3,
+    slug: "youtube-auto-pip",
+    title: "YouTube Auto Picture-in-Picture Suite",
+    description: "Cross-platform suite enabling automatic Picture-in-Picture mode for YouTube videos across browser and desktop.",
+    fullDescription: "A comprehensive cross-platform solution that automatically enables Picture-in-Picture mode for YouTube videos. The suite includes a browser extension built with JavaScript and a Windows desktop application developed in C#. This tool enhances the YouTube viewing experience by allowing seamless multitasking with video content.",
+    image: "/images/yt-auto-pip.png",
+    images: ["/images/yt-auto-pip.png", "/images/yt-auto-pip-2.png", "/images/yt-auto-pip-3.png"],
+    tags: ["JavaScript", "C#", "Browser Extension"],
+    tagColors: ["bg-yellow-500/10 text-yellow-500", "bg-purple-500/10 text-purple-500", "bg-blue-600/10 text-blue-600"],
+    links: {
+      github: "https://github.com/MRQ67/youtube-auto-pip",
+      demo: "https://github.com/MRQ67/yt-auto-pip_win"
+    },
+    features: [
+      "Automatic Picture-in-Picture activation",
+      "Cross-platform compatibility",
+      "Browser extension for seamless integration",
+      "Windows desktop application",
+      "User-friendly interface and controls"
+    ],
+    techStack: ["JavaScript", "C#", "Browser APIs", "Windows Forms", "YouTube API"],
+    status: "completed"
+  },
+  {
+    id: 4,
     slug: "markplainer",
     title: "MarkPlainer",
     description: "An android app that convert markdown text to plain text written in kotlin.",
@@ -28,7 +98,7 @@ export const projects: Project[] = [
     image: "/images/mark.png",
     images: ["/images/mark.png", "/images/mark-2.png", "/images/mark-3.png"],
     tags: ["Kotlin"],
-    tagColors: ["bg-blue-500/10 text-purple-500"],
+    tagColors: ["bg-orange-500/10 text-orange-500"],
     links: {
       github: "https://github.com/MRQ67/MarkPlainer"
     },
@@ -43,10 +113,10 @@ export const projects: Project[] = [
     status: "completed"
   },
   {
-    id: 2,
+    id: 5,
     slug: "zync-chat",
     title: "Zync Chat",
-    description: "a real-time chat web app in written golang.",
+    description: "a real-time chat web app in written Go.",
     fullDescription: "Zync Chat is a modern real-time chat application built with Go and JavaScript. It features instant messaging, user authentication, and a responsive web interface. The application demonstrates efficient WebSocket communication and scalable backend architecture.",
     image: "/images/zync.png",
     images: ["/images/zync.png", "/images/zync-2.png", "/images/zync-3.png"],
@@ -66,7 +136,7 @@ export const projects: Project[] = [
     status: "completed"
   },
   {
-    id: 3,
+    id: 6,
     slug: "unique-e-learning",
     title: "Unique E-Learning Platform",
     description: "A secure, AI-powered e-learning platform with advanced proctoring for online exams and courses.",
@@ -89,7 +159,7 @@ export const projects: Project[] = [
     status: "completed"
   },
   {
-    id: 4,
+    id: 7,
     slug: "unique-validation",
     title: "Unique Validation",
     description: "A modern web application for creating, managing, and validating e-learning certificates with QR code verification.",
@@ -113,7 +183,7 @@ export const projects: Project[] = [
     status: "completed"
   },
   {
-    id: 5,
+    id: 8,
     slug: "portfolio-website",
     title: "Portfolio Website",
     description: "A modern, responsive portfolio website built with Next.js, featuring smooth animations and interactive components.",
@@ -135,76 +205,6 @@ export const projects: Project[] = [
     ],
     techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Vercel"],
     status: "completed"
-  },
-  {
-    id: 6,
-    slug: "task-manager-api",
-    title: "Task Manager API",
-    description: "A RESTful API for task management built with Go, featuring user authentication and real-time updates.",
-    fullDescription: "A robust RESTful API built with Go that provides comprehensive task management functionality. The API features JWT authentication, real-time updates, and efficient database operations with PostgreSQL. Designed for scalability and performance.",
-    image: "/images/task-api.png",
-    images: ["/images/task-api.png", "/images/task-api-2.png", "/images/task-api-3.png"],
-    tags: ["Go", "PostgreSQL", "JWT"],
-    tagColors: ["bg-blue-500/10 text-blue-500", "bg-blue-600/10 text-blue-600", "bg-green-500/10 text-green-500"],
-    links: {
-      github: "https://github.com/MRQ67/task-manager-api"
-    },
-    features: [
-      "RESTful API design",
-      "JWT authentication",
-      "Real-time task updates",
-      "PostgreSQL database integration",
-      "Comprehensive API documentation"
-    ],
-    techStack: ["Go", "PostgreSQL", "JWT", "REST API", "Docker"],
-    status: "completed"
-  },
-  {
-    id: 7,
-    slug: "weather-dashboard",
-    title: "Weather Dashboard",
-    description: "A responsive weather application with location-based forecasts and interactive charts.",
-    fullDescription: "An intuitive weather dashboard that provides comprehensive weather information with beautiful visualizations. Features location-based forecasts, interactive charts, and a responsive design that works seamlessly across all devices.",
-    image: "/images/weather-app.png",
-    images: ["/images/weather-app.png", "/images/weather-2.png", "/images/weather-3.png"],
-    tags: ["React", "Chart.js", "Weather API"],
-    tagColors: ["bg-blue-400/10 text-blue-400", "bg-green-400/10 text-green-400", "bg-yellow-400/10 text-yellow-400"],
-    links: {
-      github: "https://github.com/MRQ67/weather-dashboard",
-      demo: "https://weather-dashboard-demo.vercel.app"
-    },
-    features: [
-      "Location-based weather forecasts",
-      "Interactive weather charts",
-      "7-day weather predictions",
-      "Responsive design",
-      "Real-time weather updates"
-    ],
-    techStack: ["React", "Chart.js", "Weather API", "CSS3", "JavaScript"],
-    status: "completed"
-  },
-  {
-    id: 8,
-    slug: "ecommerce-mobile-app",
-    title: "E-Commerce Mobile App",
-    description: "A cross-platform mobile e-commerce application with payment integration and real-time inventory.",
-    fullDescription: "A comprehensive cross-platform mobile e-commerce solution built with Flutter. The app features secure payment processing, real-time inventory management, and a smooth user experience across iOS and Android platforms.",
-    image: "/images/ecommerce-app.png",
-    images: ["/images/ecommerce-app.png", "/images/ecommerce-2.png", "/images/ecommerce-3.png"],
-    tags: ["Flutter", "Firebase", "Stripe"],
-    tagColors: ["bg-blue-500/10 text-blue-500", "bg-orange-500/10 text-orange-500", "bg-purple-500/10 text-purple-500"],
-    links: {
-      github: "https://github.com/MRQ67/ecommerce-mobile"
-    },
-    features: [
-      "Cross-platform mobile app",
-      "Secure payment processing",
-      "Real-time inventory updates",
-      "User authentication",
-      "Shopping cart and wishlist"
-    ],
-    techStack: ["Flutter", "Dart", "Firebase", "Stripe API", "REST API"],
-    status: "in-progress"
   }
 ];
 
