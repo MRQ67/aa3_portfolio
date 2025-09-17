@@ -23,7 +23,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       </AnimatePresence>
       {!ready && (
         <LoadingOverlay
-          durationMs={3000}
+          minDurationMs={4000}
           onDone={() => {
             // Wait for the logo's fade-out animation to complete (1.2s) plus a small buffer
             setTimeout(() => setReady(true), 700);

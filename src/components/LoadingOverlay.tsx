@@ -6,7 +6,7 @@ import { useRive } from "@rive-app/react-canvas";
 
 interface LoadingOverlayProps {
   src?: string; // path to the .riv file
-  durationMs?: number; // how long to play before scaling out if no event-based completion
+  minDurationMs?: number; // minimum duration to show animation
   className?: string;
   onDone?: () => void;
   onFadeStart?: () => void;
@@ -14,37 +14,72 @@ interface LoadingOverlayProps {
 
 // A simple, robust loader that:
 // - Plays a Rive animation centered on screen
-// - After durationMs, scales the logo massively so it flies off-screen
-// - Then unmounts and reveals the app
-// You can later wire an actual state machine event to replace the timeout.
+// - Waits for the animation to complete OR a minimum duration, whichever is longer
+// - Then moves to hero logo position and fades out
+// - Finally unmounts and reveals the app
 export default function LoadingOverlay({
   src = "/animation/aa3_animated.riv",
-  durationMs = 3000,
+  minDurationMs = 4000, // Increased minimum duration to ensure animation completes
   className = "",
   onDone,
   onFadeStart,
 }: LoadingOverlayProps) {
   const [phase, setPhase] = useState<"show" | "move" | "hidden">("show");
   const [offset, setOffset] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [animationEnded, setAnimationEnded] = useState(false);
+  const [minTimeElapsed, setMinTimeElapsed] = useState(false);
 
   const { rive, RiveComponent } = useRive({
     src,
-    autoplay: true, // attempt to auto-play default animation(s)
+    autoplay: true,
+    onStateChange: (event) => {
+      // Listen for animation completion events
+      if (event.data.includes('end') || event.data.includes('complete')) {
+        setAnimationEnded(true);
+      }
+    },
   });
 
-  // Center the logo initially
+  // Set minimum time elapsed flag
   useEffect(() => {
-    // nothing to compute here since we anchor at viewport center
-  }, []);
+    const timer = setTimeout(() => {
+      setMinTimeElapsed(true);
+    }, minDurationMs);
+    return () => clearTimeout(timer);
+  }, [minDurationMs]);
 
-  // After durationMs, move to hero logo position
+  // Listen for Rive animation events to detect when animation ends
   useEffect(() => {
-    if (phase !== "show") return;
-    const t = setTimeout(() => {
+    if (!rive) return;
+    
+    // Listen for when all animations complete
+    const checkAnimationState = () => {
       try {
-        // Stop the animation playback at the end of display time
+        // If the animation has stopped playing, consider it ended
+        if (!rive.isPlaying) {
+          setAnimationEnded(true);
+        }
+      } catch (error) {
+        // Fallback: assume animation is done after a reasonable time
+        console.log('Error checking animation state:', error);
+      }
+    };
+
+    // Check animation state periodically
+    const interval = setInterval(checkAnimationState, 100);
+    
+    return () => clearInterval(interval);
+  }, [rive]);
+
+  // When both conditions are met (animation ended AND minimum time elapsed), start the exit sequence
+  useEffect(() => {
+    if (phase !== "show" || !animationEnded || !minTimeElapsed) return;
+    
+    const startExitSequence = () => {
+      try {
+        // Ensure animation is stopped
         if (rive) {
-          rive.stop(); // Changed from pause() to stop() to completely stop the animation
+          rive.stop();
         }
         const el = document.getElementById("hero-logo");
         if (el) {
@@ -55,13 +90,18 @@ export default function LoadingOverlay({
           const viewportCenterY = window.innerHeight / 2;
           setOffset({ x: heroCenterX - viewportCenterX, y: heroCenterY - viewportCenterY });
         }
-      } catch {}
+      } catch (error) {
+        console.log('Error during exit sequence:', error);
+      }
       // Start fading/moving
       if (onFadeStart) onFadeStart();
       setPhase("move");
-    }, durationMs);
-    return () => clearTimeout(t);
-  }, [phase, durationMs]);
+    };
+
+    // Small delay to ensure smooth transition
+    const timer = setTimeout(startExitSequence, 200);
+    return () => clearTimeout(timer);
+  }, [phase, animationEnded, minTimeElapsed, rive, onFadeStart]);
 
   // After move, hide fully
   useEffect(() => {

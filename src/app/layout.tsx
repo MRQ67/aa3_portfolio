@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ProjectProvider } from "@/contexts/ProjectContext";
 import { DesignProvider } from "@/contexts/DesignContext";
-import { Inter, Ubuntu_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import { Analytics } from '@vercel/analytics/next';
 import AppShell from "@/components/AppShell";
@@ -14,8 +14,8 @@ const inter = Inter({
   display: "swap",
 });
 
-const ubuntuMono = Ubuntu_Mono({
-  variable: "--font-ubuntu-mono",
+const jetBrainsMono = JetBrains_Mono({
+  variable: "--font-ubuntu-mono", // Keep the same variable name for consistency
   weight: ["400", "700"],
   subsets: ["latin"],
   display: "swap",
@@ -41,7 +41,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${ubuntuMono.variable} ${sarina.variable} antialiased`}
+        className={`${inter.variable} ${jetBrainsMono.variable} ${sarina.variable} antialiased`}
       >
         <ThemeProvider
           attribute="class"

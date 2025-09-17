@@ -26,22 +26,38 @@ export default function Home() {
 
   return (
     <>
-      <Particles
-        className="fixed inset-0 z-0"
-        quantity={80}
-        ease={80}
-        color="#60A5FA"
-        size={0.6}
-        staticity={30}
-      />
-      <div className="min-h-screen text-foreground flex flex-col max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
+        <Particles
+          className="fixed inset-0 z-0"
+          quantity={80}
+          ease={80}
+          color="#60A5FA"
+          size={0.6}
+          staticity={30}
+        />
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+        className="min-h-screen text-foreground flex flex-col max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
+      >
         {/* Hero Section */}
-        <div className="flex flex-col md:grid md:grid-cols-[2fr_1fr] items-center min-h-screen p-8 relative">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
+          className="flex flex-col md:grid md:grid-cols-[2fr_1fr] items-center min-h-screen p-8 relative"
+        >
           {/* Logo at the top */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
             className="absolute top-8 left-8 z-20 flex items-center gap-4"
           >
             <div id="hero-logo" className="w-16 h-16 relative">
@@ -59,7 +75,7 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
+            transition={{ duration: 0.8, delay: 1.0 }}
             className="w-full h-full flex items-center justify-center relative order-1 md:order-2"
           >
             <div className="relative w-48 h-48 md:w-80 md:h-80 mx-auto mt-32 md:mt-0">
@@ -97,13 +113,13 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
             className="flex flex-col gap-5 md:gap-10 z-10 mt-24 md:mt-24 order-2 md:order-1"
           >
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              transition={{ duration: 0.8, delay: 1.0 }}
               className="text-4xl md:text-8xl font-bold font-[family-name:var(--font-inter)]"
             >
               <div className="flex justify-start">
@@ -119,7 +135,7 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
+              transition={{ duration: 0.8, delay: 1.2 }}
               className="flex flex-col"
             >
               <span className="text-3xl md:text-6xl font-[family-name:var(--font-ubuntu-mono)]">
@@ -141,7 +157,7 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.5 }}
+            transition={{ duration: 0.6, delay: 1.8 }}
             className="absolute bottom-20 md:bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
           >
             <div className="animate-bounce">
@@ -162,7 +178,7 @@ export default function Home() {
               </svg>
             </div>
           </motion.div>
-        </div>
+        </motion.div>
 
         {/* About Me Section */}
         <div className="py-20 grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-10">
@@ -686,7 +702,7 @@ export default function Home() {
             </div>
           </div>
         </footer>
-      </div>
+      </motion.div>
 
       {/* Project Modal */}
       <ProjectModal
