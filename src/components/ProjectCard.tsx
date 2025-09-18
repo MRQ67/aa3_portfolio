@@ -13,6 +13,16 @@ interface ProjectCardProps {
   useAnimate?: boolean;
 }
 
+/**
+ * Renders a project card with animated entry and either modal-opening or link navigation behavior.
+ *
+ * When `enableModal` is true the card intercepts clicks, prevents navigation, and opens the project modal via context (using the project's `id`). When `enableModal` is false the card is wrapped with a Next.js `Link` to `/projects/{project.slug}` and behaves as a normal navigation target.
+ *
+ * @param index - Zero-based index used to stagger the animation delay for this card.
+ * @param enableModal - If true, enables modal behavior (shared layout animations and click-to-open); defaults to `false`.
+ * @param useAnimate - If true, forces the component to use the `animate` prop for initial animation; when false it uses `whileInView` (animates on viewport entry); defaults to `false`.
+ * @returns A JSX element representing the project card.
+ */
 export function ProjectCard({ project, index, enableModal = false, useAnimate = false }: ProjectCardProps) {
   const { openModal } = useProject();
 

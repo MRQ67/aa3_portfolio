@@ -9,6 +9,13 @@ import { ProjectCard } from "@/components/ProjectCard";
 import { ProjectModal } from "@/components/ProjectModal";
 import { useProject } from "@/contexts/ProjectContext";
 
+/**
+ * Projects page component that displays a responsive grid of project cards and a project detail modal.
+ *
+ * Reads modal state and selected project from ProjectContext to control the ProjectModal. Renders a header with navigation and logo, a page title/description, an animated responsive grid of ProjectCard entries sourced from the local `projects` data, and the ProjectModal whose visibility is driven by the context.
+ *
+ * @returns The Projects page React element.
+ */
 export default function ProjectsPage() {
   const { isModalOpen, selectedProject, closeModal } = useProject();
   
