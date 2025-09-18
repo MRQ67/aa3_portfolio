@@ -7,11 +7,13 @@ A modern, responsive portfolio website built with Next.js 15, featuring smooth a
 - **Modern Design**: Clean, professional layout with dark/light theme support
 - **Smooth Animations**: Framer Motion powered animations and transitions
 - **Interactive Loading**: Rive animation on first visit with session-based display
+- **Enhanced Readability**: Darkened project thumbnails for better text contrast
 - **Responsive Layout**: Optimized for all devices and screen sizes
 - **Project Showcase**: Detailed project cards with modals and GitHub integration
 - **Design Gallery**: Interactive design portfolio with modal views
 - **Skills Section**: Comprehensive tech stack visualization
 - **Contact Integration**: Direct links to GitHub, LinkedIn, and email
+- **Performance Optimized**: Turbopack compatibility and optimized font loading
 
 ## 🚀 Tech Stack
 
@@ -52,7 +54,8 @@ src/
 ### Project Cards
 - **Interactive Modals**: Detailed project views with image galleries
 - **GitHub Integration**: Direct links to repositories
-- **Responsive Design**: Optimized thumbnails with dark overlays
+- **Enhanced Thumbnails**: Darkened overlays (90% opacity) for improved text readability
+- **Responsive Design**: Optimized thumbnails with gradient overlays
 - **Tech Stack Tags**: Color-coded technology indicators
 
 ### Design Gallery
@@ -99,16 +102,22 @@ The website is fully responsive with breakpoints optimized for:
 ## 🎯 Projects Showcase
 
 ### Featured Projects
-1. **MarkPlainer** - Android markdown converter (Kotlin)
-2. **Zync Chat** - Real-time chat application (Go + JavaScript)
-3. **Unique E-Learning** - AI-powered learning platform (Next.js)
-4. **Unique Validation** - Certificate management system (Next.js)
-5. **Portfolio Website** - This website (Next.js + TypeScript)
+1. **Stackmatch Suite** - Tech stack management platform with CLI tools and web dashboard (Next.js + TypeScript)
+2. **Bugpin** - Intuitive bug tracking and issue management platform (TypeScript + React)
+3. **YouTube Auto Picture-in-Picture Suite** - Cross-platform suite for automatic PiP mode (JavaScript + C#)
+4. **MarkPlainer** - Android markdown converter app (Kotlin)
+5. **Zync Chat** - Real-time chat web application (Go + JavaScript)
 
 ### Additional Projects
-- **Task Manager API** - RESTful API (Go + PostgreSQL)
-- **Weather Dashboard** - Weather app with charts (React)
-- **E-Commerce Mobile App** - Cross-platform app (Flutter)
+- **Unique E-Learning Platform** - AI-powered learning platform with proctoring (Next.js)
+- **Unique Validation** - Certificate management system with QR verification (Next.js)
+- **Portfolio Website** - This modern portfolio website (Next.js + TypeScript)
+
+### Recent Updates
+- **Enhanced Thumbnails**: Added custom project thumbnails for better visual appeal
+- **Improved Readability**: Darkened overlay gradients for better text contrast
+- **Font Optimization**: Switched to JetBrains Mono for better Turbopack compatibility
+- **Session Management**: Loading animation now appears only once per browser session
 
 ## 🎨 Design System
 
@@ -128,6 +137,12 @@ The website is fully responsive with breakpoints optimized for:
 The website is deployed on Vercel with automatic deployments from the main branch.
 
 **Live Site**: [https://aa3.site](https://aa3.site)
+
+### Recent Improvements
+- **Turbopack Compatibility**: Fixed font loading issues for faster development builds
+- **TypeScript Safety**: Enhanced type checking for better code quality
+- **ESLint Optimization**: Resolved dependency warnings for cleaner builds
+- **Performance**: Optimized loading animations and transitions
 
 ### Environment Variables
 No environment variables required for basic functionality.
