@@ -52,7 +52,7 @@ export default function ProjectsPage() {
           All Projects
         </h1>
         <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
-          A comprehensive collection of my work, from mobile apps to web platforms and APIs.
+          A comprehensive collection of my work, from mobile apps to web platforms and Chrome Extensions.
         </p>
       </motion.div>
 

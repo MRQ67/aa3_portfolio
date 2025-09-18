@@ -25,8 +25,8 @@ export const projects: Project[] = [
     title: "Stackmatch Suite",
     description: "A comprehensive tech stack management platform with CLI tools and web dashboard for developers.",
     fullDescription: "Stackmatch Suite is a complete solution for tech stack management featuring a powerful CLI tool and an intuitive web dashboard. Built with Next.js and TypeScript, it provides developers with streamlined tools to manage, analyze, and optimize their technology stacks. The platform includes authentication, real-time updates, and comprehensive analytics.",
-    image: "/images/stackmatch.png",
-    images: ["/images/stackmatch.png", "/images/stackmatch-2.png", "/images/stackmatch-3.png"],
+    image: "/projects/stackmatch.png",
+    images: ["/projects/stackmatch.png"],
     tags: ["Next.js", "TypeScript", "Supabase"],
     tagColors: ["bg-black/10 text-foreground", "bg-blue-500/10 text-blue-500", "bg-green-500/10 text-green-500"],
     links: {
@@ -48,8 +48,8 @@ export const projects: Project[] = [
     title: "Bugpin",
     description: "Pin Your Pain - An intuitive bug tracking and issue management platform for development teams.",
     fullDescription: "Bugpin is a modern bug tracking and issue management platform designed to help development teams efficiently track, manage, and resolve bugs. With its clean interface and powerful features, Bugpin makes it easy to 'pin your pain' and collaborate on solutions. Built with TypeScript and modern web technologies.",
-    image: "/images/bugpin.png",
-    images: ["/images/bugpin.png", "/images/bugpin-2.png", "/images/bugpin-3.png"],
+    image: "/projects/bugpin.png",
+    images: ["/projects/bugpin.png"],
     tags: ["TypeScript", "React", "Issue Tracking"],
     tagColors: ["bg-blue-500/10 text-blue-500", "bg-blue-400/10 text-blue-400", "bg-red-500/10 text-red-500"],
     links: {
@@ -71,8 +71,8 @@ export const projects: Project[] = [
     title: "YouTube Auto Picture-in-Picture Suite",
     description: "Cross-platform suite enabling automatic Picture-in-Picture mode for YouTube videos across browser and desktop.",
     fullDescription: "A comprehensive cross-platform solution that automatically enables Picture-in-Picture mode for YouTube videos. The suite includes a browser extension built with JavaScript and a Windows desktop application developed in C#. This tool enhances the YouTube viewing experience by allowing seamless multitasking with video content.",
-    image: "/images/yt-auto-pip.png",
-    images: ["/images/yt-auto-pip.png", "/images/yt-auto-pip-2.png", "/images/yt-auto-pip-3.png"],
+    image: "/projects/youtu.png",
+    images: ["/projects/youtu.png", "/images/yt-auto-pip-2.png", "/images/yt-auto-pip-3.png"],
     tags: ["JavaScript", "C#", "Browser Extension"],
     tagColors: ["bg-yellow-500/10 text-yellow-500", "bg-purple-500/10 text-purple-500", "bg-blue-600/10 text-blue-600"],
     links: {
