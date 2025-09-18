@@ -46,7 +46,7 @@ export function ProjectCard({ project, index, enableModal = false, useAnimate = 
         className={cn(
           "w-full cursor-pointer overflow-hidden relative card h-96 rounded-xl shadow-xl flex flex-col justify-end p-6 border border-transparent dark:border-neutral-800",
           "bg-cover bg-center",
-          "before:absolute before:inset-0 before:bg-gradient-to-t before:from-black/90 before:to-black/20 before:opacity-90 before:z-10",
+          "before:absolute before:inset-0 before:content-[''] before:bg-gradient-to-t before:from-black/90 before:to-black/20 before:opacity-90 before:z-10",
           "transition-all duration-500 hover:shadow-2xl hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-background"
         )}
         style={{
