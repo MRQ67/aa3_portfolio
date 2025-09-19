@@ -637,6 +637,17 @@ export default function Home() {
         {/* Footer Section */}
         <footer className="bg-black text-white py-16 w-screen relative left-1/2 right-1/2 -mx-[50vw]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Logo at the top left of footer */}
+            <div className="flex justify-start mb-12">
+              <Image
+                src="/logo.svg"
+                alt="AA³ Logo"
+                width={133}
+                height={101}
+                className="h-16 w-auto"
+              />
+            </div>
+            
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
               {/* Contact Info */}
               <div>
