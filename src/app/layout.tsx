@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ProjectProvider } from "@/contexts/ProjectContext";
 import { DesignProvider } from "@/contexts/DesignContext";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono, DM_Sans } from "next/font/google";
 import localFont from "next/font/local";
 import { Analytics } from '@vercel/analytics/next';
 import AppShell from "@/components/AppShell";
@@ -10,6 +10,12 @@ import "./globals.css";
 
 const inter = Inter({
   variable: "--font-inter",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
   subsets: ["latin"],
   display: "swap",
 });
@@ -41,7 +47,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${jetBrainsMono.variable} ${sarina.variable} antialiased`}
+        className={`${inter.variable} ${dmSans.variable} ${jetBrainsMono.variable} ${sarina.variable} antialiased`}
       >
         <ThemeProvider
           attribute="class"

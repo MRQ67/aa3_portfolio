@@ -71,14 +71,30 @@ export default function Home() {
             <AnimatedThemeToggler className="w-8 h-8 p-1.5 rounded-lg bg-white/10 backdrop-blur-sm border border-foreground/20 hover:bg-white/20 transition-all duration-300 flex items-center justify-center" />
           </motion.div>
 
-          {/* Image section - First on mobile */}
+          {/* Right side - Resume button and Image */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 1.0 }}
-            className="w-full h-full flex items-center justify-center relative order-1 md:order-2"
+            className="w-full h-full flex flex-col items-center justify-center relative order-1 md:order-2"
           >
-            <div className="relative w-48 h-48 md:w-80 md:h-80 mx-auto mt-32 md:mt-0">
+             {/* My Resume Button - Aligned with logo and theme toggle */}
+             <motion.button
+               initial={{ opacity: 0, y: -20 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ duration: 0.6, delay: 1.2 }}
+               className="absolute top-4 right-28 px-6 py-3 border-2 border-foreground rounded-full hover:bg-foreground hover:text-background transition-all duration-300 font-medium font-[family-name:var(--font-dm-sans)] z-20"
+             >
+               My Resume
+             </motion.button>
+
+            {/* Profile Image with spinning text and outside circle effect */}
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.6, delay: 1.4, type: "spring", stiffness: 200 }}
+              className="relative w-48 h-48 md:w-80 md:h-80"
+            >
               {/* Spinning Text Component around the image */}
               <div className="absolute inset-0 w-full h-full scale-50 md:scale-100">
                 <SpinningText
@@ -91,44 +107,41 @@ export default function Home() {
                 </SpinningText>
               </div>
 
-              {/* Profile Image */}
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.6, delay: 1.2, type: "spring", stiffness: 200 }}
-                className="absolute inset-0 w-full h-full rounded-full overflow-hidden border-4 border-black z-10 flex items-center justify-center"
-              >
+              {/* Circular border container */}
+              <div className="absolute inset-0 w-full h-full rounded-full border-4 border-foreground overflow-hidden z-10">
                 <Image
                   src="/images/abdellah's_image.jpg"
                   alt="Abdellah&apos;s portrait"
                   fill
-                  className="object-cover"
+                  className="object-cover object-top"
                   priority
                 />
-              </motion.div>
-            </div>
+              </div>
+            </motion.div>
           </motion.div>
 
-          {/* Text content - Second on mobile */}
+          {/* Left side - Text content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex flex-col gap-5 md:gap-10 z-10 mt-24 md:mt-24 order-2 md:order-1"
+            className="flex flex-col gap-6 md:gap-8 z-10 mt-24 md:mt-24 order-2 md:order-1 max-w-2xl"
           >
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.0 }}
-              className="text-4xl md:text-8xl font-bold font-[family-name:var(--font-inter)]"
+              className="text-5xl md:text-8xl font-[family-name:var(--font-dm-sans)] leading-tight"
             >
-              <div className="flex justify-start">
+              <div className="flex justify-start items-baseline">
+                <span className="font-normal text-5xl md:text-8xl">I&apos;m</span>
+                <span className="ml-4"></span>
                 <FlipText
-                  className="text-5xl md:text-8xl font-bold font-[family-name:var(--font-inter)]"
+                  className="text-5xl md:text-8xl font-bold font-[family-name:var(--font-dm-sans)]"
                   duration={0.6}
                   delayMultiple={0.1}
                 >
-                  I&apos;m Abdellah
+                  Abdellah
                 </FlipText>
               </div>
             </motion.h1>
@@ -136,18 +149,72 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.2 }}
-              className="flex flex-col"
+              className="flex flex-col gap-2"
             >
-              <span className="text-3xl md:text-6xl font-[family-name:var(--font-ubuntu-mono)]">
-                Software Engineer &
+              <span className="text-3xl md:text-5xl font-[family-name:var(--font-ubuntu-mono)]">
+                Software Developer &
               </span>
               <SparklesText
-                className="text-4xl md:text-7xl text-blue-400 font-[family-name:var(--font-sarina)]"
+                className="text-3xl md:text-5xl text-blue-400 font-[family-name:var(--font-sarina)] italic"
                 colors={{ first: "#F472B6", second: "#EC4899" }}
                 sparklesCount={8}
               >
-                Ui Designer
+                Graphics Designer
               </SparklesText>
+            </motion.div>
+
+            {/* Social Media Icons */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.4 }}
+              className="flex gap-12 mt-8 justify-start items-center ml-8"
+            >
+              <a href="https://github.com/MRQ67" target="_blank" rel="noopener noreferrer" className="h-10 w-10 hover:scale-110 transition-transform flex items-center justify-center">
+                <Image
+                  src="/icons/social_link/github-142-svgrepo-com.svg"
+                  alt="GitHub"
+                  width={40}
+                  height={40}
+                  className="h-10 w-auto dark:invert"
+                />
+              </a>
+              <a href="https://x.com/HimoNotting" target="_blank" rel="noopener noreferrer" className="h-10 w-10 hover:scale-110 transition-transform flex items-center justify-center">
+                <Image
+                  src="/icons/social_link/X_logo_2023_original.svg"
+                  alt="X (Twitter)"
+                  width={40}
+                  height={40}
+                  className="h-10 w-auto dark:invert"
+                />
+              </a>
+              <a href="https://www.linkedin.com/in/abdellah-qadi-b229382a2/" target="_blank" rel="noopener noreferrer" className="h-10 w-10 hover:scale-110 transition-transform flex items-center justify-center">
+                <Image
+                  src="/icons/social_link/linkedin-svgrepo-com.svg"
+                  alt="LinkedIn"
+                  width={40}
+                  height={40}
+                  className="h-10 w-auto dark:invert"
+                />
+              </a>
+              <a href="https://www.instagram.com/simply_aboo/" target="_blank" rel="noopener noreferrer" className="h-10 w-10 hover:scale-110 transition-transform flex items-center justify-center">
+                <Image
+                  src="/icons/social_link/instagram-167-svgrepo-com.svg"
+                  alt="Instagram"
+                  width={40}
+                  height={40}
+                  className="h-10 w-auto dark:invert"
+                />
+              </a>
+              <a href="https://www.youtube.com/@aa3_studio" target="_blank" rel="noopener noreferrer" className="h-10 w-10 hover:scale-110 transition-transform flex items-center justify-center">
+                <Image
+                  src="/icons/social_link/youtube-168-svgrepo-com.svg"
+                  alt="YouTube"
+                  width={40}
+                  height={40}
+                  className="h-10 w-auto dark:invert"
+                />
+              </a>
             </motion.div>
           </motion.div>
 
