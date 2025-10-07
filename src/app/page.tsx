@@ -720,81 +720,99 @@ export default function Home() {
         </motion.div>
 
         {/* Footer Section */}
-        <footer className="bg-black text-white py-16 w-screen relative left-1/2 right-1/2 -mx-[50vw]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {/* Logo at the top left of footer */}
-            <div className="flex justify-start mb-12">
-              <Image
-                src="/logo.svg"
-                alt="AA³ Logo"
-                width={133}
-                height={101}
-                className="h-16 w-auto"
-              />
+        <footer className="bg-black text-white pt-40 pb-0 w-screen relative left-1/2 right-1/2 -mx-[50vw] rounded-t-[3rem]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            {/* Header with name */}
+            <div className="mb-8 -mt-18">
+              <h2 className="text-5xl font-thin" style={{ fontFamily: "var(--font-italiana)" }}>Abdellah Qadi</h2>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-              {/* Contact Info */}
-              <div>
-                <h3 className="text-xl font-bold mb-4 font-[family-name:var(--font-inter)]">Contact</h3>
-                <ul className="space-y-2">
-                  <li>Email: contact@aa3.site</li>
-                </ul>
-              </div>
-
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-8 items-start relative">
               {/* Quick Links */}
               <div>
-                <h3 className="text-xl font-bold mb-4 font-[family-name:var(--font-inter)]">Quick Links</h3>
+                <h3 className="text-3xl font-bold mb-4 font-[family-name:var(--font-dm-sans)]">Quick Links</h3>
                 <ul className="space-y-2">
-                  <li><a href="#projects" className="hover:text-blue-400 transition-colors">My Projects</a></li>
-                  <li><a href="#skills" className="hover:text-blue-400 transition-colors">Skills & Tools</a></li>
-                  <li><a href="#about" className="hover:text-blue-400 transition-colors">About</a></li>
-                  <li><a href="#contact" className="hover:text-blue-400 transition-colors">Get in Touch</a></li>
+                  <li><a href="#about" className="hover:text-blue-400 transition-colors font-[family-name:var(--font-dm-sans)]">About</a></li>
+                  <li><a href="#projects" className="hover:text-blue-400 transition-colors font-[family-name:var(--font-dm-sans)]">My Projects</a></li>
+                  <li><a href="#skills" className="hover:text-blue-400 transition-colors font-[family-name:var(--font-dm-sans)]">My Skills</a></li>
+                  <li><a href="#contact" className="hover:text-blue-400 transition-colors font-[family-name:var(--font-dm-sans)]">Get in Touch</a></li>
                 </ul>
               </div>
 
-              {/* Social Media */}
-              <div>
-                <h3 className="text-xl font-bold mb-4 font-[family-name:var(--font-inter)]">Follow Me</h3>
-                <div className="flex space-x-4">
-                  <a href="https://x.com/HimoNotting" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors">
-                    {/* X (formerly Twitter) logo */}
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                    </svg>
+              {/* Center - Large Footer Logo */}
+              <div className="flex justify-center relative">
+                <Image
+                  src="/footer_logo.svg"
+                  alt="AA³ Footer Logo"
+                  width={600}
+                  height={444}
+                  className="h-100 w-auto"
+                />
+                
+                {/* Copyright positioned at bottom left of logo */}
+                <div className="absolute bottom-15 right-185 text-sm opacity-70 whitespace-nowrap font-[family-name:var(--font-dm-sans)]">
+                  <p>© {new Date().getFullYear()} Abdellah. All rights reserved.</p>
+                </div>
+              </div>
+
+              {/* Contact Info */}
+              <div className="lg:text-right">
+                <h3 className="text-3xl font-bold mb-4 font-[family-name:var(--font-inter)]">Contact</h3>
+                <div className="space-y-2">
+                  <p>Email: <a href="mailto:contact@aa3.site" className="hover:text-blue-400 transition-colors underline font-[family-name:var(--font-dm-sans)]">contact@aa3.site</a></p>
+                </div>
+              </div>
+
+              {/* Social Media Icons - White color for black footer background */}
+              <div className="absolute bottom-15 left-255 lg:text-right">
+                <div className="flex space-x-4 mt-6 lg:justify-end">
+                  <a href="https://x.com/HimoNotting" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
+                    <Image
+                      src="/icons/social_link/X_logo_2023_original.svg"
+                      alt="X (Twitter)"
+                      width={24}
+                      height={24}
+                      className="w-6 h-6 brightness-0 invert"
+                    />
                   </a>
-                  <a href="https://github.com/MRQ67" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors">
-                    {/* GitHub logo */}
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M12 2C6.477 2 2 6.477 2 12C2 16.418 4.865 20.166 8.84 21.49C9.34 21.581 9.52 21.272 9.52 21.006C9.52 20.765 9.512 20.046 9.508 19.192C6.726 19.79 6.139 17.777 6.139 17.777C5.684 16.598 5.029 16.29 5.029 16.29C4.121 15.633 5.098 15.646 5.098 15.646C6.101 15.719 6.629 16.72 6.629 16.72C7.521 18.276 8.97 17.825 9.54 17.569C9.629 16.89 9.889 16.44 10.175 16.187C7.954 15.931 5.62 15.07 5.62 11.265C5.62 10.179 6.01 9.293 6.649 8.603C6.549 8.35 6.201 7.349 6.749 5.916C6.749 5.916 7.587 5.646 9.497 6.862C10.295 6.639 11.15 6.528 12 6.524C12.85 6.528 13.705 6.639 14.504 6.862C16.413 5.646 17.25 5.916 17.25 5.916C17.799 7.349 17.451 8.35 17.351 8.603C17.991 9.293 18.379 10.179 18.379 11.265C18.379 15.082 16.041 15.927 13.813 16.178C14.172 16.493 14.496 17.116 14.496 18.067C14.496 19.419 14.483 20.677 14.483 21.006C14.483 21.275 14.661 21.587 15.171 21.489C19.138 20.162 22 16.417 22 12C22 6.477 17.523 2 12 2Z" />
-                    </svg>
+                  <a href="https://github.com/MRQ67" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
+                    <Image
+                      src="/icons/social_link/github-142-svgrepo-com.svg"
+                      alt="GitHub"
+                      width={24}
+                      height={24}
+                      className="w-6 h-6 brightness-0 invert"
+                    />
                   </a>
-                  <a href="https://www.instagram.com/simply_aboo/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors">
-                    {/* Instagram logo */}
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M7.8 2H16.2C19.4 2 22 4.6 22 7.8V16.2C22 19.4 19.4 22 16.2 22H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2ZM7.6 4C5.61177 4 4 5.61177 4 7.6V16.4C4 18.3882 5.61177 20 7.6 20H16.4C18.3882 20 20 18.3882 20 16.4V7.6C20 5.61177 18.3882 4 16.4 4H7.6ZM17.25 5.5C17.9404 5.5 18.5 6.05964 18.5 6.75C18.5 7.44036 17.9404 8 17.25 8C16.5596 8 16 7.44036 16 6.75C16 6.05964 16.5596 5.5 17.25 5.5ZM12 7C14.7614 7 17 9.23858 17 12C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12C7 9.23858 9.23858 7 12 7ZM12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9Z" />
-                    </svg>
+                  <a href="https://www.instagram.com/simply_aboo/" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
+                    <Image
+                      src="/icons/social_link/instagram-167-svgrepo-com.svg"
+                      alt="Instagram"
+                      width={24}
+                      height={24}
+                      className="w-6 h-6 brightness-0 invert"
+                    />
+                  </a>
+                  <a href="https://www.youtube.com/@abdellahqadi" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
+                    <Image
+                      src="/icons/social_link/youtube-168-svgrepo-com.svg"
+                      alt="YouTube"
+                      width={24}
+                      height={24}
+                      className="w-6 h-6 brightness-0 invert"
+                    />
+                  </a>
+                  <a href="https://www.linkedin.com/in/abdellah-qadi-a71906251/" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
+                    <Image
+                      src="/icons/social_link/linkedin-svgrepo-com.svg"
+                      alt="LinkedIn"
+                      width={24}
+                      height={24}
+                      className="w-6 h-6 brightness-0 invert"
+                    />
                   </a>
                 </div>
               </div>
-            </div>
-
-            {/* Scroll-based velocity component at the bottom */}
-            <div className="mt-16 overflow-hidden w-full">
-              <div className="overflow-hidden">
-                <VelocityScroll
-                  defaultVelocity={3}
-                  numRows={2}
-                  className="text-6xl md:text-8xl font-bold text-white opacity-20"
-                >
-                  AA³
-                </VelocityScroll>
-              </div>
-            </div>
-
-            {/* Copyright */}
-            <div className="mt-12 text-center text-sm opacity-70">
-              <p>© {new Date().getFullYear()} Abdellah. All rights reserved.</p>
             </div>
           </div>
         </footer>

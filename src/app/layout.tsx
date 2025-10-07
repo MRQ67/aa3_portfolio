@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ProjectProvider } from "@/contexts/ProjectContext";
 import { DesignProvider } from "@/contexts/DesignContext";
-import { Inter, JetBrains_Mono, DM_Sans } from "next/font/google";
+import { Inter, JetBrains_Mono, DM_Sans, Italiana } from "next/font/google";
 import localFont from "next/font/local";
 import { Analytics } from '@vercel/analytics/next';
 import AppShell from "@/components/AppShell";
@@ -27,6 +27,13 @@ const jetBrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const italiana = Italiana({
+  variable: "--font-italiana",
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
+
 // Import Sarina font as a local font
 const sarina = localFont({
   src: "../../public/fonts/Sarina-Regular.ttf",
@@ -47,7 +54,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${dmSans.variable} ${jetBrainsMono.variable} ${sarina.variable} antialiased`}
+        className={`${inter.variable} ${dmSans.variable} ${jetBrainsMono.variable} ${italiana.variable} ${sarina.variable} antialiased`}
       >
         <ThemeProvider
           attribute="class"
