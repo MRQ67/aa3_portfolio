@@ -248,14 +248,14 @@ export default function Home() {
         </motion.div>
 
         {/* About Me Section */}
-        <div className="py-20 grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-10">
+        <div className="py-20 grid grid-cols-1 lg:grid-cols-[2.5fr_2fr] gap-8">
           {/* Left side - About Me Text */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="flex flex-col justify-start"
+            className="flex flex-col justify-start pr-2"
           >
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
@@ -271,7 +271,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               viewport={{ once: true }}
-              className="mt-6 space-y-4 text-foreground/80 text-lg md:text-xl leading-relaxed font-[family-name:var(--font-dm-sans)]"
+              className="mt-6 space-y-4 text-foreground/80 text-lg md:text-xl leading-relaxed font-[family-name:var(--font-dm-sans)] max-w-none"
             >
               <p className="mb-4">
                 I'm a passionate developer with a strong foundation in{" "}
