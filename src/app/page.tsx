@@ -262,7 +262,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
-              className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-inter)]"
+              className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-dm-sans)]"
             >
               About Me
             </motion.h2>
@@ -271,9 +271,27 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               viewport={{ once: true }}
-              className="mt-6 space-y-4 text-foreground/80 text-lg md:text-xl leading-relaxed"
+              className="mt-6 space-y-4 text-foreground/80 text-lg md:text-xl leading-relaxed font-[family-name:var(--font-dm-sans)]"
             >
-              <p>I&apos;m a passionate developer with a knack for building innovative solutions that make a difference. With a strong foundation in <span className="text-blue-400 font-semibold">Next.js</span>, <span className="text-blue-400 font-semibold">Go</span>, <span className="text-blue-400 font-semibold">Python</span>, and <span className="text-blue-400 font-semibold">Kotlin</span>, I thrive on tackling complex challenges and turning ideas into reality. My curiosity drives me to stay updated with the latest tech trends, while my collaborative spirit ensures I work seamlessly with teams to deliver user-focused projects. When I&apos;m not coding, you can find me playing an awesome Video Game or Draft a design for my latest projects and, I&apos;m always seeking inspiration to fuel my creativity.</p>
+              <p className="mb-4">
+                I'm a passionate developer with a strong foundation in{" "}
+                <span style={{ color: "#32ADE6" }}><strong>Next.js</strong></span>,{" "}
+                <span style={{ color: "#32ADE6" }}><strong>Go</strong></span>,{" "}
+                <span style={{ color: "#32ADE6" }}><strong>Python</strong></span>, and{" "}
+                <span style={{ color: "#32ADE6" }}><strong>Kotlin</strong></span>. I'm also passionate about{" "}
+                <span style={{ color: "#32ADE6" }}><strong>Graphics Design & Video Editing</strong></span>{" "}
+                and practice them regularly with projects.
+              </p>
+              
+              <p className="mb-4">
+                I'm currently studying{" "}
+                <span style={{ color: "#32ADE6" }}><strong>Electrical & Computer Engineering</strong></span>{" "}
+                at <span style={{ color: "#32ADE6" }}><strong>Dire Dawa University</strong></span>.
+              </p>
+              
+              <p>
+                <strong>When I'm not on my pc fixing bugs</strong>, i like to watching movies/tv series or play video games
+              </p>
             </motion.div>
           </motion.div>
 
