@@ -17,6 +17,7 @@ import { DesignCard } from "@/components/DesignCard";
 import { DesignModal } from "@/components/DesignModal";
 import { useProject } from "@/contexts/ProjectContext";
 import { useDesign } from "@/contexts/DesignContext";
+import Lightning from "@/components/Lightning";
 
 export default function Home() {
   const topProjects = getTopProjects(4);
@@ -26,18 +27,19 @@ export default function Home() {
 
   return (
     <>
+      {/* Global Particles Background for non-hero sections */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
+        className="fixed inset-0 z-0"
       >
         <Particles
-          className="fixed inset-0 z-0"
-          quantity={80}
+          className="absolute inset-0"
+          quantity={100}
           ease={80}
-          color="#60A5FA"
-          size={0.6}
-          staticity={30}
+          color="#ffffff"
+          refresh
         />
       </motion.div>
       <motion.div
@@ -53,6 +55,26 @@ export default function Home() {
           transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
           className="flex flex-col md:grid md:grid-cols-[2fr_1fr] items-center min-h-screen p-8 relative"
         >
+          {/* Lightning Background for Hero Section Only - Full Width */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+            className="absolute inset-0 w-screen h-full z-0"
+            style={{ 
+              left: '50%',
+              transform: 'translateX(-50%)',
+              width: '100vw'
+            }}
+          >
+            <Lightning
+              hue={230}
+              xOffset={0}
+              speed={0.5}
+              intensity={0.8}
+              size={1.2}
+            />
+          </motion.div>
           {/* Logo at the top */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -110,7 +132,7 @@ export default function Home() {
               {/* Circular border container */}
               <div className="absolute inset-0 w-full h-full rounded-full border-4 border-foreground overflow-hidden z-10">
                 <Image
-                  src="/images/abdellah's_image.jpg"
+                  src="/images/abdellah_image.jpg"
                   alt="Abdellah&apos;s portrait"
                   fill
                   className="object-cover object-top"
