@@ -17,7 +17,7 @@ import { DesignCard } from "@/components/DesignCard";
 import { DesignModal } from "@/components/DesignModal";
 import { useProject } from "@/contexts/ProjectContext";
 import { useDesign } from "@/contexts/DesignContext";
-import Lightning from "@/components/Lightning";
+import PrismaticBurst from "@/components/PrismaticBurst";
 
 export default function Home() {
   const topProjects = getTopProjects(4);
@@ -67,12 +67,14 @@ export default function Home() {
               width: '100vw'
             }}
           >
-            <Lightning
-              hue={230}
-              xOffset={0}
+            <PrismaticBurst
+              intensity={2}
               speed={0.5}
-              intensity={0.8}
-              size={1.2}
+              animationType="rotate3d"
+              colors={["#3b82f6", "#8b5cf6", "#06b6d4", "#10b981", "#f59e0b"]}
+              distort={5}
+              rayCount={8}
+              mixBlendMode="lighten"
             />
           </motion.div>
           {/* Logo at the top */}
