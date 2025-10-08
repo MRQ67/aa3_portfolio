@@ -364,45 +364,64 @@ export default function Home() {
         </div>
 
         {/* Projects Section */}
-        <div className="py-20 flex flex-col-reverse lg:grid lg:grid-cols-[2fr_1fr] gap-10">
-          {/* Left side - Project Cards Grid */}
+        <div className="py-20 space-y-16">
+          {/* Velocity Scroll Title */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+            className="overflow-hidden w-screen -mx-8 md:-mx-16 lg:-mx-24"
           >
-            {topProjects.map((project, index) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                index={index}
-                enableModal={true}
-              />
-            ))}
+            <VelocityScroll
+              defaultVelocity={2}
+              numRows={2}
+              className="w-full text-2xl md:text-4xl lg:text-5xl font-bold text-white font-[family-name:var(--font-dm-sans)]"
+            >
+              My Projects
+            </VelocityScroll>
           </motion.div>
 
-          {/* Right side - Section Title */}
+          {/* Horizontal Scrollable Projects */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="flex flex-col justify-start"
+            className="relative"
           >
-            <div className="sticky top-20 space-y-4">
-              <h2 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-inter)]">My Projects</h2>
+            <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">
+              <div className="flex gap-6 min-w-max">
+                {topProjects.map((project, index) => (
+                  <div key={project.id} className="flex-shrink-0 w-80 md:w-96">
+                    <ProjectCard
+                      project={project}
+                      index={index}
+                      enableModal={true}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            {/* View All Projects Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="flex justify-center mt-8"
+            >
               <Link
                 href="/projects"
-                className="text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-2"
+                className="px-8 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-full transition-all duration-300 inline-flex items-center gap-2 font-medium"
               >
                 View All Projects
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </Link>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
 
