@@ -364,7 +364,20 @@ export default function Home() {
         </div>
 
         {/* Projects Section */}
-        <div className="py-20 space-y-16">
+        <div className="py-20 space-y-2">
+          {/* Small intro text */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-2"
+          >
+            <p className="text-sm md:text-base text-white text-foreground/70 font-[family-name:var(--font-dm-sans)]">
+              so here are
+            </p>
+          </motion.div>
+
           {/* Velocity Scroll Title */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -388,7 +401,7 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="relative"
+            className="relative mt-16"
           >
             <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">
               <div className="flex gap-6 min-w-max">
@@ -397,7 +410,6 @@ export default function Home() {
                     <ProjectCard
                       project={project}
                       index={index}
-                      enableModal={true}
                     />
                   </div>
                 ))}
