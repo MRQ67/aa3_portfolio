@@ -310,7 +310,7 @@ export default function Home() {
               <p className="mb-4">
                 I'm currently studying{" "}
                 <span style={{ color: "#32ADE6" }}><strong>Electrical & Computer Engineering</strong></span>{" "}
-                at <span style={{ color: "#32ADE6" }}><strong>Dire Dawa University</strong></span>.
+                @ <span style={{ color: "#32ADE6" }}><strong>Dire Dawa University</strong></span>.
               </p>
               
               <p>
@@ -403,10 +403,10 @@ export default function Home() {
             viewport={{ once: true }}
             className="relative mt-16"
           >
-            <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">
-              <div className="flex gap-6 min-w-max">
+            <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory -mx-4 sm:-mx-6 lg:-mx-8">
+              <div className="flex gap-6 min-w-max pl-0 pr-0 md:pr-12">
                 {topProjects.map((project, index) => (
-                  <div key={project.id} className="flex-shrink-0 w-80 md:w-96">
+                  <div key={project.id} className="flex-shrink-0 w-80 md:w-96 snap-start">
                     <ProjectCard
                       project={project}
                       index={index}
@@ -416,7 +416,7 @@ export default function Home() {
               </div>
             </div>
             
-            {/* View All Projects Button */}
+            {/* View All Projects Link */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -426,7 +426,7 @@ export default function Home() {
             >
               <Link
                 href="/projects"
-                className="px-8 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-full transition-all duration-300 inline-flex items-center gap-2 font-medium"
+                className="text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-2 font-medium font-[family-name:var(--font-dm-sans)]"
               >
                 View All Projects
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

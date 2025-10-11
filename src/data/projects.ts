@@ -63,7 +63,7 @@ export const projects: Project[] = [
       "Comprehensive reporting and analytics"
     ],
     techStack: ["TypeScript", "React", "Node.js", "Database Integration"],
-    status: "completed"
+    status: "in-progress"
   },
   {
     id: 3,
@@ -87,7 +87,7 @@ export const projects: Project[] = [
       "User-friendly interface and controls"
     ],
     techStack: ["JavaScript", "C#", "Browser APIs", "Windows Forms", "YouTube API"],
-    status: "completed"
+    status: "in-progress"
   },
   {
     id: 4,
