@@ -14,16 +14,13 @@ import Link from "next/link";
 import { ProjectCard } from "@/components/ProjectCard";
 import { ProjectModal } from "@/components/ProjectModal";
 import { DesignCard } from "@/components/DesignCard";
-import { DesignModal } from "@/components/DesignModal";
 import { useProject } from "@/contexts/ProjectContext";
-import { useDesign } from "@/contexts/DesignContext";
 import PrismaticBurst from "@/components/PrismaticBurst";
 
 export default function Home() {
   const topProjects = getTopProjects(4);
   const featuredDesigns = getFeaturedDesigns();
   const { isModalOpen, selectedProject, closeModal } = useProject();
-  const { isModalOpen: isDesignModalOpen, selectedDesign, closeModal: closeDesignModal } = useDesign();
 
   return (
     <>
@@ -437,48 +434,69 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* Design Gallery Section */}
-        <div className="py-20 grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-10">
-          {/* Left side - Section Title */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="flex flex-col justify-start"
-          >
-            <div className="sticky top-20 space-y-4">
-              <h2 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-inter)]">Design Gallery</h2>
-              <p className="text-foreground/70 pr-4">A showcase of my graphic design work, from logos to digital illustrations.</p>
-              <Link
-                href="/designs"
-                className="text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-2"
-              >
-                View All Designs
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </Link>
+        {/* Design Gallery Section (mirrored from Projects) */}
+        <div className="py-5">
+          {/* Velocity header like Projects */}
+          <div className="space-y-6 md:space-y-8">
+            <div className="flex justify-center">
+              <span className="text-sm md:text-base text-foreground/60 font-[family-name:var(--font-dm-sans)]">and</span>
             </div>
-          </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="overflow-hidden w-screen -mx-8 md:-mx-16 lg:-mx-24"
+            >
+              <VelocityScroll
+                defaultVelocity={2}
+                numRows={2}
+                className="w-full text-2xl md:text-4xl lg:text-5xl font-bold text-white font-[family-name:var(--font-dm-sans)]"
+              >
+                My Designs
+              </VelocityScroll>
+            </motion.div>
+          </div>
 
-          {/* Right side - Design Cards Grid */}
+          {/* Grid identical to Projects section */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full"
+            className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 w-full place-items-center"
           >
             {featuredDesigns.slice(0, 3).map((design, index) => (
-              <div key={design.id} className={index === 2 ? 'md:col-span-2 max-w-2xl mx-auto' : ''}>
-                <DesignCard
-                  design={design}
-                  index={index}
-                  enableModal={true}
-                />
+              <div key={design.id} className="flex justify-center">
+                <div className="w-80 md:w-96">
+                  <DesignCard
+                    design={design}
+                    index={index}
+                    enableModal={false}
+                    useAnimate={false}
+                  />
+                </div>
               </div>
             ))}
+          </motion.div>
+
+          {/* View All Designs link styled like Projects */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="flex justify-center mt-8"
+          >
+            <Link
+              href="/designs"
+              className="text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-2 font-medium font-[family-name:var(--font-dm-sans)]"
+            >
+              View All Designs
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </Link>
           </motion.div>
         </div>
 
@@ -919,12 +937,7 @@ export default function Home() {
         selectedProject={selectedProject}
       />
 
-      {/* Design Modal */}
-      <DesignModal
-        isOpen={isDesignModalOpen}
-        onClose={closeDesignModal}
-        selectedDesign={selectedDesign}
-      />
+      {/* Design Modal removed */}
     </>
   );
 }

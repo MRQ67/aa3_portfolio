@@ -5,12 +5,10 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { designs } from "@/data/designs";
-import { DesignModal } from "@/components/DesignModal";
-import { useDesign } from "@/contexts/DesignContext";
+// DesignModal removed; designs use card-only presentation
 import { DesignCard } from "@/components/DesignCard";
 
 export default function DesignsPage() {
-  const { isModalOpen, selectedDesign, closeModal } = useDesign();
   
   return (
     <div className="min-h-screen text-foreground flex flex-col max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -89,18 +87,13 @@ export default function DesignsPage() {
             key={design.id}
             design={design}
             index={index}
-            enableModal={true}
+            enableModal={false}
             useAnimate={true}
           />
         ))}
       </motion.div>
       
-      {/* Design Modal */}
-      <DesignModal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        selectedDesign={selectedDesign}
-      />
+      {/* Design Modal removed */}
     </div>
   );
 }
