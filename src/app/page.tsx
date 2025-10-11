@@ -500,178 +500,159 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* Skills & Technologies Section */}
-        <div className="py-20 flex flex-col-reverse lg:grid lg:grid-cols-[2fr_1fr] gap-10">
-          {/* Left side - Skills Grid */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-6"
-          >
-            {/* Frontend */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2"
-            >
-              <Image src="/icons/nextjs.svg" alt="Next.js" width={48} height={48} />
-              <span className="text-sm font-medium">Next.js</span>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2"
-            >
-              <Image src="/icons/tailwindcss.svg" alt="Tailwind CSS" width={48} height={48} />
-              <span className="text-sm font-medium">Tailwind CSS</span>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2"
-            >
-              <Image src="/icons/javascript.svg" alt="JavaScript" width={48} height={48} />
-              <span className="text-sm font-medium">JavaScript</span>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2"
-            >
-              <Image src="/icons/typescript.svg" alt="TypeScript" width={48} height={48} />
-              <span className="text-sm font-medium">TypeScript</span>
-            </motion.div>
-
-            {/* Backend */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2"
-            >
-              <Image src="/icons/nodejs.svg" alt="Node.js" width={48} height={48} />
-              <span className="text-sm font-medium">Node.js</span>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2"
-            >
-              <Image src="/icons/go.svg" alt="Go" width={48} height={48} />
-              <span className="text-sm font-medium">Go</span>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.7 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2"
-            >
-              <Image src="/icons/supabase.svg" alt="Supabase" width={48} height={48} />
-              <span className="text-sm font-medium">Supabase</span>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2"
-            >
-              <Image src="/icons/adobe-illustrator.svg" alt="Adobe Illustrator" width={48} height={48} />
-              <span className="text-sm font-medium">Adobe Illustrator</span>
-            </motion.div>
-
-            {/* Mobile */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.9 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2"
-            >
-              <Image src="/icons/shadcn.svg" alt="shadcn/ui" width={48} height={48} />
-              <span className="text-sm font-medium">shadcn/ui</span>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 1.0 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2"
-            >
-              <Image src="/icons/kotlin.svg" alt="Kotlin" width={48} height={48} />
-              <span className="text-sm font-medium">Kotlin</span>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 1.1 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2"
-            >
-              <Image src="/icons/flutter.svg" alt="Flutter" width={48} height={48} />
-              <span className="text-sm font-medium">Flutter</span>
-            </motion.div>
-
-            {/* Design & Tools */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 1.2 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2"
-            >
-              <Image src="/icons/figma.svg" alt="Figma" width={48} height={48} />
-              <span className="text-sm font-medium">Figma</span>
-            </motion.div>
-          </motion.div>
-
-          {/* Right side - Section Title */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="flex flex-col justify-start"
-          >
-            <div className="sticky top-20 space-y-4">
-              <h2 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-inter)]">Skills & Tech</h2>
-              <p className="text-foreground/70 pl-4">Technologies and tools I work with.</p>
+        {/* Skills Header with VelocityScroll */}
+        <div className="py-12">
+          <div className="space-y-2 md:space-y-4">
+            <div className="flex justify-center">
+              <span className="text-sm md:text-base text-foreground/60 font-[family-name:var(--font-dm-sans)]">and also</span>
             </div>
-          </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="overflow-hidden w-screen -mx-8 md:-mx-16 lg:-mx-24"
+            >
+              <VelocityScroll
+                defaultVelocity={2}
+                numRows={2}
+                className="w-full text-2xl md:text-4xl lg:text-5xl font-bold text-white font-[family-name:var(--font-dm-sans)]"
+              >
+                My Skills
+              </VelocityScroll>
+            </motion.div>
+            <div className="flex justify-center">
+              <span className="text-sm md:text-base text-foreground/60 font-[family-name:var(--font-dm-sans)]">or my tech stack</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Skills & Technologies Section */}
+        <div className="py-14 space-y-12">
+          {/* Row 1: Frontend Dev only */}
+          <div className="space-y-4">
+            <div className="flex justify-center">
+              <span className="text-2xl md:text-3xl lg:text-4xl font-bold font-[family-name:var(--font-dm-sans)]">Frontend Dev</span>
+            </div>
+            <div className="grid grid-cols-3 md:grid-cols-6 gap-1">
+              {[
+                { src: "/icons/nextjs.svg", label: "Next.js" },
+                { src: "/icons/react.svg", label: "React" },
+                { src: "/icons/tailwindcss.svg", label: "Tailwind CSS" },
+                { src: "/icons/shadcn.svg", label: "Shadcn" },
+                { src: "/icons/javascript.svg", label: "JavaScript" },
+                { src: "/icons/typescript.svg", label: "TypeScript" },
+              ].map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4, delay: 0.06 * idx }}
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.04, y: -3 }}
+                  className="flex flex-col items-center justify-center gap-2 transition-transform"
+                >
+                  <Image
+                    src={item.src}
+                    alt={item.label}
+                    width={48}
+                    height={48}
+                    className={[
+                      "Shadcn",
+                      "Tailwind CSS",
+                    ].includes(item.label)
+                      ? "filter invert brightness-0"
+                      : ""}
+                  />
+                  <span className="text-sm font-medium">{item.label}</span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Row 2: Mobile Dev, Backend Dev, Design */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Mobile Dev */}
+            <div className="space-y-4">
+              <div className="flex justify-center">
+                <span className="text-2xl md:text-3xl lg:text-4xl font-bold font-[family-name:var(--font-dm-sans)]">Mobile Dev</span>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
+                {[
+                  { src: "/icons/flutter.svg", label: "Flutter" },
+                  { src: "/icons/react-native.svg", label: "React native" },
+                  { src: "/icons/kotlin.svg", label: "Kotlin" },
+                ].map((item, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, delay: 0.06 * idx }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.04, y: -3 }}
+                    className="flex flex-col items-center justify-center gap-2 transition-transform"
+                  >
+                    <Image src={item.src} alt={item.label} width={48} height={48} />
+                    <span className="text-sm font-medium">{item.label}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Backend Dev */}
+            <div className="space-y-4">
+              <div className="flex justify-center">
+                <span className="text-2xl md:text-3xl lg:text-4xl font-bold font-[family-name:var(--font-dm-sans)]">Backend Dev</span>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
+                {[
+                  { src: "/icons/nodejs.svg", label: "Node.js" },
+                  { src: "/icons/go.svg", label: "Go" },
+                  { src: "/icons/supabase.svg", label: "Supabase" },
+                ].map((item, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, delay: 0.06 * idx }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.04, y: -3 }}
+                    className="flex flex-col items-center justify-center gap-2 transition-transform"
+                  >
+                    <Image src={item.src} alt={item.label} width={48} height={48} />
+                    <span className="text-sm font-medium">{item.label}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Design */}
+            <div className="space-y-4">
+              <div className="flex justify-center">
+                <span className="text-2xl md:text-3xl lg:text-4xl font-bold font-[family-name:var(--font-dm-sans)]">Design</span>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
+                {[
+                  { src: "/icons/adobe-illustrator.svg", label: "illustrator" },
+                  { src: "/icons/figma.svg", label: "figma" },
+                  { src: "/icons/canva.svg", label: "canva" },
+                ].map((item, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, delay: 0.06 * idx }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.04, y: -3 }}
+                    className="flex flex-col items-center justify-center gap-2 transition-transform"
+                  >
+                    <Image src={item.src} alt={item.label} width={48} height={48} />
+                    <span className="text-sm font-medium capitalize">{item.label}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Get in Touch Section */}
