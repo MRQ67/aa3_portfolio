@@ -51,25 +51,7 @@ export function DesignCard({ design, index, enableModal = false, useAnimate = fa
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-xl" />
       </motion.div>
 
-      {/* CTA - More Detail */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={useAnimate ? { opacity: 1, y: 0 } : undefined }
-        whileInView={!useAnimate ? { opacity: 1, y: 0 } : undefined }
-        transition={{
-          duration: 0.6,
-          delay: 0.1 * (index + 1) + 0.5
-        }}
-        viewport={!useAnimate ? { once: true } : undefined}
-        className="flex font-[family-name:var(--font-dm-sans)]"
-      >
-        <Link
-          href={`/designs/${design.id}`}
-          className="px-3 py-1.5 text-xs bg-accent hover:bg-accent/80 text-accent-foreground rounded-full border border-border transition-all duration-300"
-        >
-          For More Detail
-        </Link>
-      </motion.div>
+      
 
       {/* Title - Floating */}
       <motion.h3
@@ -86,7 +68,7 @@ export function DesignCard({ design, index, enableModal = false, useAnimate = fa
         {design.title}
       </motion.h3>
 
-      {/* Category/Year Badge - Floating */}
+      {/* Category/Year Badge - Floating (bg removed as requested) */}
       <motion.span
         initial={{ opacity: 0, y: 20 }}
         animate={useAnimate ? { opacity: 1, y: 0 } : undefined}
@@ -97,8 +79,8 @@ export function DesignCard({ design, index, enableModal = false, useAnimate = fa
         }}
         viewport={!useAnimate ? { once: true } : undefined}
         className={cn(
-          "inline-flex items-center px-2.5 py-1 text-xs font-medium rounded-full border font-[family-name:var(--font-dm-sans)]",
-          "bg-foreground/10 text-foreground/70 border-foreground/20"
+          "inline-flex items-center px-2.5 py-1 text-xs font-medium font-[family-name:var(--font-dm-sans)]",
+          "text-foreground/80"
         )}
       >
         {design.category.charAt(0).toUpperCase() + design.category.slice(1)} • {design.year}
@@ -159,6 +141,36 @@ export function DesignCard({ design, index, enableModal = false, useAnimate = fa
             +{design.tools.length - 3}
           </span>
         )}
+      </motion.div>
+      
+      {/* CTA - More Detail (moved below tool names at bottom, icon added) */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={useAnimate ? { opacity: 1, y: 0 } : undefined }
+        whileInView={!useAnimate ? { opacity: 1, y: 0 } : undefined }
+        transition={{
+          duration: 0.6,
+          delay: 0.1 * (index + 1) + 0.5
+        }}
+        viewport={!useAnimate ? { once: true } : undefined}
+        className="flex font-[family-name:var(--font-dm-sans)]"
+      >
+        <Link
+          href={`/designs/${design.id}`}
+          className="px-3 py-1.5 text-xs bg-accent hover:bg-accent/80 text-accent-foreground rounded-full border border-border transition-all duration-300 inline-flex items-center gap-2 group"
+        >
+          More Detail
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="transition-transform group-hover:translate-x-0.5"
+          >
+            <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </Link>
       </motion.div>
     </div>
   );

@@ -370,7 +370,7 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center mb-2"
           >
-            <p className="text-sm md:text-base text-white text-foreground/70 font-[family-name:var(--font-dm-sans)]">
+            <p className="text-sm md:text-base  text-foreground/80 font-[family-name:var(--font-dm-sans)]">
               so here are
             </p>
           </motion.div>
