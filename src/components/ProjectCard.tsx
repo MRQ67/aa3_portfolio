@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import {
   AppWindow,
   FileCode,
@@ -13,7 +14,6 @@ import {
   Server,
   Cog,
   Smartphone,
-  Triangle,
   Braces
 } from "lucide-react";
 import Link from "next/link";
@@ -140,10 +140,12 @@ export function ProjectCard({ project, index, useAnimate = false }: ProjectCardP
         viewport={!useAnimate ? { once: true } : undefined}
         className="relative h-48 overflow-hidden rounded-xl"
       >
-        <img
+        <Image
           src={project.image}
           alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 rounded-xl"
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-cover transition-transform duration-300 group-hover:scale-105 rounded-xl"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-xl" />
       </motion.div>
@@ -217,13 +219,13 @@ export function ProjectCard({ project, index, useAnimate = false }: ProjectCardP
             >
               <span className="inline-flex align-middle leading-none">
                 {src ? (
-                  <img
+                  <Image
                     src={src}
                     alt=""
-                    aria-hidden="true"
-                    className="w-[1em] h-[1em] object-contain"
-                    loading="lazy"
-                    decoding="async"
+                    width={16}
+                    height={16}
+                    aria-hidden
+                    className="object-contain"
                   />
                 ) : (
                   getTagIcon(tag)

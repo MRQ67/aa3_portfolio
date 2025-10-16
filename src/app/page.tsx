@@ -295,23 +295,23 @@ export default function Home() {
               className="mt-6 space-y-4 text-foreground/80 text-lg md:text-xl leading-relaxed font-[family-name:var(--font-dm-sans)] max-w-none"
             >
               <p className="mb-4">
-                I'm a passionate developer with a strong foundation in{" "}
+                I&#39;m a passionate developer with a strong foundation in{" "}
                 <span style={{ color: "#32ADE6" }}><strong>Next.js</strong></span>,{" "}
                 <span style={{ color: "#32ADE6" }}><strong>Go</strong></span>,{" "}
                 <span style={{ color: "#32ADE6" }}><strong>Python</strong></span>, and{" "}
-                <span style={{ color: "#32ADE6" }}><strong>Kotlin</strong></span>. I'm also passionate about{" "}
+                <span style={{ color: "#32ADE6" }}><strong>Kotlin</strong></span>. I&#39;m also passionate about{" "}
                 <span style={{ color: "#32ADE6" }}><strong>Graphics Design & Video Editing</strong></span>{" "}
                 and practice them regularly with projects.
               </p>
               
               <p className="mb-4">
-                I'm currently studying{" "}
+                I&#39;m currently studying{" "}
                 <span style={{ color: "#32ADE6" }}><strong>Electrical & Computer Engineering</strong></span>{" "}
                 @ <span style={{ color: "#32ADE6" }}><strong>Dire Dawa University</strong></span>.
               </p>
               
               <p>
-                <strong>When I'm not on my pc fixing bugs</strong>, i like to watching movies/tv series or play video games
+                <strong>When I&#39;m not on my pc fixing bugs</strong>, i like to watching movies/tv series or play video games
               </p>
             </motion.div>
           </motion.div>

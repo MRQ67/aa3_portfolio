@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { Design } from "@/data/designs";
 import { cn } from "@/lib/utils";
@@ -43,10 +44,12 @@ export function DesignCard({ design, index, useAnimate = false }: DesignCardProp
         viewport={!useAnimate ? { once: true } : undefined}
         className="relative aspect-[4/3] overflow-hidden rounded-xl"
       >
-        <img
+        <Image
           src={design.image}
           alt={design.title}
-          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 rounded-xl"
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-cover transition-transform duration-300 group-hover:scale-105 rounded-xl"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-xl" />
       </motion.div>
@@ -122,13 +125,13 @@ export function DesignCard({ design, index, useAnimate = false }: DesignCardProp
             >
               <span className="inline-flex align-middle leading-none">
                 {src ? (
-                  <img
+                  <Image
                     src={src}
                     alt=""
-                    aria-hidden="true"
-                    className="w-[1em] h-[1em] object-contain"
-                    loading="lazy"
-                    decoding="async"
+                    width={16}
+                    height={16}
+                    aria-hidden
+                    className="object-contain"
                   />
                 ) : null}
               </span>
