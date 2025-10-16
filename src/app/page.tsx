@@ -534,7 +534,7 @@ export default function Home() {
             <div className="flex justify-center">
               <span className="text-2xl md:text-3xl lg:text-4xl font-bold font-[family-name:var(--font-dm-sans)]">Frontend Dev</span>
             </div>
-            <div className="grid grid-cols-3 md:grid-cols-6 gap-1">
+            <div className="grid grid-cols-6 gap-x-0 gap-y-2">
               {[
                 { src: "/icons/nextjs.svg", label: "Next.js" },
                 { src: "/icons/react.svg", label: "React" },
@@ -555,14 +555,15 @@ export default function Home() {
                   <Image
                     src={item.src}
                     alt={item.label}
-                    width={48}
-                    height={48}
+                    width={80}
+                    height={80}
                     className={[
                       "Shadcn",
                       "Tailwind CSS",
                     ].includes(item.label)
-                      ? "filter invert brightness-0"
-                      : ""}
+                      ? "filter invert brightness-0 object-contain"
+                      : "object-contain"}
+                    style={{ height: "56px", width: "auto" }}
                   />
                   <span className="text-sm font-medium">{item.label}</span>
                 </motion.div>
@@ -577,24 +578,29 @@ export default function Home() {
               <div className="flex justify-center">
                 <span className="text-2xl md:text-3xl lg:text-4xl font-bold font-[family-name:var(--font-dm-sans)]">Mobile Dev</span>
               </div>
-              <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-2 gap-x-2 gap-y-6">
                 {[
                   { src: "/icons/flutter.svg", label: "Flutter" },
                   { src: "/icons/react-native.svg", label: "React native" },
                   { src: "/icons/kotlin.svg", label: "Kotlin" },
+                  null,
                 ].map((item, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.4, delay: 0.06 * idx }}
-                    viewport={{ once: true }}
-                    whileHover={{ scale: 1.04, y: -3 }}
-                    className="flex flex-col items-center justify-center gap-2 transition-transform"
-                  >
-                    <Image src={item.src} alt={item.label} width={48} height={48} />
-                    <span className="text-sm font-medium">{item.label}</span>
-                  </motion.div>
+                  item ? (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.4, delay: 0.06 * idx }}
+                      viewport={{ once: true }}
+                      whileHover={{ scale: 1.04, y: -3 }}
+                      className="flex flex-col items-center justify-center gap-2 transition-transform"
+                    >
+                      <Image src={item.src} alt={item.label} width={80} height={80} className="object-contain" style={{ height: "56px", width: "auto" }} />
+                      <span className="text-sm font-medium">{item.label}</span>
+                    </motion.div>
+                  ) : (
+                    <div key={idx} className="" />
+                  )
                 ))}
               </div>
             </div>
@@ -604,24 +610,29 @@ export default function Home() {
               <div className="flex justify-center">
                 <span className="text-2xl md:text-3xl lg:text-4xl font-bold font-[family-name:var(--font-dm-sans)]">Backend Dev</span>
               </div>
-              <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-2 gap-x-2 gap-y-6">
                 {[
                   { src: "/icons/nodejs.svg", label: "Node.js" },
                   { src: "/icons/go.svg", label: "Go" },
                   { src: "/icons/supabase.svg", label: "Supabase" },
+                  null,
                 ].map((item, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.4, delay: 0.06 * idx }}
-                    viewport={{ once: true }}
-                    whileHover={{ scale: 1.04, y: -3 }}
-                    className="flex flex-col items-center justify-center gap-2 transition-transform"
-                  >
-                    <Image src={item.src} alt={item.label} width={48} height={48} />
-                    <span className="text-sm font-medium">{item.label}</span>
-                  </motion.div>
+                  item ? (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.4, delay: 0.06 * idx }}
+                      viewport={{ once: true }}
+                      whileHover={{ scale: 1.04, y: -3 }}
+                      className="flex flex-col items-center justify-center gap-2 transition-transform"
+                    >
+                      <Image src={item.src} alt={item.label} width={80} height={80} className="object-contain" style={{ height: "56px", width: "auto" }} />
+                      <span className="text-sm font-medium">{item.label}</span>
+                    </motion.div>
+                  ) : (
+                    <div key={idx} className="" />
+                  )
                 ))}
               </div>
             </div>
@@ -631,24 +642,36 @@ export default function Home() {
               <div className="flex justify-center">
                 <span className="text-2xl md:text-3xl lg:text-4xl font-bold font-[family-name:var(--font-dm-sans)]">Design</span>
               </div>
-              <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-2 gap-x-2 gap-y-6">
                 {[
                   { src: "/icons/adobe-illustrator.svg", label: "illustrator" },
                   { src: "/icons/figma.svg", label: "figma" },
                   { src: "/icons/canva.svg", label: "canva" },
+                  null,
                 ].map((item, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.4, delay: 0.06 * idx }}
-                    viewport={{ once: true }}
-                    whileHover={{ scale: 1.04, y: -3 }}
-                    className="flex flex-col items-center justify-center gap-2 transition-transform"
-                  >
-                    <Image src={item.src} alt={item.label} width={48} height={48} />
-                    <span className="text-sm font-medium capitalize">{item.label}</span>
-                  </motion.div>
+                  item ? (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.4, delay: 0.06 * idx }}
+                      viewport={{ once: true }}
+                      whileHover={{ scale: 1.04, y: -3 }}
+                      className="flex flex-col items-center justify-center gap-2 transition-transform"
+                    >
+                      <Image
+                        src={item.src}
+                        alt={item.label}
+                        width={80}
+                        height={80}
+                        className="object-contain"
+                        style={item.label === "canva" ? { width: "48px", height: "56px" } : { height: "56px", width: "auto" }}
+                      />
+                      <span className="text-sm font-medium capitalize">{item.label}</span>
+                    </motion.div>
+                  ) : (
+                    <div key={idx} className="" />
+                  )
                 ))}
               </div>
             </div>

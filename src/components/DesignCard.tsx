@@ -13,7 +13,7 @@ interface DesignCardProps {
   enableModal?: boolean;
 }
 
-export function DesignCard({ design, index, enableModal = false, useAnimate = false }: DesignCardProps) {
+export function DesignCard({ design, index, useAnimate = false }: DesignCardProps) {
   // Map tool names to local brand SVGs; fallback to null
   const getToolIconSrc = (tool: string) => {
     const t = tool.toLowerCase();
