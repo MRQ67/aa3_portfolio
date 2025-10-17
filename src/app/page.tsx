@@ -4,7 +4,6 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { VelocityScroll } from "@/components/magicui/scroll-based-velocity";
 import { SpinningText } from "@/components/magicui/spinning-text";
-import { AnimatedThemeToggler } from "@/components/magicui/animated-theme-toggler";
 import { SparklesText } from "@/components/magicui/sparkles-text";
 import { FlipText } from "@/components/magicui/flip-text";
 import { Particles } from "@/components/magicui/particles";
@@ -68,7 +67,7 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="absolute top-8 left-12 md:left-16 z-20 flex items-center gap-4"
           >
-            <div id="hero-logo" className="w-16 h-16 relative">
+            <div id="hero-logo" className="w-18 h-18 absolute top-2 left-4">
               <Image
                 src="/logo.svg"
                 alt="Logo"
@@ -76,7 +75,7 @@ export default function Home() {
                 className="object-contain"
               />
             </div>
-            <AnimatedThemeToggler className="w-8 h-8 p-1.5 rounded-lg bg-white/10 backdrop-blur-sm border border-foreground/20 hover:bg-white/20 transition-all duration-300 flex items-center justify-center" />
+
           </motion.div>
 
           {/* Right side - Resume button and Image */}
