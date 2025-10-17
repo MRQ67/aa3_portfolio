@@ -54,7 +54,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${dmSans.variable} ${jetBrainsMono.variable} ${italiana.variable} ${sarina.variable} antialiased`}
+        className={`${inter.variable} ${dmSans.variable} ${jetBrainsMono.variable} ${italiana.variable} ${sarina.variable} antialiased overflow-x-hidden`}
       >
         <ThemeProvider
           attribute="class"

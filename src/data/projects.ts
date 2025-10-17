@@ -68,7 +68,7 @@ export const projects: Project[] = [
   {
     id: 3,
     slug: "youtube-auto-pip",
-    title: "YouTube Auto Picture-in-Picture Suite",
+    title: "YT Auto PiP Suite",
     description: "Cross-platform suite enabling automatic Picture-in-Picture mode for YouTube videos across browser and desktop.",
     fullDescription: "A comprehensive cross-platform solution that automatically enables Picture-in-Picture mode for YouTube videos. The suite includes a browser extension built with JavaScript and a Windows desktop application developed in C#. This tool enhances the YouTube viewing experience by allowing seamless multitasking with video content.",
     image: "/projects/youtu.png",

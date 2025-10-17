@@ -49,7 +49,7 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-          className="w-screen relative left-1/2 right-1/2 -mx-[50vw] flex flex-col md:grid md:grid-cols-[2fr_1fr] items-center min-h-screen p-8 overflow-hidden rounded-b-[80px] md:rounded-b-[120px] bg-background"
+          className="w-screen relative left-1/2 right-1/2 -mx-[50vw] flex flex-col md:grid md:grid-cols-[2fr_1fr] items-stretch md:items-center min-h-screen p-4 md:p-8 overflow-hidden rounded-b-[80px] md:rounded-b-[120px] bg-background"
         >
           {/* Lightning Background for Hero Section Only - Full Width */}
           <motion.div
@@ -60,50 +60,58 @@ export default function Home() {
           >
             <Silk />
           </motion.div>
-          {/* Logo at the top */}
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="absolute top-8 left-12 md:left-16 z-20 flex items-center gap-4"
-          >
-            <div id="hero-logo" className="w-18 h-18 absolute top-2 left-4">
-              <Image
-                src="/logo.svg"
-                alt="Logo"
-                fill
-                className="object-contain"
-              />
-            </div>
-
-          </motion.div>
+          {/* Mobile top bar with logo + resume */}
+           <div className="flex md:hidden w-full items-center justify-between z-20 px-2 pt-2">
+             <div className="w-10 h-10 relative">
+               <Image src="/logo.svg" alt="Logo" fill className="object-contain" />
+             </div>
+             <button className="px-3 py-2 border-2 border-foreground rounded-full text-xs hover:bg-foreground hover:text-background transition-all duration-300 font-medium">
+               My Resume
+             </button>
+           </div>
+           {/* Logo at the top (desktop only) */}
+           <motion.div
+             initial={{ opacity: 0, y: -20 }}
+             animate={{ opacity: 1, y: 0 }}
+             transition={{ duration: 0.6, delay: 0.6 }}
+             className="hidden md:flex md:absolute md:top-8 md:left-16 z-20 items-center gap-4"
+           >
+             <div id="hero-logo" className="w-18 h-18 md:absolute md:top-2 md:left-4">
+               <Image
+                 src="/logo.svg"
+                 alt="Logo"
+                 fill
+                 className="object-contain"
+               />
+             </div>
+           </motion.div>
 
           {/* Right side - Resume button and Image */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 1.0 }}
-            className="w-full h-full flex flex-col items-center justify-center relative order-1 md:order-2"
+            className="w-full h-full flex flex-col items-center justify-center relative order-1 md:order-2 mt-8 md:mt-0"
           >
              {/* My Resume Button - Aligned with logo and theme toggle */}
              <motion.button
-               initial={{ opacity: 0, y: -20 }}
-               animate={{ opacity: 1, y: 0 }}
-               transition={{ duration: 0.6, delay: 1.2 }}
-               className="absolute top-4 right-28 px-6 py-3 border-2 border-foreground rounded-full hover:bg-foreground hover:text-background transition-all duration-300 font-medium font-[family-name:var(--font-dm-sans)] z-20"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 1.2 }}
+                className="hidden md:block md:absolute md:top-4 md:right-28 px-6 py-3 border-2 border-foreground rounded-full hover:bg-foreground hover:text-background transition-all duration-300 font-medium font-[family-name:var(--font-dm-sans)] z-20"
+              >
+                My Resume
+              </motion.button>
+ 
+             {/* Profile Image with spinning text and outside circle effect */}
+             <motion.div
+               initial={{ scale: 0 }}
+               animate={{ scale: 1 }}
+               transition={{ duration: 0.6, delay: 1.4, type: "spring", stiffness: 200 }}
+               className="relative w-56 h-56 md:w-80 md:h-80"
              >
-               My Resume
-             </motion.button>
-
-            {/* Profile Image with spinning text and outside circle effect */}
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 0.6, delay: 1.4, type: "spring", stiffness: 200 }}
-              className="relative w-48 h-48 md:w-80 md:h-80"
-            >
               {/* Spinning Text Component around the image */}
-              <div className="absolute inset-0 w-full h-full scale-50 md:scale-100">
+              <div className="absolute inset-0 w-full h-full scale-65 md:scale-100">
                 <SpinningText
                   className="w-full h-full text-foreground/70"
                   duration={15}
@@ -128,98 +136,98 @@ export default function Home() {
           </motion.div>
 
           {/* Left side - Text content */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex flex-col gap-6 md:gap-8 z-10 mt-24 md:mt-24 order-2 md:order-1 max-w-2xl ml-6 md:ml-12"
-          >
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.0 }}
-              className="text-5xl md:text-8xl font-[family-name:var(--font-dm-sans)] leading-tight"
-            >
-              <div className="flex justify-start items-baseline">
-                <span className="font-normal text-5xl md:text-8xl">I&apos;m</span>
-                <span className="ml-4"></span>
-                <FlipText
-                  className="text-5xl md:text-8xl font-bold font-[family-name:var(--font-dm-sans)]"
-                  duration={0.6}
-                  delayMultiple={0.1}
-                >
-                  Abdellah
-                </FlipText>
-              </div>
-            </motion.h1>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.2 }}
-              className="flex flex-col gap-2"
-            >
-              <span className="text-3xl md:text-5xl font-[family-name:var(--font-ubuntu-mono)]">
-                Software Developer &
-              </span>
-              <SparklesText
-                className="text-3xl md:text-5xl text-blue-400 font-[family-name:var(--font-sarina)] italic"
-                colors={{ first: "#F472B6", second: "#EC4899" }}
-                sparklesCount={8}
-              >
-                Graphics Designer
-              </SparklesText>
-            </motion.div>
-
-            {/* Social Media Icons */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.4 }}
-              className="flex gap-12 mt-8 justify-start items-center ml-12"
-            >
-              <a href="https://github.com/MRQ67" target="_blank" rel="noopener noreferrer" className="h-10 w-10 hover:scale-110 transition-transform flex items-center justify-center">
+           <motion.div
+             initial={{ opacity: 0, x: -50 }}
+             animate={{ opacity: 1, x: 0 }}
+             transition={{ duration: 0.8, delay: 0.8 }}
+             className="flex flex-col gap-5 md:gap-8 z-10 mt-12 md:mt-24 order-2 md:order-1 max-w-2xl ml-2 md:ml-12 text-center md:text-left"
+           >
+             <motion.h1
+               initial={{ opacity: 0, y: 30 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ duration: 0.8, delay: 1.0 }}
+               className="text-4xl sm:text-5xl md:text-8xl font-[family-name:var(--font-dm-sans)] leading-tight"
+             >
+               <div className="flex justify-center md:justify-start items-baseline">
+                 <span className="font-normal text-4xl sm:text-5xl md:text-8xl">I&apos;m</span>
+                 <span className="ml-4"></span>
+                 <FlipText
+                   className="text-4xl sm:text-5xl md:text-8xl font-bold font-[family-name:var(--font-dm-sans)]"
+                   duration={0.6}
+                   delayMultiple={0.1}
+                 >
+                   Abdellah
+                 </FlipText>
+               </div>
+             </motion.h1>
+             <motion.div
+               initial={{ opacity: 0, y: 30 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ duration: 0.8, delay: 1.2 }}
+               className="flex flex-col gap-2"
+             >
+               <span className="text-2xl md:text-5xl font-[family-name:var(--font-ubuntu-mono)]">
+                 Software Developer &
+               </span>
+               <SparklesText
+                 className="text-2xl md:text-5xl text-blue-400 font-[family-name:var(--font-sarina)] italic"
+                 colors={{ first: "#F472B6", second: "#EC4899" }}
+                 sparklesCount={8}
+               >
+                 Graphics Designer
+               </SparklesText>
+             </motion.div>
+ 
+             {/* Social Media Icons */}
+             <motion.div
+               initial={{ opacity: 0, y: 30 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ duration: 0.8, delay: 1.4 }}
+               className="flex gap-6 md:gap-10 mt-8 md:mt-8 justify-center md:justify-start items-center ml-0 md:ml-12"
+             >
+              <a href="https://github.com/MRQ67" target="_blank" rel="noopener noreferrer" className="h-8 w-8 md:h-10 md:w-10 hover:scale-110 transition-transform flex items-center justify-center">
                 <Image
                   src="/icons/social_link/github-142-svgrepo-com.svg"
                   alt="GitHub"
-                  width={40}
-                  height={40}
-                  className="h-10 w-auto dark:invert"
+                  width={32}
+                  height={32}
+                  className="h-8 md:h-10 w-auto dark:invert"
                 />
               </a>
-              <a href="https://x.com/HimoNotting" target="_blank" rel="noopener noreferrer" className="h-10 w-10 hover:scale-110 transition-transform flex items-center justify-center">
+              <a href="https://x.com/HimoNotting" target="_blank" rel="noopener noreferrer" className="h-8 w-8 md:h-10 md:w-10 hover:scale-110 transition-transform flex items-center justify-center">
                 <Image
                   src="/icons/social_link/X_logo_2023_original.svg"
                   alt="X (Twitter)"
-                  width={40}
-                  height={40}
-                  className="h-10 w-auto dark:invert"
+                  width={32}
+                  height={32}
+                  className="h-8 md:h-10 w-auto dark:invert"
                 />
               </a>
-              <a href="https://www.linkedin.com/in/abdellah-qadi-b229382a2/" target="_blank" rel="noopener noreferrer" className="h-10 w-10 hover:scale-110 transition-transform flex items-center justify-center">
+              <a href="https://www.linkedin.com/in/abdellah-qadi-b229382a2/" target="_blank" rel="noopener noreferrer" className="h-8 w-8 md:h-10 md:w-10 hover:scale-110 transition-transform flex items-center justify-center">
                 <Image
                   src="/icons/social_link/linkedin-svgrepo-com.svg"
                   alt="LinkedIn"
-                  width={40}
-                  height={40}
-                  className="h-10 w-auto dark:invert"
+                  width={32}
+                  height={32}
+                  className="h-8 md:h-10 w-auto dark:invert"
                 />
               </a>
-              <a href="https://www.instagram.com/simply_aboo/" target="_blank" rel="noopener noreferrer" className="h-10 w-10 hover:scale-110 transition-transform flex items-center justify-center">
+              <a href="https://www.instagram.com/simply_aboo/" target="_blank" rel="noopener noreferrer" className="h-8 w-8 md:h-10 md:w-10 hover:scale-110 transition-transform flex items-center justify-center">
                 <Image
                   src="/icons/social_link/instagram-167-svgrepo-com.svg"
                   alt="Instagram"
-                  width={40}
-                  height={40}
-                  className="h-10 w-auto dark:invert"
+                  width={32}
+                  height={32}
+                  className="h-8 md:h-10 w-auto dark:invert"
                 />
               </a>
-              <a href="https://www.youtube.com/@aa3_studio" target="_blank" rel="noopener noreferrer" className="h-10 w-10 hover:scale-110 transition-transform flex items-center justify-center">
+              <a href="https://www.youtube.com/@aa3_studio" target="_blank" rel="noopener noreferrer" className="h-8 w-8 md:h-10 md:w-10 hover:scale-110 transition-transform flex items-center justify-center">
                 <Image
                   src="/icons/social_link/youtube-168-svgrepo-com.svg"
                   alt="YouTube"
-                  width={40}
-                  height={40}
-                  className="h-10 w-auto dark:invert"
+                  width={32}
+                  height={32}
+                  className="h-8 md:h-10 w-auto dark:invert"
                 />
               </a>
             </motion.div>
@@ -227,31 +235,31 @@ export default function Home() {
 
 
 
-          {/* Logo and down arrow at bottom */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.8 }}
-            className="absolute bottom-20 md:bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
-          >
-            <div className="animate-bounce">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12 5V19M12 19L5 12M12 19L19 12"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
-          </motion.div>
+          {/* Logo and down arrow at bottom (desktop only) */}
+           <motion.div
+             initial={{ opacity: 0, y: 20 }}
+             animate={{ opacity: 1, y: 0 }}
+             transition={{ duration: 0.6, delay: 1.8 }}
+             className="hidden md:flex md:absolute md:bottom-10 md:left-1/2 md:transform md:-translate-x-1/2 flex-col items-center"
+           >
+             <div className="animate-bounce">
+               <svg
+                 width="24"
+                 height="24"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 xmlns="http://www.w3.org/2000/svg"
+               >
+                 <path
+                   d="M12 5V19M12 19L5 12M12 19L19 12"
+                   stroke="currentColor"
+                   strokeWidth="2"
+                   strokeLinecap="round"
+                   strokeLinejoin="round"
+                 />
+               </svg>
+             </div>
+           </motion.div>
         </motion.div>
 
         {/* About Me Section */}
@@ -367,7 +375,7 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="overflow-hidden w-screen -mx-8 md:-mx-16 lg:-mx-24"
+            className="overflow-hidden w-full"
           >
             <VelocityScroll
               defaultVelocity={2}
@@ -386,10 +394,10 @@ export default function Home() {
             viewport={{ once: true }}
             className="relative mt-16"
           >
-            <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory -mx-4 sm:-mx-6 lg:-mx-8">
-              <div className="flex gap-6 min-w-max pl-0 pr-0 md:pr-12">
+            <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory">
+              <div className="flex gap-6 min-w-max pl-4 pr-4 sm:pl-6 sm:pr-6 lg:pl-8 lg:pr-8">
                 {topProjects.map((project, index) => (
-                  <div key={project.id} className="flex-shrink-0 w-80 md:w-96 snap-start">
+                  <div key={project.id} className="flex-shrink-0 w-64 md:w-80 snap-start">
                     <ProjectCard
                       project={project}
                       index={index}
@@ -497,7 +505,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="overflow-hidden w-screen -mx-8 md:-mx-16 lg:-mx-24"
+              className="overflow-hidden w-full"
             >
               <VelocityScroll
                 defaultVelocity={2}
@@ -750,12 +758,7 @@ export default function Home() {
               className="flex flex-col items-center gap-3"
             >
               <motion.a
-                href="https://www.linkedin.com/in/abdellah-qadi-b229382a2/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="h-16 w-16 md:h-20 md:w-20 hover:scale-110 transition-transform flex items-center justify-center"
-                whileHover={{ scale: 1.1 }}
-              >
+                href="https://www.linkedin.com/in/abdellah-qadi-b229382a2/" target="_blank" rel="noopener noreferrer" className="h-10 w-10 hover:scale-110 transition-transform flex items-center justify-center">
                 <Image
                   src="/icons/social_link/linkedin-svgrepo-com.svg"
                   alt="LinkedIn"
