@@ -15,7 +15,7 @@ import { ProjectCard } from "@/components/ProjectCard";
 import { ProjectModal } from "@/components/ProjectModal";
 import { DesignCard } from "@/components/DesignCard";
 import { useProject } from "@/contexts/ProjectContext";
-import PrismaticBurst from "@/components/PrismaticBurst";
+import Silk from "@/components/Silk";
 
 export default function Home() {
   const topProjects = getTopProjects(4);
@@ -57,22 +57,9 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
-            className="absolute inset-0 w-screen h-full z-0"
-            style={{ 
-              left: '50%',
-              transform: 'translateX(-50%)',
-              width: '100vw'
-            }}
+            className="absolute top-0 left-1/2 -translate-x-1/2 w-screen h-full z-0 pointer-events-none"
           >
-            <PrismaticBurst
-              intensity={2}
-              speed={0.5}
-              animationType="rotate3d"
-              colors={["#3b82f6", "#8b5cf6", "#06b6d4", "#10b981", "#f59e0b"]}
-              distort={5}
-              rayCount={8}
-              mixBlendMode="lighten"
-            />
+            <Silk />
           </motion.div>
           {/* Logo at the top */}
           <motion.div
