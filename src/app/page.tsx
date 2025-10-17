@@ -50,14 +50,14 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-          className="flex flex-col md:grid md:grid-cols-[2fr_1fr] items-center min-h-screen p-8 relative"
+          className="w-screen relative left-1/2 right-1/2 -mx-[50vw] flex flex-col md:grid md:grid-cols-[2fr_1fr] items-center min-h-screen p-8 overflow-hidden rounded-b-[80px] md:rounded-b-[120px] bg-background"
         >
           {/* Lightning Background for Hero Section Only - Full Width */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
-            className="absolute top-0 left-1/2 -translate-x-1/2 w-screen h-full z-0 pointer-events-none"
+            className="absolute inset-0 z-0 pointer-events-none"
           >
             <Silk />
           </motion.div>
@@ -66,7 +66,7 @@ export default function Home() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="absolute top-8 left-8 z-20 flex items-center gap-4"
+            className="absolute top-8 left-12 md:left-16 z-20 flex items-center gap-4"
           >
             <div id="hero-logo" className="w-16 h-16 relative">
               <Image
@@ -133,7 +133,7 @@ export default function Home() {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex flex-col gap-6 md:gap-8 z-10 mt-24 md:mt-24 order-2 md:order-1 max-w-2xl"
+            className="flex flex-col gap-6 md:gap-8 z-10 mt-24 md:mt-24 order-2 md:order-1 max-w-2xl ml-6 md:ml-12"
           >
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
@@ -176,7 +176,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.4 }}
-              className="flex gap-12 mt-8 justify-start items-center ml-8"
+              className="flex gap-12 mt-8 justify-start items-center ml-12"
             >
               <a href="https://github.com/MRQ67" target="_blank" rel="noopener noreferrer" className="h-10 w-10 hover:scale-110 transition-transform flex items-center justify-center">
                 <Image
