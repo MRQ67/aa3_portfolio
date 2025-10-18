@@ -440,7 +440,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="overflow-hidden w-screen -mx-8 md:-mx-16 lg:-mx-24"
+              className="overflow-hidden w-full"
             >
               <VelocityScroll
                 defaultVelocity={2}
@@ -452,26 +452,28 @@ export default function Home() {
             </motion.div>
           </div>
 
-          {/* Grid identical to Projects section */}
+          {/* Horizontal Scrollable Designs */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 w-full place-items-center"
+            className="relative mt-16"
           >
-            {featuredDesigns.slice(0, 3).map((design, index) => (
-              <div key={design.id} className="flex justify-center">
-                <div className="w-80 md:w-96">
-                  <DesignCard
-                    design={design}
-                    index={index}
-                    enableModal={false}
-                    useAnimate={false}
-                  />
-                </div>
+            <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory">
+              <div className="flex gap-6 min-w-max pl-4 pr-4 sm:pl-6 sm:pr-6 lg:pl-8 lg:pr-8">
+                {featuredDesigns.slice(0, 3).map((design, index) => (
+                  <div key={design.id} className="flex-shrink-0 w-64 md:w-80 snap-start">
+                    <DesignCard
+                      design={design}
+                      index={index}
+                      enableModal={false}
+                      useAnimate={false}
+                    />
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </motion.div>
 
           {/* View All Designs link styled like Projects */}
@@ -557,44 +559,39 @@ export default function Home() {
                     ].includes(item.label)
                       ? "filter invert brightness-0 object-contain"
                       : "object-contain"}
-                    style={{ height: "56px", width: "auto" }}
+                    style={{ height: "40px", width: "auto" }}
                   />
-                  <span className="text-sm font-medium">{item.label}</span>
+                  <span className="text-xs md:text-sm font-medium">{item.label}</span>
                 </motion.div>
               ))}
             </div>
           </div>
 
-          {/* Row 2: Mobile Dev, Backend Dev, Design */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Row 2: Mobile Dev & Backend Dev side by side */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Mobile Dev */}
             <div className="space-y-4">
               <div className="flex justify-center">
-                <span className="text-2xl md:text-3xl lg:text-4xl font-bold font-[family-name:var(--font-dm-sans)]">Mobile Dev</span>
+                <span className="text-xl md:text-2xl lg:text-3xl font-bold font-[family-name:var(--font-dm-sans)]">Mobile Dev</span>
               </div>
-              <div className="grid grid-cols-2 gap-x-2 gap-y-6">
+              <div className="grid grid-cols-3 gap-x-2 gap-y-4">
                 {[
                   { src: "/icons/flutter.svg", label: "Flutter" },
                   { src: "/icons/react-native.svg", label: "React native" },
                   { src: "/icons/kotlin.svg", label: "Kotlin" },
-                  null,
                 ].map((item, idx) => (
-                  item ? (
-                    <motion.div
-                      key={idx}
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.4, delay: 0.06 * idx }}
-                      viewport={{ once: true }}
-                      whileHover={{ scale: 1.04, y: -3 }}
-                      className="flex flex-col items-center justify-center gap-2 transition-transform"
-                    >
-                      <Image src={item.src} alt={item.label} width={80} height={80} className="object-contain" style={{ height: "56px", width: "auto" }} />
-                      <span className="text-sm font-medium">{item.label}</span>
-                    </motion.div>
-                  ) : (
-                    <div key={idx} className="" />
-                  )
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, delay: 0.06 * idx }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.04, y: -3 }}
+                    className="flex flex-col items-center justify-center gap-2 transition-transform"
+                  >
+                    <Image src={item.src} alt={item.label} width={80} height={80} className="object-contain" style={{ height: "36px", width: "auto" }} />
+                    <span className="text-xs md:text-sm font-medium">{item.label}</span>
+                  </motion.div>
                 ))}
               </div>
             </div>
@@ -602,70 +599,62 @@ export default function Home() {
             {/* Backend Dev */}
             <div className="space-y-4">
               <div className="flex justify-center">
-                <span className="text-2xl md:text-3xl lg:text-4xl font-bold font-[family-name:var(--font-dm-sans)]">Backend Dev</span>
+                <span className="text-xl md:text-2xl lg:text-3xl font-bold font-[family-name:var(--font-dm-sans)]">Backend Dev</span>
               </div>
-              <div className="grid grid-cols-2 gap-x-2 gap-y-6">
+              <div className="grid grid-cols-3 gap-x-2 gap-y-4">
                 {[
                   { src: "/icons/nodejs.svg", label: "Node.js" },
                   { src: "/icons/go.svg", label: "Go" },
                   { src: "/icons/supabase.svg", label: "Supabase" },
-                  null,
                 ].map((item, idx) => (
-                  item ? (
-                    <motion.div
-                      key={idx}
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.4, delay: 0.06 * idx }}
-                      viewport={{ once: true }}
-                      whileHover={{ scale: 1.04, y: -3 }}
-                      className="flex flex-col items-center justify-center gap-2 transition-transform"
-                    >
-                      <Image src={item.src} alt={item.label} width={80} height={80} className="object-contain" style={{ height: "56px", width: "auto" }} />
-                      <span className="text-sm font-medium">{item.label}</span>
-                    </motion.div>
-                  ) : (
-                    <div key={idx} className="" />
-                  )
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, delay: 0.06 * idx }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.04, y: -3 }}
+                    className="flex flex-col items-center justify-center gap-2 transition-transform"
+                  >
+                    <Image src={item.src} alt={item.label} width={80} height={80} className="object-contain" style={{ height: "36px", width: "auto" }} />
+                    <span className="text-xs md:text-sm font-medium">{item.label}</span>
+                  </motion.div>
                 ))}
               </div>
             </div>
+          </div>
 
-            {/* Design */}
-            <div className="space-y-4">
-              <div className="flex justify-center">
-                <span className="text-2xl md:text-3xl lg:text-4xl font-bold font-[family-name:var(--font-dm-sans)]">Design</span>
-              </div>
-              <div className="grid grid-cols-2 gap-x-2 gap-y-6">
+          {/* Row 3: Design category on its own */}
+          <div className="space-y-4">
+            <div className="flex justify-center">
+              <span className="text-xl md:text-2xl lg:text-3xl font-bold font-[family-name:var(--font-dm-sans)]">Design</span>
+            </div>
+            <div className="flex justify-center">
+              <div className="grid grid-cols-3 gap-x-4 gap-y-4 max-w-xs">
                 {[
                   { src: "/icons/adobe-illustrator.svg", label: "illustrator" },
                   { src: "/icons/figma.svg", label: "figma" },
                   { src: "/icons/canva.svg", label: "canva" },
-                  null,
                 ].map((item, idx) => (
-                  item ? (
-                    <motion.div
-                      key={idx}
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.4, delay: 0.06 * idx }}
-                      viewport={{ once: true }}
-                      whileHover={{ scale: 1.04, y: -3 }}
-                      className="flex flex-col items-center justify-center gap-2 transition-transform"
-                    >
-                      <Image
-                        src={item.src}
-                        alt={item.label}
-                        width={80}
-                        height={80}
-                        className="object-contain"
-                        style={item.label === "canva" ? { width: "48px", height: "56px" } : { height: "56px", width: "auto" }}
-                      />
-                      <span className="text-sm font-medium capitalize">{item.label}</span>
-                    </motion.div>
-                  ) : (
-                    <div key={idx} className="" />
-                  )
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, delay: 0.06 * idx }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.04, y: -3 }}
+                    className="flex flex-col items-center justify-center gap-2 transition-transform"
+                  >
+                    <Image
+                      src={item.src}
+                      alt={item.label}
+                      width={80}
+                      height={80}
+                      className="object-contain"
+                      style={item.label === "canva" ? { width: "32px", height: "36px" } : { height: "36px", width: "auto" }}
+                    />
+                    <span className="text-xs md:text-sm font-medium capitalize">{item.label}</span>
+                  </motion.div>
                 ))}
               </div>
             </div>
@@ -825,14 +814,14 @@ export default function Home() {
         </motion.div>
 
         {/* Footer Section */}
-        <footer className="bg-black text-white pt-40 pb-0 w-screen relative left-1/2 right-1/2 -mx-[50vw] rounded-t-[3rem]">
+        <footer className="bg-black text-white pt-40 pb-0 w-screen relative left-1/2 right-1/2 -mx-[50vw] rounded-t-[3rem] overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             {/* Header with name */}
             <div className="mb-8 -mt-18">
               <h2 className="text-5xl font-thin" style={{ fontFamily: "var(--font-italiana)" }}>Abdellah Qadi</h2>
             </div>
             
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-8 items-start relative">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-8 items-start relative pb-8 lg:pb-0">
               {/* Quick Links */}
               <div>
                 <h3 className="text-3xl font-bold mb-4 font-[family-name:var(--font-dm-sans)]">Quick Links</h3>
@@ -844,8 +833,8 @@ export default function Home() {
                 </ul>
               </div>
 
-              {/* Center - Large Footer Logo */}
-              <div className="flex justify-center relative">
+              {/* Center - Large Footer Logo - Desktop only */}
+              <div className="hidden lg:flex justify-center relative">
                 <Image
                   src="/footer_logo.svg"
                   alt="AA³ Footer Logo"
@@ -868,8 +857,8 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Social Media Icons - White color for black footer background */}
-              <div className="absolute bottom-15 left-255 lg:text-right">
+              {/* Social Media Icons - Desktop positioning */}
+              <div className="hidden lg:block absolute bottom-15 left-255 lg:text-right">
                 <div className="flex space-x-4 mt-6 lg:justify-end">
                   <a href="https://x.com/HimoNotting" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
                     <Image
@@ -918,7 +907,74 @@ export default function Home() {
                   </a>
                 </div>
               </div>
+
+              {/* Mobile Social Media Icons */}
+              <div className="lg:hidden flex justify-center mt-8">
+                <div className="flex space-x-4">
+                  <a href="https://x.com/HimoNotting" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
+                    <Image
+                      src="/icons/social_link/X_logo_2023_original.svg"
+                      alt="X (Twitter)"
+                      width={24}
+                      height={24}
+                      className="w-6 h-6 brightness-0 invert"
+                    />
+                  </a>
+                  <a href="https://github.com/MRQ67" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
+                    <Image
+                      src="/icons/social_link/github-142-svgrepo-com.svg"
+                      alt="GitHub"
+                      width={24}
+                      height={24}
+                      className="w-6 h-6 brightness-0 invert"
+                    />
+                  </a>
+                  <a href="https://www.instagram.com/simply_aboo/" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
+                    <Image
+                      src="/icons/social_link/instagram-167-svgrepo-com.svg"
+                      alt="Instagram"
+                      width={24}
+                      height={24}
+                      className="w-6 h-6 brightness-0 invert"
+                    />
+                  </a>
+                  <a href="https://www.youtube.com/@abdellahqadi" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
+                    <Image
+                      src="/icons/social_link/youtube-168-svgrepo-com.svg"
+                      alt="YouTube"
+                      width={24}
+                      height={24}
+                      className="w-6 h-6 brightness-0 invert"
+                    />
+                  </a>
+                  <a href="https://www.linkedin.com/in/abdellah-qadi-a71906251/" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
+                    <Image
+                      src="/icons/social_link/linkedin-svgrepo-com.svg"
+                      alt="LinkedIn"
+                      width={24}
+                      height={24}
+                      className="w-6 h-6 brightness-0 invert"
+                    />
+                  </a>
+                </div>
+              </div>
+
+              {/* Mobile Copyright */}
+              <div className="lg:hidden text-center mt-6 text-sm opacity-70 font-[family-name:var(--font-dm-sans)]">
+                <p>© {new Date().getFullYear()} Abdellah. All rights reserved.</p>
+              </div>
             </div>
+          </div>
+
+          {/* Mobile Footer Logo - Half visible at bottom */}
+          <div className="lg:hidden absolute bottom-15 left-1/2 transform -translate-x-1/2 translate-y-1/2">
+            <Image
+              src="/footer_logo.svg"
+              alt="AA³ Footer Logo"
+              width={300}
+              height={222}
+              className="w-auto h-32 opacity-80"
+            />
           </div>
         </footer>
       </motion.div>
