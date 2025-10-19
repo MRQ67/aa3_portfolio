@@ -814,22 +814,22 @@ export default function Home() {
         </motion.div>
 
         {/* Footer Section */}
-        <footer className="bg-black text-white pt-40 pb-0 w-screen relative left-1/2 right-1/2 -mx-[50vw] rounded-t-[3rem] overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <footer className="bg-neutral-900 text-white pt-40 pb-0 lg:pb-0 w-screen relative left-1/2 right-1/2 -mx-[50vw] rounded-t-[3rem] overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative pb-32 lg:pb-0">
             {/* Header with name */}
             <div className="mb-8 -mt-18">
               <h2 className="text-5xl font-thin" style={{ fontFamily: "var(--font-italiana)" }}>Abdellah Qadi</h2>
             </div>
             
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-8 items-start relative pb-8 lg:pb-0">
+            <div className="grid grid-cols-2 lg:grid-cols-[1fr_auto_1fr] gap-4 lg:gap-8 items-start relative">
               {/* Quick Links */}
               <div>
-                <h3 className="text-3xl font-bold mb-4 font-[family-name:var(--font-dm-sans)]">Quick Links</h3>
-                <ul className="space-y-2">
-                  <li><a href="#about" className="hover:text-blue-400 transition-colors font-[family-name:var(--font-dm-sans)]">About</a></li>
-                  <li><a href="#projects" className="hover:text-blue-400 transition-colors font-[family-name:var(--font-dm-sans)]">My Projects</a></li>
-                  <li><a href="#skills" className="hover:text-blue-400 transition-colors font-[family-name:var(--font-dm-sans)]">My Skills</a></li>
-                  <li><a href="#contact" className="hover:text-blue-400 transition-colors font-[family-name:var(--font-dm-sans)]">Get in Touch</a></li>
+                <h3 className="text-xl lg:text-3xl font-bold mb-2 lg:mb-4 font-[family-name:var(--font-dm-sans)]">Quick Links</h3>
+                <ul className="space-y-1 lg:space-y-2">
+                  <li><a href="#about" className="text-sm lg:text-base hover:text-blue-400 transition-colors font-[family-name:var(--font-dm-sans)]">About</a></li>
+                  <li><a href="#projects" className="text-sm lg:text-base hover:text-blue-400 transition-colors font-[family-name:var(--font-dm-sans)]">My Projects</a></li>
+                  <li><a href="#skills" className="text-sm lg:text-base hover:text-blue-400 transition-colors font-[family-name:var(--font-dm-sans)]">My Skills</a></li>
+                  <li><a href="#contact" className="text-sm lg:text-base hover:text-blue-400 transition-colors font-[family-name:var(--font-dm-sans)]">Get in Touch</a></li>
                 </ul>
               </div>
 
@@ -851,9 +851,9 @@ export default function Home() {
 
               {/* Contact Info */}
               <div className="lg:text-right">
-                <h3 className="text-3xl font-bold mb-4 font-[family-name:var(--font-inter)]">Contact</h3>
-                <div className="space-y-2">
-                  <p>Email: <a href="mailto:contact@aa3.site" className="hover:text-blue-400 transition-colors underline font-[family-name:var(--font-dm-sans)]">contact@aa3.site</a></p>
+                <h3 className="text-xl lg:text-3xl font-bold mb-2 lg:mb-4 font-[family-name:var(--font-inter)]">Contact</h3>
+                <div className="space-y-1 lg:space-y-2">
+                  <p className="text-sm lg:text-base">Email: <a href="mailto:contact@aa3.site" className="hover:text-blue-400 transition-colors underline font-[family-name:var(--font-dm-sans)]">contact@aa3.site</a></p>
                 </div>
               </div>
 
@@ -900,74 +900,74 @@ export default function Home() {
                     <Image
                       src="/icons/social_link/linkedin-svgrepo-com.svg"
                       alt="LinkedIn"
-                      width={24}
-                      height={24}
-                      className="w-6 h-6 brightness-0 invert"
+                      width={28}
+                      height={28}
+                      className="w-7 h-7 brightness-0 invert"
                     />
                   </a>
                 </div>
               </div>
+            </div>
 
-              {/* Mobile Social Media Icons */}
-              <div className="lg:hidden flex justify-center mt-8">
-                <div className="flex space-x-4">
-                  <a href="https://x.com/HimoNotting" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
-                    <Image
-                      src="/icons/social_link/X_logo_2023_original.svg"
-                      alt="X (Twitter)"
-                      width={24}
-                      height={24}
-                      className="w-6 h-6 brightness-0 invert"
-                    />
-                  </a>
-                  <a href="https://github.com/MRQ67" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
-                    <Image
-                      src="/icons/social_link/github-142-svgrepo-com.svg"
-                      alt="GitHub"
-                      width={24}
-                      height={24}
-                      className="w-6 h-6 brightness-0 invert"
-                    />
-                  </a>
-                  <a href="https://www.instagram.com/simply_aboo/" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
-                    <Image
-                      src="/icons/social_link/instagram-167-svgrepo-com.svg"
-                      alt="Instagram"
-                      width={24}
-                      height={24}
-                      className="w-6 h-6 brightness-0 invert"
-                    />
-                  </a>
-                  <a href="https://www.youtube.com/@abdellahqadi" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
-                    <Image
-                      src="/icons/social_link/youtube-168-svgrepo-com.svg"
-                      alt="YouTube"
-                      width={24}
-                      height={24}
-                      className="w-6 h-6 brightness-0 invert"
-                    />
-                  </a>
-                  <a href="https://www.linkedin.com/in/abdellah-qadi-a71906251/" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
-                    <Image
-                      src="/icons/social_link/linkedin-svgrepo-com.svg"
-                      alt="LinkedIn"
-                      width={24}
-                      height={24}
-                      className="w-6 h-6 brightness-0 invert"
-                    />
-                  </a>
-                </div>
+            {/* Mobile Social Media Icons */}
+            <div className="lg:hidden flex justify-center mt-6">
+              <div className="flex space-x-4">
+                <a href="https://x.com/HimoNotting" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
+                  <Image
+                    src="/icons/social_link/X_logo_2023_original.svg"
+                    alt="X (Twitter)"
+                    width={24}
+                    height={24}
+                    className="w-6 h-6 brightness-0 invert"
+                  />
+                </a>
+                <a href="https://github.com/MRQ67" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
+                  <Image
+                    src="/icons/social_link/github-142-svgrepo-com.svg"
+                    alt="GitHub"
+                    width={24}
+                    height={24}
+                    className="w-6 h-6 brightness-0 invert"
+                  />
+                </a>
+                <a href="https://www.instagram.com/simply_aboo/" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
+                  <Image
+                    src="/icons/social_link/instagram-167-svgrepo-com.svg"
+                    alt="Instagram"
+                    width={24}
+                    height={24}
+                    className="w-6 h-6 brightness-0 invert"
+                  />
+                </a>
+                <a href="https://www.youtube.com/@abdellahqadi" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
+                  <Image
+                    src="/icons/social_link/youtube-168-svgrepo-com.svg"
+                    alt="YouTube"
+                    width={24}
+                    height={24}
+                    className="w-6 h-6 brightness-0 invert"
+                  />
+                </a>
+                <a href="https://www.linkedin.com/in/abdellah-qadi-a71906251/" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
+                  <Image
+                    src="/icons/social_link/linkedin-svgrepo-com.svg"
+                    alt="LinkedIn"
+                    width={28}
+                    height={28}
+                    className="w-7 h-7 brightness-0 invert"
+                  />
+                </a>
               </div>
+            </div>
 
-              {/* Mobile Copyright */}
-              <div className="lg:hidden text-center mt-6 text-sm opacity-70 font-[family-name:var(--font-dm-sans)]">
-                <p>© {new Date().getFullYear()} Abdellah. All rights reserved.</p>
-              </div>
+            {/* Mobile Copyright */}
+            <div className="lg:hidden text-center mt-4 text-sm opacity-70 font-[family-name:var(--font-dm-sans)]">
+              <p>© {new Date().getFullYear()} Abdellah. All rights reserved.</p>
             </div>
           </div>
 
           {/* Mobile Footer Logo - Half visible at bottom */}
-          <div className="lg:hidden absolute bottom-15 left-1/2 transform -translate-x-1/2 translate-y-1/2">
+          <div className="lg:hidden absolute bottom-14 left-1/2 transform -translate-x-1/2 translate-y-1/2">
             <Image
               src="/footer_logo.svg"
               alt="AA³ Footer Logo"
