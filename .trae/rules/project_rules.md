@@ -1,0 +1,1 @@
+Dont run "npm run dev" or open a web preview while working on this project.

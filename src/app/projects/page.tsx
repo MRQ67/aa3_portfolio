@@ -13,7 +13,7 @@ export default function ProjectsPage() {
   const { isModalOpen, selectedProject, closeModal } = useProject();
   
   return (
-    <div className="min-h-screen text-foreground flex flex-col max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div className="min-h-screen text-foreground flex flex-col max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 font-[family-name:var(--font-dm-sans)]">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -48,7 +48,7 @@ export default function ProjectsPage() {
         transition={{ duration: 0.8, delay: 0.2 }}
         className="text-center py-16"
       >
-        <h1 className="text-5xl md:text-7xl font-bold font-[family-name:var(--font-inter)] mb-6">
+        <h1 className="text-5xl md:text-7xl font-bold font-[family-name:var(--font-dm-sans)] mb-6">
           All Projects
         </h1>
         <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
@@ -68,7 +68,6 @@ export default function ProjectsPage() {
             key={project.id}
             project={project}
             index={index}
-            enableModal={true}
             useAnimate={true}
           />
         ))}

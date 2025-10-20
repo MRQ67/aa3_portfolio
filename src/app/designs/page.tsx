@@ -5,15 +5,13 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { designs } from "@/data/designs";
-import { DesignModal } from "@/components/DesignModal";
-import { useDesign } from "@/contexts/DesignContext";
+// DesignModal removed; designs use card-only presentation
 import { DesignCard } from "@/components/DesignCard";
 
 export default function DesignsPage() {
-  const { isModalOpen, selectedDesign, closeModal } = useDesign();
   
   return (
-    <div className="min-h-screen text-foreground flex flex-col max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div className="min-h-screen text-foreground flex flex-col max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 font-[family-name:var(--font-dm-sans)]">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -48,7 +46,7 @@ export default function DesignsPage() {
         transition={{ duration: 0.8, delay: 0.2 }}
         className="text-center py-16"
       >
-        <h1 className="text-5xl md:text-7xl font-bold font-[family-name:var(--font-inter)] mb-6">
+        <h1 className="text-5xl md:text-7xl font-bold font-[family-name:var(--font-dm-sans)] mb-6">
           Design Gallery
         </h1>
         <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
@@ -89,18 +87,13 @@ export default function DesignsPage() {
             key={design.id}
             design={design}
             index={index}
-            enableModal={true}
+            enableModal={false}
             useAnimate={true}
           />
         ))}
       </motion.div>
       
-      {/* Design Modal */}
-      <DesignModal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        selectedDesign={selectedDesign}
-      />
+      {/* Design Modal removed */}
     </div>
   );
 }
