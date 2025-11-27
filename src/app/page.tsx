@@ -4,7 +4,6 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { VelocityScroll } from "@/components/magicui/scroll-based-velocity";
 import { SpinningText } from "@/components/magicui/spinning-text";
-import { AnimatedThemeToggler } from "@/components/magicui/animated-theme-toggler";
 import { SparklesText } from "@/components/magicui/sparkles-text";
 import { FlipText } from "@/components/magicui/flip-text";
 import { Particles } from "@/components/magicui/particles";
@@ -14,30 +13,29 @@ import Link from "next/link";
 import { ProjectCard } from "@/components/ProjectCard";
 import { ProjectModal } from "@/components/ProjectModal";
 import { DesignCard } from "@/components/DesignCard";
-import { DesignModal } from "@/components/DesignModal";
 import { useProject } from "@/contexts/ProjectContext";
-import { useDesign } from "@/contexts/DesignContext";
+import Silk from "@/components/Silk";
 
 export default function Home() {
   const topProjects = getTopProjects(4);
   const featuredDesigns = getFeaturedDesigns();
   const { isModalOpen, selectedProject, closeModal } = useProject();
-  const { isModalOpen: isDesignModalOpen, selectedDesign, closeModal: closeDesignModal } = useDesign();
 
   return (
     <>
+      {/* Global Particles Background for non-hero sections */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
+        className="fixed inset-0 z-0"
       >
         <Particles
-          className="fixed inset-0 z-0"
-          quantity={80}
+          className="absolute inset-0"
+          quantity={100}
           ease={80}
-          color="#60A5FA"
-          size={0.6}
-          staticity={30}
+          color="#ffffff"
+          refresh
         />
       </motion.div>
       <motion.div
@@ -51,36 +49,69 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-          className="flex flex-col md:grid md:grid-cols-[2fr_1fr] items-center min-h-screen p-8 relative"
+          className="w-screen relative left-1/2 right-1/2 -mx-[50vw] flex flex-col md:grid md:grid-cols-[2fr_1fr] items-stretch md:items-center min-h-screen p-4 md:p-8 overflow-hidden rounded-b-[80px] md:rounded-b-[120px] bg-background"
         >
-          {/* Logo at the top */}
+          {/* Lightning Background for Hero Section Only - Full Width */}
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="absolute top-8 left-8 z-20 flex items-center gap-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+            className="absolute inset-0 z-0 pointer-events-none"
           >
-            <div id="hero-logo" className="w-16 h-16 relative">
-              <Image
-                src="/logo.svg"
-                alt="Logo"
-                fill
-                className="object-contain"
-              />
-            </div>
-            <AnimatedThemeToggler className="w-8 h-8 p-1.5 rounded-lg bg-white/10 backdrop-blur-sm border border-foreground/20 hover:bg-white/20 transition-all duration-300 flex items-center justify-center" />
+            <Silk />
           </motion.div>
+          {/* Mobile top bar with logo + resume */}
+           <div className="flex md:hidden w-full items-center justify-between z-20 px-2 pt-2">
+             <div className="w-10 h-10 relative">
+               <Image src="/logo.svg" alt="Logo" fill className="object-contain" />
+             </div>
+             <button className="px-3 py-2 border-2 border-foreground rounded-full text-xs hover:bg-foreground hover:text-background transition-all duration-300 font-medium">
+               My Resume
+             </button>
+           </div>
+           {/* Logo at the top (desktop only) */}
+           <motion.div
+             initial={{ opacity: 0, y: -20 }}
+             animate={{ opacity: 1, y: 0 }}
+             transition={{ duration: 0.6, delay: 0.6 }}
+             className="hidden md:flex md:absolute md:top-8 md:left-16 z-20 items-center gap-4"
+           >
+             <div id="hero-logo" className="w-18 h-18 md:absolute md:top-2 md:left-4">
+               <Image
+                 src="/logo.svg"
+                 alt="Logo"
+                 fill
+                 className="object-contain"
+               />
+             </div>
+           </motion.div>
 
-          {/* Image section - First on mobile */}
+          {/* Right side - Resume button and Image */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 1.0 }}
-            className="w-full h-full flex items-center justify-center relative order-1 md:order-2"
+            className="w-full h-full flex flex-col items-center justify-center relative order-1 md:order-2 mt-8 md:mt-0"
           >
-            <div className="relative w-48 h-48 md:w-80 md:h-80 mx-auto mt-32 md:mt-0">
+             {/* My Resume Button - Aligned with logo and theme toggle */}
+             <motion.button
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 1.2 }}
+                className="hidden md:block md:absolute md:top-4 md:right-28 px-6 py-3 border-2 border-foreground rounded-full hover:bg-foreground hover:text-background transition-all duration-300 font-medium font-[family-name:var(--font-dm-sans)] z-20"
+              >
+                My Resume
+              </motion.button>
+ 
+             {/* Profile Image with spinning text and outside circle effect */}
+             <motion.div
+               initial={{ scale: 0 }}
+               animate={{ scale: 1 }}
+               transition={{ duration: 0.6, delay: 1.4, type: "spring", stiffness: 200 }}
+               className="relative w-56 h-56 md:w-80 md:h-80"
+             >
               {/* Spinning Text Component around the image */}
-              <div className="absolute inset-0 w-full h-full scale-50 md:scale-100">
+              <div className="absolute inset-0 w-full h-full scale-65 md:scale-100">
                 <SpinningText
                   className="w-full h-full text-foreground/70"
                   duration={15}
@@ -91,111 +122,162 @@ export default function Home() {
                 </SpinningText>
               </div>
 
-              {/* Profile Image */}
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.6, delay: 1.2, type: "spring", stiffness: 200 }}
-                className="absolute inset-0 w-full h-full rounded-full overflow-hidden border-4 border-black z-10 flex items-center justify-center"
-              >
+              {/* Circular border container */}
+              <div className="absolute inset-0 w-full h-full rounded-full border-4 border-foreground overflow-hidden z-10">
                 <Image
-                  src="/images/abdellah's_image.jpg"
+                  src="/images/abdellah_image.jpg"
                   alt="Abdellah&apos;s portrait"
                   fill
-                  className="object-cover"
+                  className="object-cover object-top"
                   priority
                 />
-              </motion.div>
-            </div>
+              </div>
+            </motion.div>
           </motion.div>
 
-          {/* Text content - Second on mobile */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex flex-col gap-5 md:gap-10 z-10 mt-24 md:mt-24 order-2 md:order-1"
-          >
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.0 }}
-              className="text-4xl md:text-8xl font-bold font-[family-name:var(--font-inter)]"
-            >
-              <div className="flex justify-start">
-                <FlipText
-                  className="text-5xl md:text-8xl font-bold font-[family-name:var(--font-inter)]"
-                  duration={0.6}
-                  delayMultiple={0.1}
-                >
-                  I&apos;m Abdellah
-                </FlipText>
-              </div>
-            </motion.h1>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.2 }}
-              className="flex flex-col"
-            >
-              <span className="text-3xl md:text-6xl font-[family-name:var(--font-ubuntu-mono)]">
-                Software Engineer &
-              </span>
-              <SparklesText
-                className="text-4xl md:text-7xl text-blue-400 font-[family-name:var(--font-sarina)]"
-                colors={{ first: "#F472B6", second: "#EC4899" }}
-                sparklesCount={8}
-              >
-                Ui Designer
-              </SparklesText>
+          {/* Left side - Text content */}
+           <motion.div
+             initial={{ opacity: 0, x: -50 }}
+             animate={{ opacity: 1, x: 0 }}
+             transition={{ duration: 0.8, delay: 0.8 }}
+             className="flex flex-col gap-5 md:gap-8 z-10 mt-12 md:mt-24 order-2 md:order-1 max-w-2xl ml-2 md:ml-12 text-center md:text-left"
+           >
+             <motion.h1
+               initial={{ opacity: 0, y: 30 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ duration: 0.8, delay: 1.0 }}
+               className="text-4xl sm:text-5xl md:text-8xl font-[family-name:var(--font-dm-sans)] leading-tight"
+             >
+               <div className="flex justify-center md:justify-start items-baseline">
+                 <span className="font-normal text-4xl sm:text-5xl md:text-8xl">I&apos;m</span>
+                 <span className="ml-4"></span>
+                 <FlipText
+                   className="text-4xl sm:text-5xl md:text-8xl font-bold font-[family-name:var(--font-dm-sans)]"
+                   duration={0.6}
+                   delayMultiple={0.1}
+                 >
+                   Abdellah
+                 </FlipText>
+               </div>
+             </motion.h1>
+             <motion.div
+               initial={{ opacity: 0, y: 30 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ duration: 0.8, delay: 1.2 }}
+               className="flex flex-col gap-2"
+             >
+               <span className="text-2xl md:text-5xl font-[family-name:var(--font-ubuntu-mono)]">
+                 Software Developer &
+               </span>
+               <SparklesText
+                 className="text-2xl md:text-5xl text-blue-400 font-[family-name:var(--font-sarina)] italic"
+                 colors={{ first: "#F472B6", second: "#EC4899" }}
+                 sparklesCount={8}
+               >
+                 Graphics Designer
+               </SparklesText>
+             </motion.div>
+ 
+             {/* Social Media Icons */}
+             <motion.div
+               initial={{ opacity: 0, y: 30 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ duration: 0.8, delay: 1.4 }}
+               className="flex gap-6 md:gap-10 mt-8 md:mt-8 justify-center md:justify-start items-center ml-0 md:ml-12"
+             >
+              <a href="https://github.com/MRQ67" target="_blank" rel="noopener noreferrer" className="h-8 w-8 md:h-10 md:w-10 hover:scale-110 transition-transform flex items-center justify-center">
+                <Image
+                  src="/icons/social_link/github-142-svgrepo-com.svg"
+                  alt="GitHub"
+                  width={32}
+                  height={32}
+                  className="h-8 md:h-10 w-auto dark:invert"
+                />
+              </a>
+              <a href="https://x.com/HimoNotting" target="_blank" rel="noopener noreferrer" className="h-8 w-8 md:h-10 md:w-10 hover:scale-110 transition-transform flex items-center justify-center">
+                <Image
+                  src="/icons/social_link/X_logo_2023_original.svg"
+                  alt="X (Twitter)"
+                  width={32}
+                  height={32}
+                  className="h-8 md:h-10 w-auto dark:invert"
+                />
+              </a>
+              <a href="https://www.linkedin.com/in/abdellah-qadi-b229382a2/" target="_blank" rel="noopener noreferrer" className="h-8 w-8 md:h-10 md:w-10 hover:scale-110 transition-transform flex items-center justify-center">
+                <Image
+                  src="/icons/social_link/linkedin-svgrepo-com.svg"
+                  alt="LinkedIn"
+                  width={32}
+                  height={32}
+                  className="h-8 md:h-10 w-auto dark:invert"
+                />
+              </a>
+              <a href="https://www.instagram.com/simply_aboo/" target="_blank" rel="noopener noreferrer" className="h-8 w-8 md:h-10 md:w-10 hover:scale-110 transition-transform flex items-center justify-center">
+                <Image
+                  src="/icons/social_link/instagram-167-svgrepo-com.svg"
+                  alt="Instagram"
+                  width={32}
+                  height={32}
+                  className="h-8 md:h-10 w-auto dark:invert"
+                />
+              </a>
+              <a href="https://www.youtube.com/@aa3_studio" target="_blank" rel="noopener noreferrer" className="h-8 w-8 md:h-10 md:w-10 hover:scale-110 transition-transform flex items-center justify-center">
+                <Image
+                  src="/icons/social_link/youtube-168-svgrepo-com.svg"
+                  alt="YouTube"
+                  width={32}
+                  height={32}
+                  className="h-8 md:h-10 w-auto dark:invert"
+                />
+              </a>
             </motion.div>
           </motion.div>
 
 
 
-          {/* Logo and down arrow at bottom */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.8 }}
-            className="absolute bottom-20 md:bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
-          >
-            <div className="animate-bounce">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12 5V19M12 19L5 12M12 19L19 12"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
-          </motion.div>
+          {/* Logo and down arrow at bottom (desktop only) */}
+           <motion.div
+             initial={{ opacity: 0, y: 20 }}
+             animate={{ opacity: 1, y: 0 }}
+             transition={{ duration: 0.6, delay: 1.8 }}
+             className="hidden md:flex md:absolute md:bottom-10 md:left-1/2 md:transform md:-translate-x-1/2 flex-col items-center"
+           >
+             <div className="animate-bounce">
+               <svg
+                 width="24"
+                 height="24"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 xmlns="http://www.w3.org/2000/svg"
+               >
+                 <path
+                   d="M12 5V19M12 19L5 12M12 19L19 12"
+                   stroke="currentColor"
+                   strokeWidth="2"
+                   strokeLinecap="round"
+                   strokeLinejoin="round"
+                 />
+               </svg>
+             </div>
+           </motion.div>
         </motion.div>
 
         {/* About Me Section */}
-        <div className="py-20 grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-10">
+        <div className="py-20 grid grid-cols-1 lg:grid-cols-[2.5fr_2fr] gap-8">
           {/* Left side - About Me Text */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="flex flex-col justify-start"
+            className="flex flex-col justify-start pr-2"
           >
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
-              className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-inter)]"
+              className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-dm-sans)]"
             >
               About Me
             </motion.h2>
@@ -204,9 +286,27 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               viewport={{ once: true }}
-              className="mt-6 space-y-4 text-foreground/80 text-lg md:text-xl leading-relaxed"
+              className="mt-6 space-y-4 text-foreground/80 text-lg md:text-xl leading-relaxed font-[family-name:var(--font-dm-sans)] max-w-none"
             >
-              <p>I&apos;m a passionate developer with a knack for building innovative solutions that make a difference. With a strong foundation in <span className="text-blue-400 font-semibold">Next.js</span>, <span className="text-blue-400 font-semibold">Go</span>, <span className="text-blue-400 font-semibold">Python</span>, and <span className="text-blue-400 font-semibold">Kotlin</span>, I thrive on tackling complex challenges and turning ideas into reality. My curiosity drives me to stay updated with the latest tech trends, while my collaborative spirit ensures I work seamlessly with teams to deliver user-focused projects. When I&apos;m not coding, you can find me playing an awesome Video Game or Draft a design for my latest projects and, I&apos;m always seeking inspiration to fuel my creativity.</p>
+              <p className="mb-4">
+                I&#39;m a passionate developer with a strong foundation in{" "}
+                <span style={{ color: "#32ADE6" }}><strong>Next.js</strong></span>,{" "}
+                <span style={{ color: "#32ADE6" }}><strong>Go</strong></span>,{" "}
+                <span style={{ color: "#32ADE6" }}><strong>Python</strong></span>, and{" "}
+                <span style={{ color: "#32ADE6" }}><strong>Kotlin</strong></span>. I&#39;m also passionate about{" "}
+                <span style={{ color: "#32ADE6" }}><strong>Graphics Design & Video Editing</strong></span>{" "}
+                and practice them regularly with projects.
+              </p>
+              
+              <p className="mb-4">
+                I&#39;m currently studying{" "}
+                <span style={{ color: "#32ADE6" }}><strong>Electrical & Computer Engineering</strong></span>{" "}
+                @ <span style={{ color: "#32ADE6" }}><strong>Dire Dawa University</strong></span>.
+              </p>
+              
+              <p>
+                <strong>When I&#39;m not on my pc fixing bugs</strong>, i like to watching movies/tv series or play video games
+              </p>
             </motion.div>
           </motion.div>
 
@@ -255,265 +355,310 @@ export default function Home() {
         </div>
 
         {/* Projects Section */}
-        <div className="py-20 flex flex-col-reverse lg:grid lg:grid-cols-[2fr_1fr] gap-10">
-          {/* Left side - Project Cards Grid */}
+        <div className="py-20 space-y-2">
+          {/* Small intro text */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-2"
+          >
+            <p className="text-sm md:text-base  text-foreground/80 font-[family-name:var(--font-dm-sans)]">
+              so here are
+            </p>
+          </motion.div>
+
+          {/* Velocity Scroll Title */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+            className="overflow-hidden w-full"
           >
-            {topProjects.map((project, index) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                index={index}
-                enableModal={true}
-              />
-            ))}
+            <VelocityScroll
+              defaultVelocity={2}
+              numRows={2}
+              className="w-full text-2xl md:text-4xl lg:text-5xl font-bold text-white font-[family-name:var(--font-dm-sans)]"
+            >
+              My Projects
+            </VelocityScroll>
           </motion.div>
 
-          {/* Right side - Section Title */}
+          {/* Horizontal Scrollable Projects */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="flex flex-col justify-start"
+            className="relative mt-16"
           >
-            <div className="sticky top-20 space-y-4">
-              <h2 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-inter)]">My Projects</h2>
+            <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory">
+              <div className="flex gap-6 min-w-max pl-4 pr-4 sm:pl-6 sm:pr-6 lg:pl-8 lg:pr-8">
+                {topProjects.map((project, index) => (
+                  <div key={project.id} className="flex-shrink-0 w-64 md:w-80 snap-start">
+                    <ProjectCard
+                      project={project}
+                      index={index}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            {/* View All Projects Link */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="flex justify-center mt-8"
+            >
               <Link
                 href="/projects"
-                className="text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-2"
+                className="text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-2 font-medium font-[family-name:var(--font-dm-sans)]"
               >
                 View All Projects
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </Link>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
 
-        {/* Design Gallery Section */}
-        <div className="py-20 grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-10">
-          {/* Left side - Section Title */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="flex flex-col justify-start"
-          >
-            <div className="sticky top-20 space-y-4">
-              <h2 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-inter)]">Design Gallery</h2>
-              <p className="text-foreground/70 pr-4">A showcase of my graphic design work, from logos to digital illustrations.</p>
-              <Link
-                href="/designs"
-                className="text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-2"
-              >
-                View All Designs
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </Link>
+        {/* Design Gallery Section (mirrored from Projects) */}
+        <div className="py-5">
+          {/* Velocity header like Projects */}
+          <div className="space-y-6 md:space-y-8">
+            <div className="flex justify-center">
+              <span className="text-sm md:text-base text-foreground/60 font-[family-name:var(--font-dm-sans)]">and</span>
             </div>
-          </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="overflow-hidden w-full"
+            >
+              <VelocityScroll
+                defaultVelocity={2}
+                numRows={2}
+                className="w-full text-2xl md:text-4xl lg:text-5xl font-bold text-white font-[family-name:var(--font-dm-sans)]"
+              >
+                My Designs
+              </VelocityScroll>
+            </motion.div>
+          </div>
 
-          {/* Right side - Design Cards Grid */}
+          {/* Horizontal Scrollable Designs */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full"
+            className="relative mt-16"
           >
-            {featuredDesigns.slice(0, 3).map((design, index) => (
-              <div key={design.id} className={index === 2 ? 'md:col-span-2 max-w-2xl mx-auto' : ''}>
-                <DesignCard
-                  design={design}
-                  index={index}
-                  enableModal={true}
-                />
+            <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory">
+              <div className="flex gap-6 min-w-max pl-4 pr-4 sm:pl-6 sm:pr-6 lg:pl-8 lg:pr-8">
+                {featuredDesigns.slice(0, 3).map((design, index) => (
+                  <div key={design.id} className="flex-shrink-0 w-64 md:w-80 snap-start">
+                    <DesignCard
+                      design={design}
+                      index={index}
+                      enableModal={false}
+                      useAnimate={false}
+                    />
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </motion.div>
+
+          {/* View All Designs link styled like Projects */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="flex justify-center mt-8"
+          >
+            <Link
+              href="/designs"
+              className="text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-2 font-medium font-[family-name:var(--font-dm-sans)]"
+            >
+              View All Designs
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </Link>
+          </motion.div>
+        </div>
+
+        {/* Skills Header with VelocityScroll */}
+        <div className="py-12">
+          <div className="space-y-2 md:space-y-4">
+            <div className="flex justify-center">
+              <span className="text-sm md:text-base text-foreground/60 font-[family-name:var(--font-dm-sans)]">and also</span>
+            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="overflow-hidden w-full"
+            >
+              <VelocityScroll
+                defaultVelocity={2}
+                numRows={2}
+                className="w-full text-2xl md:text-4xl lg:text-5xl font-bold text-white font-[family-name:var(--font-dm-sans)]"
+              >
+                My Skills
+              </VelocityScroll>
+            </motion.div>
+            <div className="flex justify-center">
+              <span className="text-sm md:text-base text-foreground/60 font-[family-name:var(--font-dm-sans)]">or my tech stack</span>
+            </div>
+          </div>
         </div>
 
         {/* Skills & Technologies Section */}
-        <div className="py-20 flex flex-col-reverse lg:grid lg:grid-cols-[2fr_1fr] gap-10">
-          {/* Left side - Skills Grid */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-6"
-          >
-            {/* Frontend */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2"
-            >
-              <Image src="/icons/nextjs.svg" alt="Next.js" width={48} height={48} />
-              <span className="text-sm font-medium">Next.js</span>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2"
-            >
-              <Image src="/icons/tailwindcss.svg" alt="Tailwind CSS" width={48} height={48} />
-              <span className="text-sm font-medium">Tailwind CSS</span>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2"
-            >
-              <Image src="/icons/javascript.svg" alt="JavaScript" width={48} height={48} />
-              <span className="text-sm font-medium">JavaScript</span>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2"
-            >
-              <Image src="/icons/typescript.svg" alt="TypeScript" width={48} height={48} />
-              <span className="text-sm font-medium">TypeScript</span>
-            </motion.div>
-
-            {/* Backend */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2"
-            >
-              <Image src="/icons/nodejs.svg" alt="Node.js" width={48} height={48} />
-              <span className="text-sm font-medium">Node.js</span>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2"
-            >
-              <Image src="/icons/go.svg" alt="Go" width={48} height={48} />
-              <span className="text-sm font-medium">Go</span>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.7 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2"
-            >
-              <Image src="/icons/supabase.svg" alt="Supabase" width={48} height={48} />
-              <span className="text-sm font-medium">Supabase</span>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2"
-            >
-              <Image src="/icons/adobe-illustrator.svg" alt="Adobe Illustrator" width={48} height={48} />
-              <span className="text-sm font-medium">Adobe Illustrator</span>
-            </motion.div>
-
-            {/* Mobile */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.9 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2"
-            >
-              <Image src="/icons/shadcn.svg" alt="shadcn/ui" width={48} height={48} />
-              <span className="text-sm font-medium">shadcn/ui</span>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 1.0 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2"
-            >
-              <Image src="/icons/kotlin.svg" alt="Kotlin" width={48} height={48} />
-              <span className="text-sm font-medium">Kotlin</span>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 1.1 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2"
-            >
-              <Image src="/icons/flutter.svg" alt="Flutter" width={48} height={48} />
-              <span className="text-sm font-medium">Flutter</span>
-            </motion.div>
-
-            {/* Design & Tools */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 1.2 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border-2 border-foreground/20 hover:border-foreground/40 transition-all hover:shadow-xl shadow-md flex flex-col items-center justify-center gap-2"
-            >
-              <Image src="/icons/figma.svg" alt="Figma" width={48} height={48} />
-              <span className="text-sm font-medium">Figma</span>
-            </motion.div>
-          </motion.div>
-
-          {/* Right side - Section Title */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="flex flex-col justify-start"
-          >
-            <div className="sticky top-20 space-y-4">
-              <h2 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-inter)]">Skills & Tech</h2>
-              <p className="text-foreground/70 pl-4">Technologies and tools I work with.</p>
+        <div className="py-14 space-y-12">
+          {/* Row 1: Frontend Dev only */}
+          <div className="space-y-4">
+            <div className="flex justify-center">
+              <span className="text-2xl md:text-3xl lg:text-4xl font-bold font-[family-name:var(--font-dm-sans)]">Frontend Dev</span>
             </div>
-          </motion.div>
+            <div className="grid grid-cols-6 gap-x-0 gap-y-2">
+              {[
+                { src: "/icons/nextjs.svg", label: "Next.js" },
+                { src: "/icons/react.svg", label: "React" },
+                { src: "/icons/tailwindcss.svg", label: "Tailwind CSS" },
+                { src: "/icons/shadcn.svg", label: "Shadcn" },
+                { src: "/icons/javascript.svg", label: "JavaScript" },
+                { src: "/icons/typescript.svg", label: "TypeScript" },
+              ].map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4, delay: 0.06 * idx }}
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.04, y: -3 }}
+                  className="flex flex-col items-center justify-center gap-2 transition-transform"
+                >
+                  <Image
+                    src={item.src}
+                    alt={item.label}
+                    width={80}
+                    height={80}
+                    className={[
+                      "Shadcn",
+                      "Tailwind CSS",
+                    ].includes(item.label)
+                      ? "filter invert brightness-0 object-contain"
+                      : "object-contain"}
+                    style={{ height: "40px", width: "auto" }}
+                  />
+                  <span className="text-xs md:text-sm font-medium">{item.label}</span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Row 2: Mobile Dev & Backend Dev side by side */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Mobile Dev */}
+            <div className="space-y-4">
+              <div className="flex justify-center">
+                <span className="text-xl md:text-2xl lg:text-3xl font-bold font-[family-name:var(--font-dm-sans)]">Mobile Dev</span>
+              </div>
+              <div className="grid grid-cols-3 gap-x-2 gap-y-4">
+                {[
+                  { src: "/icons/flutter.svg", label: "Flutter" },
+                  { src: "/icons/react-native.svg", label: "React native" },
+                  { src: "/icons/kotlin.svg", label: "Kotlin" },
+                ].map((item, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, delay: 0.06 * idx }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.04, y: -3 }}
+                    className="flex flex-col items-center justify-center gap-2 transition-transform"
+                  >
+                    <Image src={item.src} alt={item.label} width={80} height={80} className="object-contain" style={{ height: "36px", width: "auto" }} />
+                    <span className="text-xs md:text-sm font-medium">{item.label}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Backend Dev */}
+            <div className="space-y-4">
+              <div className="flex justify-center">
+                <span className="text-xl md:text-2xl lg:text-3xl font-bold font-[family-name:var(--font-dm-sans)]">Backend Dev</span>
+              </div>
+              <div className="grid grid-cols-3 gap-x-2 gap-y-4">
+                {[
+                  { src: "/icons/nodejs.svg", label: "Node.js" },
+                  { src: "/icons/go.svg", label: "Go" },
+                  { src: "/icons/supabase.svg", label: "Supabase" },
+                ].map((item, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, delay: 0.06 * idx }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.04, y: -3 }}
+                    className="flex flex-col items-center justify-center gap-2 transition-transform"
+                  >
+                    <Image src={item.src} alt={item.label} width={80} height={80} className="object-contain" style={{ height: "36px", width: "auto" }} />
+                    <span className="text-xs md:text-sm font-medium">{item.label}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Row 3: Design category on its own */}
+          <div className="space-y-4">
+            <div className="flex justify-center">
+              <span className="text-xl md:text-2xl lg:text-3xl font-bold font-[family-name:var(--font-dm-sans)]">Design</span>
+            </div>
+            <div className="flex justify-center">
+              <div className="grid grid-cols-3 gap-x-4 gap-y-4 max-w-xs">
+                {[
+                  { src: "/icons/adobe-illustrator.svg", label: "illustrator" },
+                  { src: "/icons/figma.svg", label: "figma" },
+                  { src: "/icons/canva.svg", label: "canva" },
+                ].map((item, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, delay: 0.06 * idx }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.04, y: -3 }}
+                    className="flex flex-col items-center justify-center gap-2 transition-transform"
+                  >
+                    <Image
+                      src={item.src}
+                      alt={item.label}
+                      width={80}
+                      height={80}
+                      className="object-contain"
+                      style={item.label === "canva" ? { width: "32px", height: "36px" } : { height: "36px", width: "auto" }}
+                    />
+                    <span className="text-xs md:text-sm font-medium capitalize">{item.label}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Get in Touch Section */}
@@ -522,14 +667,14 @@ export default function Home() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="py-20 flex flex-col items-center justify-center"
+          className="py-32 flex flex-col items-center justify-center"
         >
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-6xl font-bold mb-12 text-center font-[family-name:var(--font-inter)]"
+            className="text-4xl md:text-6xl font-bold mb-16 text-center font-[family-name:var(--font-dm-sans)]"
           >
             Get in Touch
           </motion.h2>
@@ -539,178 +684,297 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
-            className="flex flex-wrap justify-center gap-8 md:gap-12"
+            className="flex flex-wrap justify-center items-center gap-12 md:gap-16"
           >
             {/* GitHub */}
-            <motion.a
-              href="https://github.com/MRQ67"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-all duration-300 group"
-              aria-label="GitHub"
+            <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.1 }}
               viewport={{ once: true }}
-              whileHover={{ scale: 1.1, rotate: 5 }}
+              className="flex flex-col items-center gap-3"
             >
-              <svg
-                className="w-8 h-8 md:w-10 md:h-10 text-foreground/80 group-hover:text-white transition-colors duration-300"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
+              <motion.a
+                href="https://github.com/MRQ67"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="h-16 w-16 md:h-20 md:w-20 hover:scale-110 transition-transform flex items-center justify-center"
+                whileHover={{ scale: 1.1 }}
               >
-                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z" />
-              </svg>
-            </motion.a>
+                <Image
+                  src="/icons/social_link/github-142-svgrepo-com.svg"
+                  alt="GitHub"
+                  width={64}
+                  height={64}
+                  className="h-12 w-auto md:h-16 dark:invert"
+                />
+              </motion.a>
+              <span className="text-sm font-medium font-[family-name:var(--font-dm-sans)] text-foreground/80">@MRQ67</span>
+            </motion.div>
 
             {/* X (Twitter) */}
-            <motion.a
-              href="https://x.com/HimoNotting"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-all duration-300 group"
-              aria-label="X (Twitter)"
+            <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
               viewport={{ once: true }}
-              whileHover={{ scale: 1.1, rotate: -5 }}
+              className="flex flex-col items-center gap-3"
             >
-              <svg
-                className="w-8 h-8 md:w-10 md:h-10 text-foreground/80 group-hover:text-white transition-colors duration-300"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
+              <motion.a
+                href="https://x.com/HimoNotting"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="h-16 w-16 md:h-20 md:w-20 hover:scale-110 transition-transform flex items-center justify-center"
+                whileHover={{ scale: 1.1 }}
               >
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-              </svg>
-            </motion.a>
+                <Image
+                  src="/icons/social_link/X_logo_2023_original.svg"
+                  alt="X (Twitter)"
+                  width={64}
+                  height={64}
+                  className="h-12 w-auto md:h-16 dark:invert"
+                />
+              </motion.a>
+              <span className="text-sm font-medium font-[family-name:var(--font-dm-sans)] text-foreground/80">@HimoNotting</span>
+            </motion.div>
 
-            {/* Instagram */}
-            <motion.a
-              href="https://www.instagram.com/simply_aboo/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-all duration-300 group"
-              aria-label="Instagram"
+            {/* LinkedIn */}
+            <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.3 }}
               viewport={{ once: true }}
-              whileHover={{ scale: 1.1, rotate: 5 }}
+              className="flex flex-col items-center gap-3"
             >
-              <svg
-                className="w-8 h-8 md:w-10 md:h-10 text-foreground/80 group-hover:text-white transition-colors duration-300"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-              </svg>
-            </motion.a>
+              <motion.a
+                href="https://www.linkedin.com/in/abdellah-qadi-b229382a2/" target="_blank" rel="noopener noreferrer" className="h-10 w-10 hover:scale-110 transition-transform flex items-center justify-center">
+                <Image
+                  src="/icons/social_link/linkedin-svgrepo-com.svg"
+                  alt="LinkedIn"
+                  width={64}
+                  height={64}
+                  className="h-16 w-auto md:h-16 dark:invert"
+                />
+              </motion.a>
+              <span className="text-sm font-medium font-[family-name:var(--font-dm-sans)] text-foreground/80">Abdellah Qadi</span>
+            </motion.div>
 
-            {/* Email */}
-            <motion.a
-              href="mailto:contact@aa3.site"
-              className="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-all duration-300 group"
-              aria-label="Email"
+            {/* Instagram */}
+            <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.4 }}
               viewport={{ once: true }}
-              whileHover={{ scale: 1.1, rotate: -5 }}
+              className="flex flex-col items-center gap-3"
             >
-              <svg
-                className="w-8 h-8 md:w-10 md:h-10 text-foreground/80 group-hover:text-white transition-colors duration-300"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
+              <motion.a
+                href="https://www.instagram.com/simply_aboo/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="h-16 w-16 md:h-20 md:w-20 hover:scale-110 transition-transform flex items-center justify-center"
+                whileHover={{ scale: 1.1 }}
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-              </svg>
-            </motion.a>
+                <Image
+                  src="/icons/social_link/instagram-167-svgrepo-com.svg"
+                  alt="Instagram"
+                  width={64}
+                  height={64}
+                  className="h-12 w-auto md:h-16 dark:invert"
+                />
+              </motion.a>
+              <span className="text-sm font-medium font-[family-name:var(--font-dm-sans)] text-foreground/80">@simply_aboo</span>
+            </motion.div>
+
+            {/* YouTube */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              viewport={{ once: true }}
+              className="flex flex-col items-center gap-3"
+            >
+              <motion.a
+                href="https://www.youtube.com/@aa3_studio"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="h-16 w-16 md:h-20 md:w-20 hover:scale-110 transition-transform flex items-center justify-center"
+                whileHover={{ scale: 1.1 }}
+              >
+                <Image
+                  src="/icons/social_link/youtube-168-svgrepo-com.svg"
+                  alt="YouTube"
+                  width={64}
+                  height={64}
+                  className="h-12 w-auto md:h-16 dark:invert"
+                />
+              </motion.a>
+              <span className="text-sm font-medium font-[family-name:var(--font-dm-sans)] text-foreground/80">@aa3_studio</span>
+            </motion.div>
           </motion.div>
         </motion.div>
 
         {/* Footer Section */}
-        <footer className="bg-black text-white py-16 w-screen relative left-1/2 right-1/2 -mx-[50vw]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {/* Logo at the top left of footer */}
-            <div className="flex justify-start mb-12">
-              <Image
-                src="/logo.svg"
-                alt="AA³ Logo"
-                width={133}
-                height={101}
-                className="h-16 w-auto"
-              />
+        <footer className="bg-neutral-900 text-white pt-40 pb-0 lg:pb-0 w-screen relative left-1/2 right-1/2 -mx-[50vw] rounded-t-[3rem] overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative pb-32 lg:pb-0">
+            {/* Header with name */}
+            <div className="mb-8 -mt-18">
+              <h2 className="text-5xl font-thin" style={{ fontFamily: "var(--font-italiana)" }}>Abdellah Qadi</h2>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-              {/* Contact Info */}
-              <div>
-                <h3 className="text-xl font-bold mb-4 font-[family-name:var(--font-inter)]">Contact</h3>
-                <ul className="space-y-2">
-                  <li>Email: contact@aa3.site</li>
-                </ul>
-              </div>
-
+            <div className="grid grid-cols-2 lg:grid-cols-[1fr_auto_1fr] gap-4 lg:gap-8 items-start relative">
               {/* Quick Links */}
               <div>
-                <h3 className="text-xl font-bold mb-4 font-[family-name:var(--font-inter)]">Quick Links</h3>
-                <ul className="space-y-2">
-                  <li><a href="#projects" className="hover:text-blue-400 transition-colors">My Projects</a></li>
-                  <li><a href="#skills" className="hover:text-blue-400 transition-colors">Skills & Tools</a></li>
-                  <li><a href="#about" className="hover:text-blue-400 transition-colors">About</a></li>
-                  <li><a href="#contact" className="hover:text-blue-400 transition-colors">Get in Touch</a></li>
+                <h3 className="text-xl lg:text-3xl font-bold mb-2 lg:mb-4 font-[family-name:var(--font-dm-sans)]">Quick Links</h3>
+                <ul className="space-y-1 lg:space-y-2">
+                  <li><a href="#about" className="text-sm lg:text-base hover:text-blue-400 transition-colors font-[family-name:var(--font-dm-sans)]">About</a></li>
+                  <li><a href="#projects" className="text-sm lg:text-base hover:text-blue-400 transition-colors font-[family-name:var(--font-dm-sans)]">My Projects</a></li>
+                  <li><a href="#skills" className="text-sm lg:text-base hover:text-blue-400 transition-colors font-[family-name:var(--font-dm-sans)]">My Skills</a></li>
+                  <li><a href="#contact" className="text-sm lg:text-base hover:text-blue-400 transition-colors font-[family-name:var(--font-dm-sans)]">Get in Touch</a></li>
                 </ul>
               </div>
 
-              {/* Social Media */}
-              <div>
-                <h3 className="text-xl font-bold mb-4 font-[family-name:var(--font-inter)]">Follow Me</h3>
-                <div className="flex space-x-4">
-                  <a href="https://x.com/HimoNotting" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors">
-                    {/* X (formerly Twitter) logo */}
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                    </svg>
+              {/* Center - Large Footer Logo - Desktop only */}
+              <div className="hidden lg:flex justify-center relative">
+                <Image
+                  src="/footer_logo.svg"
+                  alt="AA³ Footer Logo"
+                  width={600}
+                  height={444}
+                  className="h-100 w-auto"
+                />
+                
+                {/* Copyright positioned at bottom left of logo */}
+                <div className="absolute bottom-15 right-185 text-sm opacity-70 whitespace-nowrap font-[family-name:var(--font-dm-sans)]">
+                  <p>© {new Date().getFullYear()} Abdellah. All rights reserved.</p>
+                </div>
+              </div>
+
+              {/* Contact Info */}
+              <div className="lg:text-right">
+                <h3 className="text-xl lg:text-3xl font-bold mb-2 lg:mb-4 font-[family-name:var(--font-inter)]">Contact</h3>
+                <div className="space-y-1 lg:space-y-2">
+                  <p className="text-sm lg:text-base">Email: <a href="mailto:contact@aa3.site" className="hover:text-blue-400 transition-colors underline font-[family-name:var(--font-dm-sans)]">contact@aa3.site</a></p>
+                </div>
+              </div>
+
+              {/* Social Media Icons - Desktop positioning */}
+              <div className="hidden lg:block absolute bottom-15 left-255 lg:text-right">
+                <div className="flex space-x-4 mt-6 lg:justify-end">
+                  <a href="https://x.com/HimoNotting" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
+                    <Image
+                      src="/icons/social_link/X_logo_2023_original.svg"
+                      alt="X (Twitter)"
+                      width={24}
+                      height={24}
+                      className="w-6 h-6 brightness-0 invert"
+                    />
                   </a>
-                  <a href="https://github.com/MRQ67" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors">
-                    {/* GitHub logo */}
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M12 2C6.477 2 2 6.477 2 12C2 16.418 4.865 20.166 8.84 21.49C9.34 21.581 9.52 21.272 9.52 21.006C9.52 20.765 9.512 20.046 9.508 19.192C6.726 19.79 6.139 17.777 6.139 17.777C5.684 16.598 5.029 16.29 5.029 16.29C4.121 15.633 5.098 15.646 5.098 15.646C6.101 15.719 6.629 16.72 6.629 16.72C7.521 18.276 8.97 17.825 9.54 17.569C9.629 16.89 9.889 16.44 10.175 16.187C7.954 15.931 5.62 15.07 5.62 11.265C5.62 10.179 6.01 9.293 6.649 8.603C6.549 8.35 6.201 7.349 6.749 5.916C6.749 5.916 7.587 5.646 9.497 6.862C10.295 6.639 11.15 6.528 12 6.524C12.85 6.528 13.705 6.639 14.504 6.862C16.413 5.646 17.25 5.916 17.25 5.916C17.799 7.349 17.451 8.35 17.351 8.603C17.991 9.293 18.379 10.179 18.379 11.265C18.379 15.082 16.041 15.927 13.813 16.178C14.172 16.493 14.496 17.116 14.496 18.067C14.496 19.419 14.483 20.677 14.483 21.006C14.483 21.275 14.661 21.587 15.171 21.489C19.138 20.162 22 16.417 22 12C22 6.477 17.523 2 12 2Z" />
-                    </svg>
+                  <a href="https://github.com/MRQ67" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
+                    <Image
+                      src="/icons/social_link/github-142-svgrepo-com.svg"
+                      alt="GitHub"
+                      width={24}
+                      height={24}
+                      className="w-6 h-6 brightness-0 invert"
+                    />
                   </a>
-                  <a href="https://www.instagram.com/simply_aboo/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors">
-                    {/* Instagram logo */}
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M7.8 2H16.2C19.4 2 22 4.6 22 7.8V16.2C22 19.4 19.4 22 16.2 22H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2ZM7.6 4C5.61177 4 4 5.61177 4 7.6V16.4C4 18.3882 5.61177 20 7.6 20H16.4C18.3882 20 20 18.3882 20 16.4V7.6C20 5.61177 18.3882 4 16.4 4H7.6ZM17.25 5.5C17.9404 5.5 18.5 6.05964 18.5 6.75C18.5 7.44036 17.9404 8 17.25 8C16.5596 8 16 7.44036 16 6.75C16 6.05964 16.5596 5.5 17.25 5.5ZM12 7C14.7614 7 17 9.23858 17 12C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12C7 9.23858 9.23858 7 12 7ZM12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9Z" />
-                    </svg>
+                  <a href="https://www.instagram.com/simply_aboo/" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
+                    <Image
+                      src="/icons/social_link/instagram-167-svgrepo-com.svg"
+                      alt="Instagram"
+                      width={24}
+                      height={24}
+                      className="w-6 h-6 brightness-0 invert"
+                    />
+                  </a>
+                  <a href="https://www.youtube.com/@abdellahqadi" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
+                    <Image
+                      src="/icons/social_link/youtube-168-svgrepo-com.svg"
+                      alt="YouTube"
+                      width={24}
+                      height={24}
+                      className="w-6 h-6 brightness-0 invert"
+                    />
+                  </a>
+                  <a href="https://www.linkedin.com/in/abdellah-qadi-a71906251/" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
+                    <Image
+                      src="/icons/social_link/linkedin-svgrepo-com.svg"
+                      alt="LinkedIn"
+                      width={28}
+                      height={28}
+                      className="w-7 h-7 brightness-0 invert"
+                    />
                   </a>
                 </div>
               </div>
             </div>
 
-            {/* Scroll-based velocity component at the bottom */}
-            <div className="mt-16 overflow-hidden w-full">
-              <div className="overflow-hidden">
-                <VelocityScroll
-                  defaultVelocity={3}
-                  numRows={2}
-                  className="text-6xl md:text-8xl font-bold text-white opacity-20"
-                >
-                  AA³
-                </VelocityScroll>
+            {/* Mobile Social Media Icons */}
+            <div className="lg:hidden flex justify-center mt-6">
+              <div className="flex space-x-4">
+                <a href="https://x.com/HimoNotting" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
+                  <Image
+                    src="/icons/social_link/X_logo_2023_original.svg"
+                    alt="X (Twitter)"
+                    width={24}
+                    height={24}
+                    className="w-6 h-6 brightness-0 invert"
+                  />
+                </a>
+                <a href="https://github.com/MRQ67" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
+                  <Image
+                    src="/icons/social_link/github-142-svgrepo-com.svg"
+                    alt="GitHub"
+                    width={24}
+                    height={24}
+                    className="w-6 h-6 brightness-0 invert"
+                  />
+                </a>
+                <a href="https://www.instagram.com/simply_aboo/" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
+                  <Image
+                    src="/icons/social_link/instagram-167-svgrepo-com.svg"
+                    alt="Instagram"
+                    width={24}
+                    height={24}
+                    className="w-6 h-6 brightness-0 invert"
+                  />
+                </a>
+                <a href="https://www.youtube.com/@abdellahqadi" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
+                  <Image
+                    src="/icons/social_link/youtube-168-svgrepo-com.svg"
+                    alt="YouTube"
+                    width={24}
+                    height={24}
+                    className="w-6 h-6 brightness-0 invert"
+                  />
+                </a>
+                <a href="https://www.linkedin.com/in/abdellah-qadi-a71906251/" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
+                  <Image
+                    src="/icons/social_link/linkedin-svgrepo-com.svg"
+                    alt="LinkedIn"
+                    width={28}
+                    height={28}
+                    className="w-7 h-7 brightness-0 invert"
+                  />
+                </a>
               </div>
             </div>
 
-            {/* Copyright */}
-            <div className="mt-12 text-center text-sm opacity-70">
+            {/* Mobile Copyright */}
+            <div className="lg:hidden text-center mt-4 text-sm opacity-70 font-[family-name:var(--font-dm-sans)]">
               <p>© {new Date().getFullYear()} Abdellah. All rights reserved.</p>
             </div>
+          </div>
+
+          {/* Mobile Footer Logo - Half visible at bottom */}
+          <div className="lg:hidden absolute bottom-14 left-1/2 transform -translate-x-1/2 translate-y-1/2">
+            <Image
+              src="/footer_logo.svg"
+              alt="AA³ Footer Logo"
+              width={300}
+              height={222}
+              className="w-auto h-32 opacity-80"
+            />
           </div>
         </footer>
       </motion.div>
@@ -722,12 +986,7 @@ export default function Home() {
         selectedProject={selectedProject}
       />
 
-      {/* Design Modal */}
-      <DesignModal
-        isOpen={isDesignModalOpen}
-        onClose={closeDesignModal}
-        selectedDesign={selectedDesign}
-      />
+      {/* Design Modal removed */}
     </>
   );
 }

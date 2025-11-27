@@ -86,7 +86,7 @@ function ParallaxText({
   return (
     <div
       ref={containerRef}
-      className="w-full overflow-hidden whitespace-nowrap"
+      className="w-full overflow-hidden whitespace-nowrap py-1 md:py-1"
       {...props}
     >
       <motion.div className="inline-block" style={{ x }}>
@@ -110,7 +110,7 @@ export function VelocityScroll({
   return (
     <div
       className={cn(
-        "relative w-full text-4xl font-bold tracking-[-0.02em] md:text-7xl md:leading-[5rem]",
+        "relative w-full text-4xl font-bold tracking-[-0.02em] md:text-7xl leading-tight md:leading-[5.25rem] space-y-1 md:space-y-2",
         className,
       )}
       {...props}

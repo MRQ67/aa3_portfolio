@@ -23,7 +23,7 @@ export const designs: Design[] = [
       "/images/freelance/free_logo.png"
     ],
     category: "logo",
-    tools: ["Adobe Illustrator", "Figma"],
+    tools: ["Adobe Illustrator"],
     year: "2024"
   },
   {
@@ -48,7 +48,7 @@ export const designs: Design[] = [
       "/images/zarespace/X%20Banner.png"
     ],
     category: "logo",
-    tools: ["Adobe Illustrator", "Figma"],
+    tools: ["Adobe Illustrator"],
     year: "2024"
   }
 ];
