@@ -87,6 +87,10 @@ function ParallaxText({
     <div
       ref={containerRef}
       className="w-full overflow-hidden whitespace-nowrap py-1 md:py-1"
+      style={{
+        maskImage: 'linear-gradient(to right, transparent 2%, black 10%, black 90%, transparent 98%)',
+        WebkitMaskImage: 'linear-gradient(to right, transparent 2%, black 10%, black 90%, transparent 98%)',
+      }}
       {...props}
     >
       <motion.div className="inline-block" style={{ x }}>
