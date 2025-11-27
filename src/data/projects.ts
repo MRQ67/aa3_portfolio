@@ -20,6 +20,30 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: 0,
+    slug: "coil-code-editor",
+    title: "Coil Code Editor",
+    description: "collaborative web code editor made by AA3. Built using Next.js (frontend), Yjs (synchronization), PartyKit (backend), and it is - Powered by Monaco Editor",
+    fullDescription: "collaborative web code editor made by AA3. Built using Next.js (frontend), Yjs (synchronization), PartyKit (backend), and it is - Powered by Monaco Editor",
+    image: "/projects/coilcode.png",
+    images: ["/projects/coilcode.png"],
+    tags: ["Next.js", "Partykit", "Yjs", "Convex"],
+    tagColors: ["bg-black/10 text-foreground", "bg-blue-500/10 text-blue-500", "bg-green-500/10 text-green-500", "bg-purple-500/10 text-purple-500"],
+    links: {
+      github: "https://github.com/MRQ67/coil-code",
+      demo: "https://coil.aa3.site/"
+    },
+    features: [
+      "Collaborative web code editor",
+      "Real-time synchronization with Yjs",
+      "Backend powered by PartyKit",
+      "Powered by Monaco Editor",
+      "Multi-user support"
+    ],
+    techStack: ["Next.js", "Yjs", "Partykit", "Convex"],
+    status: "completed"
+  },
+  {
     id: 1,
     slug: "stackmatch-suite",
     title: "Stackmatch Suite",

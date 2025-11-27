@@ -126,8 +126,66 @@ export default function ProjectPage({ params }: ProjectPageProps) {
               {project.tags.map((tag, index) => (
                 <span
                   key={index}
-                  className={`px-3 py-1 rounded-full text-sm ${project.tagColors[index]}`}
+                  className={`px-3 py-1 rounded-full text-sm flex items-center gap-1 ${project.tagColors[index]}`}
                 >
+                  {/* Icon for the tag */}
+                  {(() => {
+                    const lowerTag = tag.toLowerCase();
+                    let iconSrc = null;
+
+                    switch(lowerTag) {
+                      case "next.js":
+                        iconSrc = "/icons/nextjs.svg";
+                        break;
+                      case "typescript":
+                        iconSrc = "/icons/typescript.svg";
+                        break;
+                      case "supabase":
+                        iconSrc = "/icons/supabase.svg";
+                        break;
+                      case "react":
+                        iconSrc = "/icons/react.svg";
+                        break;
+                      case "javascript":
+                        iconSrc = "/icons/javascript.svg";
+                        break;
+                      case "kotlin":
+                        iconSrc = "/icons/kotlin.svg";
+                        break;
+                      case "go":
+                        iconSrc = "/icons/go.svg";
+                        break;
+                      case "tailwind css":
+                      case "tailwindcss":
+                        iconSrc = "/icons/tailwindcss.svg";
+                        break;
+                      case "node.js":
+                      case "node":
+                        iconSrc = "/icons/nodejs.svg";
+                        break;
+                      case "partykit":
+                        iconSrc = "/icons/partykit-icon.svg";
+                        break;
+                      case "yjs":
+                        iconSrc = "/icons/yjs-icon.svg";
+                        break;
+                      case "convex":
+                        iconSrc = "/icons/convex.svg";
+                        break;
+                      default:
+                        iconSrc = null;
+                    }
+
+                    return iconSrc ? (
+                      <Image
+                        src={iconSrc}
+                        alt=""
+                        width={16}
+                        height={16}
+                        className="object-contain"
+                      />
+                    ) : null;
+                  })()}
                   {tag}
                 </span>
               ))}
@@ -192,8 +250,66 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-foreground/10 hover:border-foreground/20 transition-colors"
+                  className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-foreground/10 hover:border-foreground/20 transition-colors flex items-center gap-2"
                 >
+                  {/* Icon for the tech */}
+                  {(() => {
+                    const lowerTech = tech.toLowerCase();
+                    let iconSrc = null;
+
+                    switch(lowerTech) {
+                      case "next.js":
+                        iconSrc = "/icons/nextjs.svg";
+                        break;
+                      case "typescript":
+                        iconSrc = "/icons/typescript.svg";
+                        break;
+                      case "supabase":
+                        iconSrc = "/icons/supabase.svg";
+                        break;
+                      case "react":
+                        iconSrc = "/icons/react.svg";
+                        break;
+                      case "javascript":
+                        iconSrc = "/icons/javascript.svg";
+                        break;
+                      case "kotlin":
+                        iconSrc = "/icons/kotlin.svg";
+                        break;
+                      case "go":
+                        iconSrc = "/icons/go.svg";
+                        break;
+                      case "tailwind css":
+                      case "tailwindcss":
+                        iconSrc = "/icons/tailwindcss.svg";
+                        break;
+                      case "node.js":
+                      case "node":
+                        iconSrc = "/icons/nodejs.svg";
+                        break;
+                      case "partykit":
+                        iconSrc = "/icons/partykit-icon.svg";
+                        break;
+                      case "yjs":
+                        iconSrc = "/icons/yjs-icon.svg";
+                        break;
+                      case "convex":
+                        iconSrc = "/icons/convex.svg";
+                        break;
+                      default:
+                        iconSrc = null;
+                    }
+
+                    return iconSrc ? (
+                      <Image
+                        src={iconSrc}
+                        alt=""
+                        width={20}
+                        height={20}
+                        className="object-contain"
+                      />
+                    ) : null;
+                  })()}
                   <span className="font-medium">{tech}</span>
                 </motion.div>
               ))}
