@@ -67,7 +67,7 @@ export const projects: Project[] = [
       "bg-green-500/10 text-green-500",
     ],
     links: {
-      live: "https://stackmatch.aa3.site/",
+      demo: "https://stackmatch.aa3.site/",
       github: "https://github.com/MRQ67/stackmatch-dashboard",
     },
     features: [
